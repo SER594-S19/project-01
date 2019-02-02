@@ -44,6 +44,7 @@ public class Model {
         System.out.println("model start");
     executorService.submit(dataGenerator);
     executorService.submit(threadPublisher);
+    
   }
 
   public void stop() {
