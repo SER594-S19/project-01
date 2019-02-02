@@ -57,7 +57,6 @@ public class Gui extends JPanel implements ActionListener {
       if (buttonConnect.getText().compareTo("run") == 0) {
             System.out.println("start");
         model.start();
-        
         buttonConnect.setText("stop");
       } else if (buttonConnect.getText().compareTo("stop") == 0) {
                     System.out.println("stop");
