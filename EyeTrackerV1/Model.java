@@ -1,8 +1,10 @@
-package Core;
+package EyeTrackerV1;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import Core.Publisher;
 
 /**
  * Put together a dataGenerator and a publisher. 
@@ -36,6 +38,7 @@ public class Model {
     } catch (InterruptedException ie) {
     }
   }
+  
 
   public void start() {
         System.out.println("model start");

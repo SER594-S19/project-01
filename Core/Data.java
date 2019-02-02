@@ -11,20 +11,24 @@ public class Data {
 
     private double time;
     private double value;
-
+    
     public Data(double time, double value) {
-        this.time = time;
+    	this.time = time;
         this.value = value;
     }
 
     public void setData(double data) {
-      time=0;
-      value=data;
+    	time=0;
+        value=data;
     }
 
-  @Override
+  public double getTime() {
+		return time;
+	}
+
+@Override
   public String toString() {
-    return "Data{" + "time=" + time + ", value=" + value + '}';
-  }
+	    return "Data{" + "time=" + time + ", value=" + value + '}';
+	  }
      
 }

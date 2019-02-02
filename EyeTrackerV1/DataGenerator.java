@@ -1,11 +1,13 @@
-package Core;
+package EyeTrackerV1;
 
 import java.util.Calendar;
 import java.util.Observable;
 
-class DataGenerator extends Observable implements Runnable {
+import Core.Data;
 
-  private Data data;
+public class DataGenerator extends Observable implements Runnable {
+
+  private DataEyeTracker data;
   private boolean stop = false;
 
   public void stop() {
@@ -25,22 +27,27 @@ class DataGenerator extends Observable implements Runnable {
     calendar.set(Calendar.SECOND, 0);
     long initialTime = calendar.getTimeInMillis();
     double timeStamp = 0;
+    double pupilLeft = 0;
 
     while (!stop) {
               System.out.println("data generator running");
+      pupilLeft = Math.random();
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-      createAndNotify(timeStamp, Math.random());
+      createAndNotify(timeStamp, Math.random(), pupilLeft);
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {
       }
     }
   }
+  
+  //methods to generate 9 other parameters
 
-  private void createAndNotify(double timestampsystem, double s) {
+  private void createAndNotify(double timestampsystem, double s, double pupilLeft) {
                   System.out.println("notifying ...");
+                  System.out.println(timestampsystem + " " + s + " " + pupilLeft);
 
-    data = new Data(timestampsystem, s);
+    data = new DataEyeTracker(timestampsystem, s, pupilLeft);
     setChanged();
     notifyObservers();
   }

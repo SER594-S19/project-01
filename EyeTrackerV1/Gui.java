@@ -1,4 +1,4 @@
-package Core;
+package EyeTrackerV1;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Core.Publisher;
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -55,6 +57,7 @@ public class Gui extends JPanel implements ActionListener {
       if (buttonConnect.getText().compareTo("run") == 0) {
             System.out.println("start");
         model.start();
+        
         buttonConnect.setText("stop");
       } else if (buttonConnect.getText().compareTo("stop") == 0) {
                     System.out.println("stop");
