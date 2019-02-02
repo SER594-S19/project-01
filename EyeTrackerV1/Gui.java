@@ -13,6 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Core.Publisher;
+import javax.swing.JSlider;
+import javax.swing.JScrollBar;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -45,9 +51,18 @@ public class Gui extends JPanel implements ActionListener {
     this.setLayout(new BorderLayout());
     this.add(createPanelSouth(), BorderLayout.SOUTH);
     Dimension screen = getToolkit().getScreenSize();
-    this.setSize(screen.width / 2, 3 * screen.height / 4);
+    this.setSize(444, 348);
     this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
+////
+	JFrame.setDefaultLookAndFeelDecorated(true);
+	JFrame frame = new JFrame("JSlider setting examples");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	frame.pack();
+	frame.setVisible(true);	
+    ////
     System.out.println("gui done");
+    
   }
 
   @Override
@@ -57,7 +72,6 @@ public class Gui extends JPanel implements ActionListener {
       if (buttonConnect.getText().compareTo("run") == 0) {
             System.out.println("start");
         model.start();
-        
         buttonConnect.setText("stop");
       } else if (buttonConnect.getText().compareTo("stop") == 0) {
                     System.out.println("stop");
@@ -66,12 +80,12 @@ public class Gui extends JPanel implements ActionListener {
       }
     }
   }
-  
+  static int value;
   public static void main(String[] args) {
 
     JFrame frame = new JFrame("Simulator");
-    frame.setLayout(new GridLayout(1, 1));
-    frame.add(new Gui());
+    frame.getContentPane().setLayout(new GridLayout(1, 1));
+    frame.getContentPane().add(new Gui());
     frame.addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
@@ -79,6 +93,21 @@ public class Gui extends JPanel implements ActionListener {
         System.exit(0);
       }
     });
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	JPanel panel = new JPanel();	
+	JSlider slider = new JSlider(-100, 100, 50);
+	
+	
+	
+	panel.add(slider);
+	frame.add(panel);
+	
+	slider.addChangeListener(new ChangeListener() {
+		public void stateChanged(ChangeEvent e) {
+		
+			System.out.println("Value1: " + ((JSlider)e.getSource()).getValue());
+		}
+	});
     frame.pack();
     frame.setSize(500, 300);
     frame.setVisible(true);
