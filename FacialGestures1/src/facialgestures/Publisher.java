@@ -1,4 +1,4 @@
-package Core;
+package facialgestures;
 
 import java.io.IOException;
 import java.net.ServerSocket;

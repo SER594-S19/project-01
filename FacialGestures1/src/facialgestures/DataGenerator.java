@@ -1,4 +1,4 @@
-package Core;
+package facialgestures;
 
 import java.util.Calendar;
 import java.util.Observable;

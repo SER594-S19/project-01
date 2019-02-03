@@ -1,4 +1,4 @@
-package Core;
+package facialgestures;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
