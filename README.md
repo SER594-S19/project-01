@@ -1,2 +1,2 @@
 # project-01
-Simulating Sensing Devices
+Simulating Face detection Devices 
