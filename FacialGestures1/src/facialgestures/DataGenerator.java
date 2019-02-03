@@ -1,7 +1,10 @@
 package facialgestures;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Observable;
+import java.util.stream.DoubleStream;
 
 class DataGenerator extends Observable implements Runnable {
 
@@ -38,11 +41,26 @@ class DataGenerator extends Observable implements Runnable {
   }
 
   private void createAndNotify(double timestampsystem, double s) {
-                  System.out.println("notifying ...");
-
-    data = new Data(timestampsystem, s);
+                  System.out.println("notifying ...");                 
+                  getSecureRandomNumber(0.0,1.0);
+   // data = new Data(timestampsystem, s);
     setChanged();
     notifyObservers();
+  }
+  
+  
+  private double getSecureRandomNumber(double min , double max) {
+	  double randomValue = 0;
+	  try {
+    	  SecureRandom instanceStrong = SecureRandom.getInstanceStrong();
+		DoubleStream doubles = instanceStrong.doubles(min,max);
+		randomValue = doubles.findAny().getAsDouble();
+		System.out.println("Random Num: " +randomValue);
+    	} catch (NoSuchAlgorithmException e) {
+    		
+    		e.printStackTrace();
+    	}
+	  return randomValue;
   }
 
 }
