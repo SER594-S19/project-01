@@ -29,7 +29,11 @@ class DataGenerator extends Observable implements Runnable {
     while (!stop) {
               System.out.println("data generator running");
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-      createAndNotify(timeStamp, Math.random());
+      double[] values=new double[14];
+      for(int i=0;i<values.length;i++) {
+        values[i]=Math.random();
+      }
+      createAndNotify(timeStamp, values);
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {
@@ -37,7 +41,7 @@ class DataGenerator extends Observable implements Runnable {
     }
   }
 
-  private void createAndNotify(double timestampsystem, double s) {
+  private void createAndNotify(double timestampsystem, double[] s) {
                   System.out.println("notifying ...");
 
     data = new Data(timestampsystem, s);
