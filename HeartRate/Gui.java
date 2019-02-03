@@ -29,7 +29,6 @@ public class Gui extends JPanel implements ActionListener {
 	private final JRadioButton resting = new JRadioButton("Resting", true);
 	private final JRadioButton moderate = new JRadioButton("Moderate Exercise");
 	private final JRadioButton vigorous = new JRadioButton("Vigorous Exercise");
-	
 
 	// private final JSplitPane splitPane;
 
@@ -70,13 +69,9 @@ public class Gui extends JPanel implements ActionListener {
 
 	}
 
-	/*
-	 * private Component initializeHeartGif() {
-	 * 
-	 * }
-	 */
+	
 	private void initializeHeartGif() {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
+		ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
 		JLabel imageLabel = new JLabel();
 		imageLabel.setIcon(ii);
 		gifPanel.add(imageLabel);
