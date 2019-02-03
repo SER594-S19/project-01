@@ -18,12 +18,33 @@ public class Model {
     private final ExecutorService executorService;
     private final DataGenerator dataGenerator;
     private final Publisher threadPublisher;
+    private int heartState;
+    private boolean serverState;
 
     public Model(DataGenerator device, Publisher publisher) {
         executorService = Executors.newCachedThreadPool();
         dataGenerator = device;
         threadPublisher = publisher;
         dataGenerator.addObserver(threadPublisher);
+        heartState = 0;
+        serverState = false;
+    }
+
+    public int getHeartState() {
+        return heartState;
+    }
+
+    public void setHeartState(int heartState) {
+        this.heartState = heartState;
+        dataGenerator.setHeartState(heartState);
+    }
+
+    public boolean getServerState() {
+        return serverState;
+    }
+
+    public void setServerState(boolean serverState) {
+        this.serverState = serverState;
     }
 
     public void shutdown() {
@@ -39,14 +60,11 @@ public class Model {
     }
 
     public void start() {
-        System.out.println("model start");
         executorService.submit(dataGenerator);
         executorService.submit(threadPublisher);
     }
 
     public void stop() {
-        System.out.println("model stop");
-
         dataGenerator.stop();
         threadPublisher.stop();
     }

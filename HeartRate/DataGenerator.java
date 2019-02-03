@@ -2,12 +2,23 @@ package HeartRate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ThreadLocalRandom;
 
 class DataGenerator extends Observable implements Runnable {
 
-  private Data data;
+  private HeartData data;
   private boolean stop = false;
+  private int heartState;
+
+  public DataGenerator() {
+    heartState = 0;
+  }
+
+  public void setHeartState(int heartState) {
+    this.heartState = heartState;
+  }
 
   public void stop() {
     this.stop = true;
@@ -30,7 +41,7 @@ class DataGenerator extends Observable implements Runnable {
     while (!stop) {
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
       
-      createAndNotify(timeStamp, Math.random());
+      createAndNotify(timeStamp, generateValues(heartState));
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {
@@ -38,12 +49,31 @@ class DataGenerator extends Observable implements Runnable {
     }
   }
 
-  private ArrayList<Integer> generateValues(int startRange, int endRange) {
-    return new ArrayList<>();
+  public List<Integer> generateValues(int heartState) {
+    int startRange, endRange;
+    switch(heartState) {
+      case 0: startRange = 60;
+              endRange = 100;
+              break;
+      case 1: startRange = 100;
+              endRange = 140;
+              break;
+      case 2: startRange = 140;
+              endRange = 190;
+              break;
+      default: startRange = 60;
+               endRange = 100;
+    }
+
+    int randomNum = ThreadLocalRandom.current().nextInt(startRange, endRange + 1);
+    List<Integer> values = new ArrayList<>();
+    values.add(randomNum);
+
+    return values;
   }
 
-  private void createAndNotify(double timestampsystem, double values) {
-    data = new Data(timestampsystem, values);
+  public void createAndNotify(double timestampsystem, List<Integer> values) {
+    data = new HeartData(timestampsystem, values);
     setChanged();
     notifyObservers();
   }
