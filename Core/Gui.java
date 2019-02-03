@@ -36,36 +36,38 @@ public class Gui extends JPanel implements ActionListener {
 
   private Component createPanelInput(){
     JPanel panel = new JPanel(new BorderLayout());
-    panel.setLayout(new GridLayout(14,1));;
+    panel.setLayout(new GridLayout(14,1));
     //panel.setBounds(10,10,100,100);
 
 
     JPanel labels = new JPanel();
-    labels.setBackground(Color.GRAY);
+    //labels.setBackground(Color.GRAY);
     labels.add(new JLabel(" ID "));
     JPanel panelId = new JPanel(new BorderLayout());
+    panelId.setLayout(new GridLayout(1,2));
     panelId.setBackground(Color.CYAN);
     JTextField id = new JTextField();
-    id.setSize(100,100);
+    labels.setSize(200,100);
     panelId.add(labels, BorderLayout.WEST);
     panelId.add(id);
     panel.add(panelId, BorderLayout.NORTH);
 
 
     JPanel labelSig = new JPanel();
-    labelSig.setBackground(Color.GRAY);
+    //labelSig.setBackground(Color.GRAY);
     labelSig.add(new JLabel(" Signal "));
     JPanel panelSig = new JPanel(new BorderLayout());
-
+    panelSig.setLayout(new GridLayout(1,2));
     JTextField signal = new JTextField();
     panelSig.add(labelSig, BorderLayout.WEST);
     panelSig.add(signal);
     panel.add(panelSig);
 
     JPanel labelBlink = new JPanel();
-    labelBlink.setBackground(Color.GRAY);
+    //labelBlink.setBackground(Color.GRAY);
     labelBlink.add(new JLabel(" Blink "));
     JPanel panelBlink = new JPanel(new BorderLayout());
+    panelBlink.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField blink = new JTextField();
     panelBlink.add(labelBlink, BorderLayout.WEST);
@@ -74,9 +76,10 @@ public class Gui extends JPanel implements ActionListener {
 
 
     JPanel labelWinkL  = new JPanel();
-    labelWinkL.setBackground(Color.GRAY);
+    //labelWinkL.setBackground(Color.GRAY);
     labelWinkL.add(new JLabel(" WinkL "));
     JPanel panelWinkL = new JPanel(new BorderLayout());
+    panelWinkL.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField WinkL = new JTextField();
     panelWinkL.add(labelWinkL, BorderLayout.WEST);
@@ -85,9 +88,10 @@ public class Gui extends JPanel implements ActionListener {
 
 
     JPanel labelWinkR  = new JPanel();
-    labelWinkR.setBackground(Color.GRAY);
+    //labelWinkR.setBackground(Color.GRAY);
     labelWinkR.add(new JLabel(" WinkR "));
     JPanel panelWinkR = new JPanel(new BorderLayout());
+    panelWinkR.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField WinkR = new JTextField();
     panelWinkR.add(labelWinkR, BorderLayout.WEST);
@@ -95,9 +99,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelWinkR, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelLookL  = new JPanel();
-    labelLookL.setBackground(Color.GRAY);
+    //labelLookL.setBackground(Color.GRAY);
     labelLookL.add(new JLabel(" LookL "));
     JPanel panelLookL = new JPanel(new BorderLayout());
+    panelLookL.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField LookL= new JTextField();
     panelLookL.add(labelLookL, BorderLayout.WEST);
@@ -105,9 +110,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelLookL, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelLookR  = new JPanel();
-    labelLookR.setBackground(Color.GRAY);
+    //labelLookR.setBackground(Color.GRAY);
     labelLookR.add(new JLabel(" LookR "));
     JPanel panelLookR = new JPanel(new BorderLayout());
+    panelLookR.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField LookR= new JTextField();
     panelLookR.add(labelLookR, BorderLayout.WEST);
@@ -116,9 +122,10 @@ public class Gui extends JPanel implements ActionListener {
 
 
     JPanel labelEyebrow   = new JPanel();
-    labelEyebrow.setBackground(Color.GRAY);
+    //labelEyebrow.setBackground(Color.GRAY);
     labelEyebrow.add(new JLabel(" Eyebrow"));
     JPanel panelEyebrow = new JPanel(new BorderLayout());
+    panelEyebrow.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField Eyebrow= new JTextField();
     panelEyebrow.add(labelEyebrow, BorderLayout.WEST);
@@ -126,9 +133,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelEyebrow, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelFurrow   = new JPanel();
-    labelFurrow.setBackground(Color.GRAY);
+    //labelFurrow.setBackground(Color.GRAY);
     labelFurrow.add(new JLabel(" Furrow"));
     JPanel panelFurrow = new JPanel(new BorderLayout());
+    panelFurrow.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField Furrow= new JTextField();
     panelFurrow.add(labelFurrow, BorderLayout.WEST);
@@ -137,9 +145,10 @@ public class Gui extends JPanel implements ActionListener {
 
 
     JPanel labelSmile  = new JPanel();
-    labelSmile.setBackground(Color.GRAY);
+    //labelSmile.setBackground(Color.GRAY);
     labelSmile.add(new JLabel(" Smile"));
     JPanel panelSmile = new JPanel(new BorderLayout());
+    panelSmile.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField Smile= new JTextField();
     panelSmile.add(labelSmile, BorderLayout.WEST);
@@ -147,9 +156,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelSmile, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelClench  = new JPanel();
-    labelClench.setBackground(Color.GRAY);
+    //labelClench.setBackground(Color.GRAY);
     labelClench.add(new JLabel(" Clench"));
     JPanel panelClench = new JPanel(new BorderLayout());
+    panelClench.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField Clench= new JTextField();
     panelClench.add(labelClench, BorderLayout.WEST);
@@ -157,9 +167,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelClench, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelSmirkL  = new JPanel();
-    labelSmirkL.setBackground(Color.GRAY);
+    //labelSmirkL.setBackground(Color.GRAY);
     labelSmirkL.add(new JLabel(" SmirkL"));
     JPanel panelSmirkL = new JPanel(new BorderLayout());
+    panelSmirkL.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField SmirkL= new JTextField();
     panelSmirkL.add(labelSmirkL, BorderLayout.WEST);
@@ -167,9 +178,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelSmirkL, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelSmirkR  = new JPanel();
-    labelSmirkR.setBackground(Color.GRAY);
+    //labelSmirkR.setBackground(Color.GRAY);
     labelSmirkR.add(new JLabel(" SmirkR"));
     JPanel panelSmirkR = new JPanel(new BorderLayout());
+    panelSmirkR.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField SmirkR= new JTextField();
     panelSmirkR.add(labelSmirkR, BorderLayout.WEST);
@@ -177,9 +189,10 @@ public class Gui extends JPanel implements ActionListener {
     panel.add(panelSmirkR, BorderLayout.AFTER_LAST_LINE);
 
     JPanel labelLaugh  = new JPanel();
-    labelLaugh.setBackground(Color.GRAY);
+    //labelLaugh.setBackground(Color.GRAY);
     labelLaugh.add(new JLabel(" Laugh"));
     JPanel panelLaugh = new JPanel(new BorderLayout());
+    panelLaugh.setLayout(new GridLayout(1,2));
     //panelId.setBackground(Color.CYAN);
     JTextField Laugh= new JTextField();
     panelLaugh.add(labelLaugh, BorderLayout.WEST);
