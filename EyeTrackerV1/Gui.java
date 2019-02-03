@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,14 +56,6 @@ public class Gui extends JPanel implements ActionListener {
     Dimension screen = getToolkit().getScreenSize();
     this.setSize(444, 348);
     this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
-////
-	JFrame.setDefaultLookAndFeelDecorated(true);
-	JFrame frame = new JFrame("JSlider setting examples");
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-	frame.pack();
-	frame.setVisible(true);	
-    ////
     System.out.println("gui done");
     
   }
@@ -95,19 +90,26 @@ public class Gui extends JPanel implements ActionListener {
     });
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	JPanel panel = new JPanel();	
+	
 	JSlider slider = new JSlider(-100, 100, 50);
-	
-	
-	
+    slider.setPaintTicks(true);
+    slider.setSnapToTicks(true);
+    slider.setMajorTickSpacing(20);
+    slider.setMinorTickSpacing(5);
+    slider.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
+    Font font = new Font("Serif", Font.ITALIC, 15);
+    slider.setFont(font);
 	panel.add(slider);
 	frame.add(panel);
 	
 	slider.addChangeListener(new ChangeListener() {
 		public void stateChanged(ChangeEvent e) {
-		
+			int val = ((JSlider) e.getSource()).getValue();
 			System.out.println("Value1: " + ((JSlider)e.getSource()).getValue());
+			System.out.println("slider value is " + val);
 		}
 	});
+
     frame.pack();
     frame.setSize(500, 300);
     frame.setVisible(true);
