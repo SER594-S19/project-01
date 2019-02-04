@@ -3,7 +3,6 @@ package HeartRate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Core.DataGenerator;

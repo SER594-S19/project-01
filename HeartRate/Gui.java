@@ -168,9 +168,9 @@ public class Gui extends JPanel implements ActionListener {
 	}
 
 	private int checkButtonSelected(){
-		if(resting.isSelected() == true)
+		if(resting.isSelected())
 			return 0;
-		else if(moderate.isSelected() == true){
+		else if(moderate.isSelected()){
 			return 1;
 		}
 		else
