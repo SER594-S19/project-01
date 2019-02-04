@@ -8,10 +8,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -22,6 +18,8 @@ private static Model model;
   static String agreementString = "Agreement";
   static String concentratingString = "Concentrating";
   static String disagreementString = "Disagreement";
+  static String interestedString = "Interested";
+  static String thinkingString = "Thinking";
   private final int PORT = 5914;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("RUN");
@@ -46,14 +44,24 @@ private static Model model;
     JRadioButton disagreementButton = new JRadioButton(disagreementString);
     disagreementButton.setActionCommand(disagreementString);
     
+    JRadioButton interestedButton = new JRadioButton(interestedString);
+    interestedButton.setActionCommand(interestedString);
+    
+    JRadioButton thinkingButton = new JRadioButton(thinkingString);
+    thinkingButton.setActionCommand(thinkingString);
+    
     ButtonGroup selectMood = new ButtonGroup();
     selectMood.add(agreementButton);
     selectMood.add(concentratingButton);
     selectMood.add(disagreementButton);
-    
+    selectMood.add(interestedButton);
+    selectMood.add(thinkingButton);
+  
     agreementButton.addActionListener(this);
     concentratingButton.addActionListener(this);
     disagreementButton.addActionListener(this);
+    interestedButton.addActionListener(this);
+    thinkingButton.addActionListener(this);
     
     moodGif = new JLabel(createImageIcon(agreementString
             + ".gif"));
@@ -64,6 +72,9 @@ private static Model model;
     moodPanel.add(agreementButton);
     moodPanel.add(concentratingButton);
     moodPanel.add(disagreementButton);
+    moodPanel.add(interestedButton);
+    moodPanel.add(thinkingButton);
+    
     
     add(moodPanel, BorderLayout.LINE_START);
     add(moodGif, BorderLayout.CENTER);
