@@ -7,57 +7,43 @@ import java.util.Observable;
 import Core.Data;
 import EyeTrackerV1.Gui;
 
-public class DataGenerator extends Observable implements Runnable {
-
-/*	
-	public DataGenerator(Gui val) {
-		this.val = val;
-	}
-	
-	public DataGenerator() {}
-	
-*/
-	
+public class DataGenerator extends Observable implements Runnable
+{
   private DataEyeTracker data;
   private Gui val;
   private boolean stop = false;
-  protected static HashMap<String, Integer> eyeParameters = new HashMap<String, Integer>() {{
-	put("pupilLeft", 0);
-	put("pupilRight", 0);
-	put("gpxValue", 0);
-	put("gpyValue", 0);
-	put("validityL", 0);
-	put("validityR", 0);
-	put("fixationValue", 0);
-	put("event", 0);
-	put("aoi", 0);
-  }};
+  protected static HashMap<String, Double> eyeParameters = new HashMap<>() 
+  {
+	  {
+	put("pupilLeft", 0.0);
+	put("pupilRight", 0.0);
+	put("gpxValue", (double) 0);
+	put("gpyValue", (double) 0);
+	put("validityL", (double) 0);
+	put("validityR", (double) 0);
+	put("fixationValue", (double) 0);
+	put("event", (double) 0);
+	put("aoi", (double) 0);
+  }
+	  };
 
 
-  public void stop() {
+  public void stop() 
+  {
     this.stop = true;
   }
 
-  public Object getObject() {
+  public Object getObject() 
+  {
     return data;
   }
 
   
   @Override
-  public void run() {
-	  System.out.println("hello");
+  public void run()
+  {
+	System.out.println("hello");
     stop = false;
-    /*
-    try {
-    HashMap<String, Integer> eyeParameters;
-    eyeParameters = val.getEyeParameters();
-    
-    System.out.println(" parameters are" + eyeParameters);
-    }
-    catch(Exception e) {
-    	e.printStackTrace();
-    }
-    */
     System.out.println("yes");
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -67,66 +53,89 @@ public class DataGenerator extends Observable implements Runnable {
     double timeStamp = 0;
 
    
-    while (!stop) {
+    while (!stop) 
+    {
               System.out.println("data generator running");
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
       createAndNotify(timeStamp, Math.random(), generatePupilLeft(), generatePupilright(), generateGpxValue(), generate_GpyValue(), generateValidityL(), generateValidityR(), fixationValue(), event(), aoi());
-      try {
+      try 
+      {
         Thread.sleep(1000);
-      } catch (InterruptedException ex) {
+      } 
+      catch (InterruptedException ex) 
+      {
+    	  System.out.println("Exception..");
       }
     }
   }
   
-  public void updateParam(String s, int val) {
-	  eyeParameters.put(s, val);
+  public void updateParam(String s, Double val) 
+  {
+	  
+	  if (s == "pupilLeft" || s == "pupilRight") 
+	  {
+		  eyeParameters.put(s, val);
+	  }
+	  else 
+	  {
+		  eyeParameters.put(s, Math.floor(val));
+	  }
+	  
 	  System.out.println(eyeParameters);
 	  
   }
   //methods to generate 9 other parameters
-  public static int generateGpxValue() {
+  public static Double generateGpxValue() 
+  {
 	  return eyeParameters.get("gpxValue");
 	  
   }
-  public static int generate_GpyValue() {
+  public static Double generate_GpyValue() 
+  {
 	  return eyeParameters.get("gpyValue");
 		  
 	  }
-  public static double generatePupilLeft() {
+  public static double generatePupilLeft()
+  {
 	  return eyeParameters.get("pupilLeft");
 		  
 	  }
-  public static double generatePupilright() {
+  public static double generatePupilright() 
+  {
 	  return eyeParameters.get("pupilRight");
 		  
 	  }
 
-  public static int generateValidityL() {
+  public static double generateValidityL()
+  {
 	return  eyeParameters.get("validityL");
 		
 	}
-  public static int generateValidityR() {
+  public static double generateValidityR() 
+  {
 	  return eyeParameters.get("validityR");
 	  
   }
-  public static int fixationValue() {
+  public static double fixationValue() 
+  {
 	  return eyeParameters.get("fixationValue");
   }
-  public static int event() {
+  public static double event()
+  {
 	  return eyeParameters.get("event");
   }
-  public static int aoi() {
+  public static double aoi() 
+  {
 	  return eyeParameters.get("aoi");
   }
   
   private void createAndNotify(double timestampsystem, double s, double pupilLeft, 
-		  double pupilRight,int gpxValue, 
-		  int gpyValue,int validityL, 
-		  int validityR, int fixationValue, int event, int aoi) {
+		  double pupilRight,double gpxValue, 
+		  double gpyValue,double d, 
+		  double e, double f, double g, double h)
+  {
                   System.out.println("notifying ...");
-                  //System.out.println(timestampsystem + " " + s + " " + pupilLeft);
-
-    data = new DataEyeTracker(timestampsystem, s, pupilLeft, pupilRight, gpxValue, gpyValue, validityL, validityR, fixationValue, event, aoi);
+    data = new DataEyeTracker(timestampsystem, s, pupilLeft, pupilRight, gpxValue, gpyValue, d, e, f, g, h);
     setChanged();
     notifyObservers();
   }

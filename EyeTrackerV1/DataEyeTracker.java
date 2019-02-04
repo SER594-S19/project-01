@@ -1,106 +1,125 @@
 package EyeTrackerV1;
 import Core.Data;
 
-public class DataEyeTracker extends Data {
+public class DataEyeTracker extends Data 
+{
 	private double pupilLeft;
 	private double pupilRight;
-	private int gpx;
-	private int gpy;
-	private int validityL;
-	private int validityR;
-	private int Fixation;
-	private int event;
-	private int aoi;
+	private double gpx;
+	private double gpy;
+	private double validityL;
+	private double validityR;
+	private double Fixation;
+	private double event;
+	private double aoi;
 
-	public int getEvent() {
+	public double getEvent() 
+	{
 		return event;
 	}
 
-	public void setEvent(int event) {
+	public void setEvent(int event)
+	{
 		this.event = event;
 	}
 
-	public int getAoi() {
+	public double getAoi() 
+	{
 		return aoi;
 	}
 
-	public void setAoi(int aoi) {
+	public void setAoi(int aoi)
+	{
 		this.aoi = aoi;
 	}
 
-	public int getFixation() {
+	public double getFixation()
+	{
 		return Fixation;
 	}
 
-	public void setFixation(int fixation) {
+	public void setFixation(int fixation) 
+	{
 		Fixation = fixation;
 	}
 
-	public double getPupilRight() {
+	public double getPupilRight() 
+	{
 		return pupilRight;
 	}
 
-	public void setPupilRight(double pupilRight) {
+	public void setPupilRight(double pupilRight)
+	{
 		this.pupilRight = pupilRight;
 	}
 
-	public double getGpx() {
+	public double getGpx() 
+	{
 		return gpx;
 	}
 
-	public void setGpx(int gpx) {
+	public void setGpx(int gpx)
+	{
 		this.gpx = gpx;
 	}
 
-	public double getGpy() {
+	public double getGpy() 
+	{
 		return gpy;
 	}
 
-	public void setGpy(int gpy) {
+	public void setGpy(int gpy)
+	{
 		this.gpy = gpy;
 	}
 
-	public double getValidityL() {
+	public double getValidityL()
+	{
 		return validityL;
 	}
 
-	public void setValidityL(int validityL) {
+	public void setValidityL(int validityL)
+	{
 		this.validityL = validityL;
 	}
 
-	public double getValidityR() {
+	public double getValidityR() 
+	{
 		return validityR;
 	}
 
-	public void setValidityR(int validityR) {
+	public void setValidityR(int validityR)
+	{
 		this.validityR = validityR;
 	}
 
-	public DataEyeTracker(double time, double value, double pupilLeft, double pupilRight, int gpx, int gpy, int validityL, int validityR, int Fixation, int event, int aoi) {
+	public DataEyeTracker(double time, double value, double pupilLeft, double pupilRight, double gpx, double gpy, double d, double e, double f, double g, double h) 
+	{
 		super(time, value);
 		this.pupilLeft = pupilLeft;
 		this.pupilRight = pupilRight;
-		this.aoi = aoi;
-		this.event = event;
-		this.Fixation = Fixation;
+		this.aoi = h;
+		this.event = g;
+		this.Fixation = f;
 		this.gpx = gpx;
 		this.gpy = gpy;
-		this.validityL = validityL;
-		this.validityR = validityR;
-		
-		
+		this.validityL = d;
+		this.validityR = e;
 	}
 
-	public double getPupilLeft() {
+	public double getPupilLeft()
+	{
 		return pupilLeft;
 	}
 
 	
-	public void setPupilLeft(double pupilLeft) {
+	public void setPupilLeft(double pupilLeft)
+	{
 		this.pupilLeft = pupilLeft;
 	}
 	  @Override
-	public String toString() {
+	public String toString() 
+	{
 	    return "Data{" + "time=" + getTime() + ", Pupil Left = " + getPupilLeft()  +", PupilRight = " + getPupilRight()
 	    + ", ValidityL = " + getValidityL() + ", ValidityR = " +getValidityR() + ", Gpx = " +getGpx()+ ", Gpy = "+ getGpy() +", Fixation = "+ getFixation() +", Event = " +getEvent() +", AOI = "+getAoi() + " }";
 	
