@@ -8,7 +8,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,32 +22,33 @@ import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.event.*;
 
 public class Gui extends JPanel implements ActionListener {
 
-  private static Model model;
+	private static Model model;
 
-  private final int PORT = 1594;
-  protected JLabel labelPublishPort;
-  private final JButton buttonConnect = new JButton("run");
+	private final int PORT = 1594;
+	protected JLabel labelPublishPort;
+	private final JButton buttonConnect = new JButton("run");
 
-  private Component createPanelSouth() {
+	private Component createPanelSouth() {
 
-    JPanel labels = new JPanel();
-    labels.setBackground(Color.GRAY);
-    labels.add(new JLabel("  Publishing at port: "));
-    labelPublishPort = new JLabel("" + PORT);
-    labels.add(labelPublishPort);
-    JPanel panel = new JPanel(new BorderLayout());
-    panel.setBackground(Color.CYAN);
-    panel.add(labels, BorderLayout.WEST);
-    panel.add(buttonConnect, BorderLayout.EAST);
-    buttonConnect.addActionListener(this);
-    buttonConnect.setEnabled(true);
-    return panel;
-  }
+		JPanel labels = new JPanel();
+		labels.setBackground(Color.GRAY);
+		labels.add(new JLabel("  Publishing at port: "));
+		labelPublishPort = new JLabel("" + PORT);
+		labels.add(labelPublishPort);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.setBackground(Color.CYAN);
+		panel.add(labels, BorderLayout.WEST);
+		panel.add(buttonConnect, BorderLayout.EAST);
+		buttonConnect.addActionListener(this);
+		buttonConnect.setEnabled(true);
+		return panel;
+	}
 
-  public Gui() {
+	public Gui() {
 
     model = new Model(new DataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
@@ -143,6 +147,16 @@ public class Gui extends JPanel implements ActionListener {
     group5.add(radioButton_8);
     group5.add(radioButton_9);
     
+    radioButton.addActionListener(this);
+    radioButton_1.addActionListener(this);
+    radioButton_2.addActionListener(this);
+    radioButton_3.addActionListener(this);
+    radioButton_4.addActionListener(this);
+    radioButton_5.addActionListener(this);
+    radioButton_6.addActionListener(this);
+    radioButton_7.addActionListener(this);
+    radioButton_8.addActionListener(this);
+    radioButton_9.addActionListener(this);    
     
     JLabel lblNewLabel_1 = new JLabel("0");
     lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -193,75 +207,131 @@ public class Gui extends JPanel implements ActionListener {
     lblClench.setBounds(26, 243, 89, 25);
     panel_1.add(lblClench);
     
-    JSlider slider = new JSlider();
-    slider.setBounds(107, 15, 100, 50);
-    panel_1.add(slider);
-    slider.setMaximum(1);
-    
-    JSlider slider_1 = new JSlider();
-    slider_1.setMaximum(1);
-    slider_1.setBounds(107, 55, 100, 50);
-    panel_1.add(slider_1);
-    
-    JSlider slider_2 = new JSlider();
-    slider_2.setMaximum(1);
-    slider_2.setBounds(107, 90, 100, 50);
-    panel_1.add(slider_2);
-    
-    JSlider slider_3 = new JSlider();
-    slider_3.setMaximum(1);
-    slider_3.setBounds(107, 125, 100, 50);
-    panel_1.add(slider_3);
-    
-    JSlider slider_4 = new JSlider();
-    slider_4.setMaximum(1);
-    slider_4.setBounds(107, 160, 100, 50);
-    panel_1.add(slider_4);
-    
-    JSlider slider_5 = new JSlider();
-    slider_5.setMaximum(1);
-    slider_5.setBounds(107, 195, 100, 50);
-    panel_1.add(slider_5);
-    
-    JSlider slider_6 = new JSlider();
-    slider_6.setMaximum(1);
-    slider_6.setBounds(107, 230, 100, 50);
-    panel_1.add(slider_6);
-    
-    JLabel num = new JLabel("lis1");
+    JLabel num = new JLabel("1");
     num.setHorizontalAlignment(SwingConstants.CENTER);
     num.setBounds(215, 25, 30, 25);
     panel_1.add(num);
     
-    JLabel num1 = new JLabel("lis2");
+    JSlider slider = new JSlider();
+    slider.setBounds(107, 15, 100, 50);
+    slider.setMaximum(1);
+    slider.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num.setText("1");
+        	else
+        		num.setText("0"); 		
+        }
+    });
+    panel_1.add(slider);
+    
+    JLabel num1 = new JLabel("1");
     num1.setHorizontalAlignment(SwingConstants.CENTER);
     num1.setBounds(215, 65, 30, 25);
-    panel_1.add(num1);
+    panel_1.add(num1); 
     
-    JLabel num2 = new JLabel("lis3");
+    JSlider slider_1 = new JSlider();
+    slider_1.setMaximum(1);
+    slider_1.setBounds(107, 55, 100, 50);
+    slider_1.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num1.setText("1");
+        	else
+        		num1.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_1);
+    
+    JLabel num2 = new JLabel("1");
     num2.setHorizontalAlignment(SwingConstants.CENTER);
     num2.setBounds(215, 100, 30, 25);
     panel_1.add(num2);
     
-    JLabel num3 = new JLabel("lis4");
+    JSlider slider_2 = new JSlider();
+    slider_2.setMaximum(1);
+    slider_2.setBounds(107, 90, 100, 50);
+    slider_2.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num2.setText("1");
+        	else
+        		num2.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_2);    
+   
+    JLabel num3 = new JLabel("1");
     num3.setHorizontalAlignment(SwingConstants.CENTER);
     num3.setBounds(215, 135, 30, 25);
     panel_1.add(num3);
     
-    JLabel num4 = new JLabel("lis5");
+    JSlider slider_3 = new JSlider();
+    slider_3.setMaximum(1);
+    slider_3.setBounds(107, 125, 100, 50);
+    slider_3.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num3.setText("1");
+        	else
+        		num3.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_3);
+    
+    JLabel num4 = new JLabel("1");
     num4.setHorizontalAlignment(SwingConstants.CENTER);
     num4.setBounds(215, 170, 30, 25);
     panel_1.add(num4);
     
-    JLabel num5 = new JLabel("lis6");
+    JSlider slider_4 = new JSlider();
+    slider_4.setMaximum(1);
+    slider_4.setBounds(107, 160, 100, 50);
+    slider_4.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num4.setText("1");
+        	else
+        		num4.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_4);
+   
+    JLabel num5 = new JLabel("1");
     num5.setHorizontalAlignment(SwingConstants.CENTER);
     num5.setBounds(215, 200, 30, 25);
     panel_1.add(num5);
     
-    JLabel num6 = new JLabel("lis7");
+    JSlider slider_5 = new JSlider();
+    slider_5.setMaximum(1);
+    slider_5.setBounds(107, 195, 100, 50);
+    slider_5.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num5.setText("1");
+        	else
+        		num5.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_5);
+    
+    JLabel num6 = new JLabel("1");
     num6.setHorizontalAlignment(SwingConstants.CENTER);
     num6.setBounds(215, 240, 30, 25);
-    panel_1.add(num6);
+    panel_1.add(num6);  
+    
+    JSlider slider_6 = new JSlider();
+    slider_6.setMaximum(1);
+    slider_6.setBounds(107, 230, 100, 50);
+    slider_6.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+        	if(((JSlider)e.getSource()).getValue()==1)
+        		num6.setText("1");
+        	else
+        		num6.setText("0"); 		
+        }
+    });
+    panel_1.add(slider_6);
     
     JPanel panel_2 = new JPanel();
     panel_2.setBounds(334, 28, 339, 497);
@@ -319,6 +389,19 @@ public class Gui extends JPanel implements ActionListener {
     group.add(radioButton_13);
     group.add(radioButton_14);
     
+    radioButton_10.addActionListener(this);
+    radioButton_11.addActionListener(this);
+    radioButton_12.addActionListener(this);
+    radioButton_13.addActionListener(this);
+    radioButton_14.addActionListener(this); 
+    
+		/*
+		 * Icon imgIcon = new ImageIcon(this.getClass().getResource("Thinking.gif"));
+		 * JLabel gifLabel = new JLabel(imgIcon); gifLabel.setBounds(668, 43, 46, 14);
+		 * panel_2.add(gifLabel);
+		 */
+    
+    
     JTabbedPane tp=new JTabbedPane();  
     tp.setBounds(50,50,200,200);  
     tp.add("Expressive_binary",panel);  
@@ -329,37 +412,37 @@ public class Gui extends JPanel implements ActionListener {
     System.out.println("gui done");
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    System.out.println("listener trigger");
-    if (e.getSource() == buttonConnect) {
-      if (buttonConnect.getText().compareTo("run") == 0) {
-            System.out.println("start");
-        model.start();
-        buttonConnect.setText("stop");
-      } else if (buttonConnect.getText().compareTo("stop") == 0) {
-                    System.out.println("stop");
-        model.stop();
-        buttonConnect.setText("run");
-      }
-    }
-  }
-  
-  public static void main(String[] args) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("listener trigger");
+		if (e.getSource() == buttonConnect) {
+			if (buttonConnect.getText().compareTo("run") == 0) {
+				System.out.println("start");
+				model.start();
+				buttonConnect.setText("stop");
+			} else if (buttonConnect.getText().compareTo("stop") == 0) {
+				System.out.println("stop");
+				model.stop();
+				buttonConnect.setText("run");
+			}
+		}
+	}
 
-    JFrame frame = new JFrame("Simulator");
-    frame.setLayout(new GridLayout(1, 1));
-    frame.add(new Gui());
-    frame.addWindowListener(new java.awt.event.WindowAdapter() {
-      @Override
-      public void windowClosing(java.awt.event.WindowEvent e) {
-        model.shutdown();
-        System.exit(0);
-      }
-    });
-    frame.pack();
-    frame.setSize(500, 400);
-    frame.setVisible(true);
-  }
-  
+	public static void main(String[] args) {
+
+		JFrame frame = new JFrame("Simulator");
+		frame.setLayout(new GridLayout(1, 1));
+		frame.add(new Gui());
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				model.shutdown();
+				System.exit(0);
+			}
+		});
+		frame.pack();
+		frame.setSize(500, 400);
+		frame.setVisible(true);
+	}
+
 }
