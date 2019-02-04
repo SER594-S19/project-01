@@ -59,9 +59,12 @@ public class Subscriber extends Observable implements Runnable {
     while (!stop) {
       System.out.println("in hello");
       try {
+    	  System.out.println("in try block");
         measureLocal= input.readLine();
+        System.out.println("data read is " + measureLocal);
       System.out.println("in hello read");
       } catch (IOException sce) {
+    	  sce.printStackTrace();
         measureLocal= null;
       }
       if (measureLocal == null) {

@@ -1,5 +1,6 @@
 package EyeTrackerV1;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -21,10 +22,11 @@ public class Model {
   private final Publisher threadPublisher;
 
   public Model(DataGenerator device, Publisher publisher) {
-    executorService = Executors.newCachedThreadPool();
+    executorService = Executors.newCachedThreadPool(); 
     dataGenerator = device;
     threadPublisher = publisher;
     dataGenerator.addObserver(threadPublisher);
+    
   }
 
   public void shutdown() {
@@ -39,19 +41,40 @@ public class Model {
     }
   }
   
-
-  public void start() {
+/*
+  public void startAndStop(Gui val, String status) {
         System.out.println("model start");
-    executorService.submit(dataGenerator);
-    executorService.submit(threadPublisher);
-    
-  }
+        Thread t = new Thread(new DataGenerator(val));
+        if (status.equals("Start")) {
+            t.start();
+            try {
+                executorService.submit(threadPublisher);
+            }
+            catch(Exception e) {
+            	e.printStackTrace();
+            }
+        }
+        else {
+        	System.out.println("model stop");
 
-  public void stop() {
+            //dataGenerator.stop();
+                    t = null;
+            threadPublisher.stop();
             System.out.println("model stop");
+        }
+  }*/
+  
+  public void start() {
+      System.out.println("model start");
+  executorService.submit(dataGenerator);
+  executorService.submit(threadPublisher);
+}
 
-    dataGenerator.stop();
-    threadPublisher.stop();
-  }
+public void stop() {
+          System.out.println("model stop");
+
+  dataGenerator.stop();
+  threadPublisher.stop();
+}
   
 }
