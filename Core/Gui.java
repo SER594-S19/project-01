@@ -20,6 +20,7 @@ private static Model model;
   static String disagreementString = "Disagreement";
   static String interestedString = "Interested";
   static String thinkingString = "Thinking";
+  static String unsureString = "Unsure"
   private final int PORT = 5914;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("RUN");
@@ -50,18 +51,23 @@ private static Model model;
     JRadioButton thinkingButton = new JRadioButton(thinkingString);
     thinkingButton.setActionCommand(thinkingString);
     
+    JRadioButton unsureButton = new JRadioButton(unsureString);
+    thinkingButton.setActionCommand(unsureString);
+    
     ButtonGroup selectMood = new ButtonGroup();
     selectMood.add(agreementButton);
     selectMood.add(concentratingButton);
     selectMood.add(disagreementButton);
     selectMood.add(interestedButton);
     selectMood.add(thinkingButton);
-  
+    selectMood.add(unsureButton);
+    
     agreementButton.addActionListener(this);
     concentratingButton.addActionListener(this);
     disagreementButton.addActionListener(this);
     interestedButton.addActionListener(this);
     thinkingButton.addActionListener(this);
+    unsureButton.addActionListener(this);
     
     moodGif = new JLabel(createImageIcon(agreementString
             + ".gif"));
@@ -74,7 +80,7 @@ private static Model model;
     moodPanel.add(disagreementButton);
     moodPanel.add(interestedButton);
     moodPanel.add(thinkingButton);
-    
+    moodPanel.add(unsureButton);
     
     add(moodPanel, BorderLayout.LINE_START);
     add(moodGif, BorderLayout.CENTER);
