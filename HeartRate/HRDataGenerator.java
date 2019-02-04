@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
-class DataGenerator extends Observable implements Runnable {
+import Core.DataGenerator;
+
+
+public class HRDataGenerator extends DataGenerator implements Runnable  {
 
   private HeartData data;
   private boolean stop = false;
   private int heartState;
 
-  public DataGenerator() {
+  public HRDataGenerator() {
     heartState = 0;
   }
 

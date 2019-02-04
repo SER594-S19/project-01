@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
 public class Model {
 
     private final ExecutorService executorService;
-    private final DataGenerator dataGenerator;
+    private final HRDataGenerator dataGenerator;
     private final Publisher threadPublisher;
     private int heartState;
     private boolean serverState;
 
-    public Model(DataGenerator device, Publisher publisher) {
+    public Model(HRDataGenerator device, Publisher publisher) {
         executorService = Executors.newCachedThreadPool();
         dataGenerator = device;
         threadPublisher = publisher;

@@ -83,7 +83,7 @@ public class Gui extends JPanel implements ActionListener {
 
 	public Gui() {
 
-		model = new Model(new DataGenerator(), new Publisher(PORT));
+		model = new Model(new HRDataGenerator(), new Publisher(PORT));
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
