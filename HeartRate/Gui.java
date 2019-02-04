@@ -29,6 +29,7 @@ public class Gui extends JPanel implements ActionListener {
 	private final JRadioButton resting = new JRadioButton("Resting", true);
 	private final JRadioButton moderate = new JRadioButton("Moderate Exercise");
 	private final JRadioButton vigorous = new JRadioButton("Vigorous Exercise");
+	private int selectedAction = 0;
 
 	// private final JSplitPane splitPane;
 
@@ -103,7 +104,9 @@ public class Gui extends JPanel implements ActionListener {
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
 				System.out.println("start");
+				selectedAction = checkButtonSelected();
 				model.start();
+				model.setHeartState(selectedAction);
 				buttonConnect.setText("stop");
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				System.out.println("stop");
@@ -119,6 +122,9 @@ public class Gui extends JPanel implements ActionListener {
 			gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
+			selectedAction = 0;
+			model.setHeartState(0);
+
 		} else if (e.getSource() == moderate) {
 			System.out.println("test");
 			ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
@@ -128,6 +134,8 @@ public class Gui extends JPanel implements ActionListener {
 			this.gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
+			selectedAction = 1;
+			model.setHeartState(1);
 		} else if (e.getSource() == vigorous) {
 			ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
 			JLabel imageLabel = new JLabel();
@@ -136,7 +144,8 @@ public class Gui extends JPanel implements ActionListener {
 			this.gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
-
+			selectedAction = 2;
+			model.setHeartState(2);
 		}
 	}
 
@@ -156,6 +165,16 @@ public class Gui extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setPreferredSize(new Dimension(400, 400));
 		frame.setVisible(true);
+	}
+
+	private int checkButtonSelected(){
+		if(resting.isSelected() == true)
+			return 0;
+		else if(moderate.isSelected() == true){
+			return 1;
+		}
+		else
+			return 2;
 	}
 
 }
