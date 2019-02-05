@@ -10,21 +10,20 @@ package Core;
 public class Data {
 
     private double time;
-    private double value;
+    private int x;
+    private int y;
+    private int scroll;
 
-    public Data(double time, double value) {
-        this.time = time;
-        this.value = value;
-    }
-
-    public void setData(double data) {
-      time=0;
-      value=data;
+    public Data(double time, int x,int y, int scroll){
+        this.time=time;
+        this.x=x;
+        this.y=y;
+        this.scroll=scroll;
     }
 
   @Override
   public String toString() {
-    return "Data{" + "time=" + time + ", value=" + value + '}';
+    return "Data{" + "time=" + time + ", x=" + x + ", y="+y +", scroll="+scroll +"}";
   }
      
 }
