@@ -43,6 +43,25 @@ public class Gui extends JPanel implements ActionListener {
 	  return slider;
   }
 
+  private Component createPanelConductance() {
+    JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
+    slider.setMajorTickSpacing(10);
+    slider.setPaintTicks(true);
+
+    Hashtable conductanceLabels = new Hashtable();
+    conductanceLabels.put(new Integer( 0 ), new JLabel("0") );
+    conductanceLabels.put(new Integer( 1 ), new JLabel("1") );
+    conductanceLabels.put(new Integer( 2 ), new JLabel("2") );
+    conductanceLabels.put(new Integer( 3 ), new JLabel("3") );
+
+    slider.setLabelTable(conductanceLabels);
+    slider.setPaintLabels(true);
+
+    slider.addChangeListener(changeListener);
+
+    return slider;
+  }
+
   private Component createPanelSouth() {
 
     JPanel labels = new JPanel();
@@ -83,7 +102,9 @@ public class Gui extends JPanel implements ActionListener {
     model = new Model(new DataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
-    this.add(createPanelNorth(), BorderLayout.CENTER);
+    this.add(createPanelNorth(), BorderLayout.NORTH);
+    this.add(createPanelConductance(), BorderLayout.CENTER);
+
     this.add(createPanelSouth(), BorderLayout.SOUTH);
     Dimension screen = getToolkit().getScreenSize();
     this.setSize(screen.width / 2, 3 * screen.height / 4);
