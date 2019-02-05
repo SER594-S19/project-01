@@ -20,7 +20,7 @@ private static Model model;
   static String disagreementString = "Disagreement";
   static String interestedString = "Interested";
   static String thinkingString = "Thinking";
-  static String unsureString = "Unsure"
+  static String unsureString = "Unsure";
   private final int PORT = 5914;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("RUN");
