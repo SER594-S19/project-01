@@ -7,10 +7,15 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -19,6 +24,24 @@ public class Gui extends JPanel implements ActionListener {
   private final int PORT = 1594;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
+  JSlider slider;
+  
+  private Component createPanelNorth() {
+	  JSlider slider = new JSlider(JSlider.HORIZONTAL,0,2,0);
+	  slider.setMajorTickSpacing(10);
+	  slider.setPaintTicks(true);
+	  
+	  Hashtable sliderlabels = new Hashtable();
+	  sliderlabels.put(new Integer( 0 ), new JLabel("Voltage") );
+	  sliderlabels.put(new Integer( 1 ), new JLabel("Conductance") );
+	  sliderlabels.put(new Integer( 2 ), new JLabel("V & C") );
+	  slider.setLabelTable(sliderlabels);
+	  slider.setPaintLabels(true);
+	  
+	  slider.addChangeListener(changeListener);
+	  
+	  return slider;
+  }
 
   private Component createPanelSouth() {
 
@@ -36,11 +59,31 @@ public class Gui extends JPanel implements ActionListener {
     return panel;
   }
 
+  public ChangeListener changeListener = new ChangeListener() {
+	  //making the slider react to changing positions
+	  public void stateChanged(ChangeEvent ce){
+		  slider = (JSlider) ce.getSource();
+		  if(!(slider.getValue() == 0))
+		  {
+			  
+		  }
+		  if(!(slider.getValue() == 1))
+		  {
+			  
+		  }
+		  if(!(slider.getValue() == 2))
+		  {
+			  
+		  }
+	  }
+  };
+  
   public Gui() {
 
     model = new Model(new DataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
+    this.add(createPanelNorth(), BorderLayout.CENTER);
     this.add(createPanelSouth(), BorderLayout.SOUTH);
     Dimension screen = getToolkit().getScreenSize();
     this.setSize(screen.width / 2, 3 * screen.height / 4);
