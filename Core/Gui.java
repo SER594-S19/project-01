@@ -52,7 +52,7 @@ private static Model model;
     thinkingButton.setActionCommand(thinkingString);
     
     JRadioButton unsureButton = new JRadioButton(unsureString);
-    thinkingButton.setActionCommand(unsureString);
+    unsureButton.setActionCommand(unsureString);
     
     ButtonGroup selectMood = new ButtonGroup();
     selectMood.add(agreementButton);
