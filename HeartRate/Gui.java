@@ -103,15 +103,18 @@ public class Gui extends JPanel implements ActionListener {
 		System.out.println("listener trigger");
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
+				buttonConnect.setBackground(Color.green);
 				System.out.println("start");
 				selectedAction = checkButtonSelected();
 				model.start();
 				model.setHeartState(selectedAction);
 				buttonConnect.setText("stop");
+				buttonConnect.setBackground(Color.red);
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				System.out.println("stop");
 				model.stop();
 				buttonConnect.setText("run");
+				buttonConnect.setBackground(Color.green);
 			}
 		}
 		if (e.getSource() == resting) {
