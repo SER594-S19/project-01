@@ -2,7 +2,7 @@ package Core;
 
 import java.util.Calendar;
 import java.util.Observable;
-
+import java.util.concurrent.ThreadLocalRandom;
 class DataGenerator extends Observable implements Runnable {
 
   private Data data;
@@ -29,7 +29,7 @@ class DataGenerator extends Observable implements Runnable {
     while (!stop) {
               System.out.println("data generator running");
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-      createAndNotify(timeStamp, Math.random());
+      createAndNotify(timeStamp, generateData());
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {
@@ -43,6 +43,13 @@ class DataGenerator extends Observable implements Runnable {
     data = new Data(timestampsystem, s);
     setChanged();
     notifyObservers();
+  }
+  
+  private double generateData() {
+	  double dataValue = ThreadLocalRandom.current().nextDouble(0,0.0000009);
+	  System.out.println(dataValue);
+	  return dataValue;
+	  
   }
 
 }
