@@ -1,6 +1,7 @@
 package Core;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**This class is to create an eye with a pupil in it to show eye movement
  *
@@ -12,7 +13,12 @@ public class Eye {
     private double r1;
     private double r2;
     
-    public Eye(double x, double y, double r1, double r2) {
+
+	public void setR2(double r2) {
+		this.r2 = r2;
+	}
+
+	public Eye(double x, double y, double r1, double r2) {
         position = new Scale(x, y);
         this.r1 = r1;
         this.r2 = r2;
@@ -34,5 +40,6 @@ public class Eye {
         g.setColor(Color.BLACK);
         g.fillOval((int) (pupilPosition.getX() - r2), (int) (pupilPosition.getY() - r2), (int) (2 * r2), (int) (2 * r2));
     }
+
     
 }
