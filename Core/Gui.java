@@ -62,6 +62,25 @@ public class Gui extends JPanel implements ActionListener {
     return slider;
   }
 
+  private Component createPanelVoltage() {
+	    JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
+	    slider.setMajorTickSpacing(10);
+	    slider.setPaintTicks(true);
+	    
+	    Hashtable voltageLabels = new Hashtable();
+	    voltageLabels.put(new Integer( 0 ), new JLabel("0") );
+	    voltageLabels.put(new Integer( 1 ), new JLabel("1") );
+	    voltageLabels.put(new Integer( 2 ), new JLabel("2") );
+	    voltageLabels.put(new Integer( 3 ), new JLabel("3") );
+
+	    slider.setLabelTable(voltageLabels);
+	    slider.setPaintLabels(true);
+
+	    slider.addChangeListener(changeListener);
+
+	    return slider;
+  }
+  
   private Component createPanelSouth() {
 
     JPanel labels = new JPanel();
@@ -102,8 +121,10 @@ public class Gui extends JPanel implements ActionListener {
     model = new Model(new DataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
-    this.add(createPanelNorth(), BorderLayout.NORTH);
+    //this.add(createPanelNorth(), BorderLayout.NORTH);
+    this.add(createPanelVoltage(), BorderLayout.NORTH);
     this.add(createPanelConductance(), BorderLayout.CENTER);
+    
 
     this.add(createPanelSouth(), BorderLayout.SOUTH);
     Dimension screen = getToolkit().getScreenSize();
