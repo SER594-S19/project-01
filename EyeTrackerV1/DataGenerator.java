@@ -4,15 +4,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Observable;
 
-import Core.Data;
-import EyeTrackerV1.Gui;
-
 public class DataGenerator extends Observable implements Runnable
 {
   private DataEyeTracker data;
   private Gui val;
   private boolean stop = false;
-  protected static HashMap<String, Double> eyeParameters = new HashMap<>() 
+  protected static HashMap<String, Double> eyeParameters = new HashMap<String,Double>() 
   {
 	  {
 	put("pupilLeft", 0.0);
