@@ -144,80 +144,40 @@ public class Gui extends JPanel implements ActionListener {
 				this.getParent().revalidate();
 				this.getParent().repaint();
 			}
-			if(model.getServerState()) {
-				System.out.println(e.getSource());
-				if (checkButtonSelected()==0) {
-					ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
-					JLabel imageLabel = new JLabel();
-					imageLabel.setIcon(ii);
-					gifPanel.removeAll();
-					gifPanel.add(imageLabel);
-					this.getParent().revalidate();
-					this.getParent().repaint();
-					model.setHeartState(0);
 
-				} else if (checkButtonSelected()==1) {
-					ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
-					JLabel imageLabel = new JLabel();
-					imageLabel.setIcon(ii);
-					this.gifPanel.removeAll();
-					this.gifPanel.add(imageLabel);
-					this.getParent().revalidate();
-					this.getParent().repaint();
-					model.setHeartState(1);
-				} else if (checkButtonSelected()==2) {
-					ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
-					JLabel imageLabel = new JLabel();
-					imageLabel.setIcon(ii);
-					this.gifPanel.removeAll();
-					this.gifPanel.add(imageLabel);
-					this.getParent().revalidate();
-					this.getParent().repaint();
-					model.setHeartState(2);
-				}
-				
-				
-				
+			if(model.getServerState()) {
+				if (checkButtonSelected()==0)
+					updateHeartGif("slow_heart.gif");
+				else if (checkButtonSelected()==1)
+					updateHeartGif("normal_heart.gif");
+				else if (checkButtonSelected()==2)
+					updateHeartGif("fast_heart.gif");
+				model.setHeartState(checkButtonSelected());
 			}
 		}
-		
 		
 		if(model.getServerState()) {
 			if (e.getSource() == resting ) {
-				ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
-				JLabel imageLabel = new JLabel();
-				imageLabel.setIcon(ii);
-				gifPanel.removeAll();
-				gifPanel.add(imageLabel);
-				this.getParent().revalidate();
-				this.getParent().repaint();
+				updateHeartGif("slow_heart.gif");
 				model.setHeartState(0);
-
 			} else if (e.getSource() == moderate) {
-				ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
-				JLabel imageLabel = new JLabel();
-				imageLabel.setIcon(ii);
-				this.gifPanel.removeAll();
-				this.gifPanel.add(imageLabel);
-				this.getParent().revalidate();
-				this.getParent().repaint();
+				updateHeartGif("normal_heart.gif");
 				model.setHeartState(1);
 			} else if (e.getSource() == vigorous) {
-				ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
-				JLabel imageLabel = new JLabel();
-				imageLabel.setIcon(ii);
-				this.gifPanel.removeAll();
-				this.gifPanel.add(imageLabel);
-				this.getParent().revalidate();
-				this.getParent().repaint();
+				updateHeartGif("fast_heart.gif");
 				model.setHeartState(2);
 			}
-			
-			
-			
 		}
+	}
 
-
+	private void updateHeartGif(String image) {
+		ImageIcon ii = new ImageIcon(this.getClass().getResource(image));
+		JLabel imageLabel = new JLabel();
+		imageLabel.setIcon(ii);
+		gifPanel.removeAll();
+		gifPanel.add(imageLabel);
+		this.getParent().revalidate();
+		this.getParent().repaint();
 	}
 
 	private int checkButtonSelected(){
