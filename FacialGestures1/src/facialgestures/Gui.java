@@ -32,7 +32,16 @@ public class Gui extends JPanel implements ActionListener {
     static String longTermIcon = "Long Term Excitement";
     static String meditateIcon = "Meditation";
     static String frustrateIcon = "Frustration";
+    static JSlider slider;
+    static JSlider slider_1;
+    static JSlider slider_2;
+    static JSlider slider_3;
+    static JSlider slider_4;
+    static JSlider slider_5;
+    static JSlider slider_6;
     JLabel gifIcon;
+    JLabel num;
+
 
 	private Component createPanelSouth() {
 
@@ -209,23 +218,20 @@ public class Gui extends JPanel implements ActionListener {
     lblClench.setBounds(26, 243, 89, 25);
     panel_1.add(lblClench);
     
-    JLabel num = new JLabel("1");
+    num = new JLabel("1");
     num.setHorizontalAlignment(SwingConstants.CENTER);
     num.setBounds(215, 25, 30, 25);
     panel_1.add(num);
     
-    JSlider slider = new JSlider();
+    slider = new JSlider();
     slider.setBounds(107, 15, 100, 50);
-    slider.setMaximum(1);
+    slider.setMaximum(10);
     slider.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num.setText("1");
-        	else
-        		num.setText("0"); 		
-        }
-    });
+    	public void stateChanged(ChangeEvent e) { double value =
+	((JSlider)e.getSource()).getValue() * 0.1; System.out.println(value);
+	num.setText(String.valueOf(value));
+	}
+    	}); 
     panel_1.add(slider);
     
     JLabel num1 = new JLabel("1");
@@ -233,16 +239,14 @@ public class Gui extends JPanel implements ActionListener {
     num1.setBounds(215, 65, 30, 25);
     panel_1.add(num1); 
     
-    JSlider slider_1 = new JSlider();
-    slider_1.setMaximum(1);
+    slider_1 = new JSlider();
+    slider.setMaximum(10);
     slider_1.setBounds(107, 55, 100, 50);
     slider_1.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num1.setText("1");
-        	else
-        		num1.setText("0"); 		
+    	public void stateChanged(ChangeEvent e) {
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num1.setText(String.valueOf(value));	
         }
     });
     panel_1.add(slider_1);
@@ -252,18 +256,16 @@ public class Gui extends JPanel implements ActionListener {
     num2.setBounds(215, 100, 30, 25);
     panel_1.add(num2);
     
-    JSlider slider_2 = new JSlider();
-    slider_2.setMaximum(1);
+    slider_2 = new JSlider();
+    slider_2.setMaximum(10);
     slider_2.setBounds(107, 90, 100, 50);
     slider_2.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num2.setText("1");
-        	else
-        		num2.setText("0"); 		
+    	public void stateChanged(ChangeEvent e) {
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num2.setText(String.valueOf(value));	
         }
-    });
+    	});
     panel_1.add(slider_2);    
    
     JLabel num3 = new JLabel("1");
@@ -271,16 +273,14 @@ public class Gui extends JPanel implements ActionListener {
     num3.setBounds(215, 135, 30, 25);
     panel_1.add(num3);
     
-    JSlider slider_3 = new JSlider();
-    slider_3.setMaximum(1);
+    slider_3 = new JSlider();
+    slider_3.setMaximum(10);
     slider_3.setBounds(107, 125, 100, 50);
     slider_3.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num3.setText("1");
-        	else
-        		num3.setText("0"); 		
+    	public void stateChanged(ChangeEvent e) {
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num3.setText(String.valueOf(value));	
         }
     });
     panel_1.add(slider_3);
@@ -290,16 +290,14 @@ public class Gui extends JPanel implements ActionListener {
     num4.setBounds(215, 170, 30, 25);
     panel_1.add(num4);
     
-    JSlider slider_4 = new JSlider();
-    slider_4.setMaximum(1);
+    slider_4 = new JSlider();
+    slider_4.setMaximum(10);
     slider_4.setBounds(107, 160, 100, 50);
     slider_4.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num4.setText("1");
-        	else
-        		num4.setText("0"); 		
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num4.setText(String.valueOf(value));	
         }
     });
     panel_1.add(slider_4);
@@ -309,16 +307,14 @@ public class Gui extends JPanel implements ActionListener {
     num5.setBounds(215, 200, 30, 25);
     panel_1.add(num5);
     
-    JSlider slider_5 = new JSlider();
-    slider_5.setMaximum(1);
+    slider_5 = new JSlider();
+    slider_5.setMaximum(10);
     slider_5.setBounds(107, 195, 100, 50);
     slider_5.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num5.setText("1");
-        	else
-        		num5.setText("0"); 		
+    	public void stateChanged(ChangeEvent e) {
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num5.setText(String.valueOf(value));	
         }
     });
     panel_1.add(slider_5);
@@ -329,15 +325,13 @@ public class Gui extends JPanel implements ActionListener {
     panel_1.add(num6);  
     
     JSlider slider_6 = new JSlider();
-    slider_6.setMaximum(1);
+    slider_6.setMaximum(10);
     slider_6.setBounds(107, 230, 100, 50);
     slider_6.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	System.out.println(((JSlider)e.getSource()).getValue());	
-        	if(((JSlider)e.getSource()).getValue()==1)
-        		num6.setText("1");
-        	else
-        		num6.setText("0"); 		
+    	public void stateChanged(ChangeEvent e) {
+            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num6.setText(String.valueOf(value));	
         }
     });
     panel_1.add(slider_6);
@@ -374,27 +368,27 @@ public class Gui extends JPanel implements ActionListener {
     
     JRadioButton radioButton_10 = new JRadioButton(engageIcon);
     radioButton_10.setBounds(170, 25, 21, 23);
-    radioButton_10.setActionCommand(engageIcon);
+    //radioButton_10.setActionCommand(engageIcon);
     panel_2.add(radioButton_10);
     
     JRadioButton radioButton_11 = new JRadioButton(shortTermIcon);
     radioButton_11.setBounds(170, 50, 21, 23);
-    radioButton_11.setActionCommand(shortTermIcon);
+    //radioButton_11.setActionCommand(shortTermIcon);
     panel_2.add(radioButton_11);
     
     JRadioButton radioButton_12 = new JRadioButton(longTermIcon);
     radioButton_12.setBounds(170, 75, 21, 23);
-    radioButton_12.setActionCommand(longTermIcon);
+    //radioButton_12.setActionCommand(longTermIcon);
     panel_2.add(radioButton_12);
     
     JRadioButton radioButton_13 = new JRadioButton(meditateIcon);
     radioButton_13.setBounds(170, 100, 21, 23);
-    radioButton_13.setActionCommand(meditateIcon);
+    //radioButton_13.setActionCommand(meditateIcon);
     panel_2.add(radioButton_13);
     
     JRadioButton radioButton_14 = new JRadioButton(frustrateIcon);
     radioButton_14.setBounds(170, 125, 21, 23);
-    radioButton_14.setActionCommand(frustrateIcon);
+    //radioButton_14.setActionCommand(frustrateIcon);
     panel_2.add(radioButton_14);
     
     ButtonGroup group = new ButtonGroup();
@@ -427,6 +421,7 @@ public class Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		 gifIcon.setIcon(createImageIcon(e.getActionCommand()
 	              + ".gif"));
+		 
             System.out.println("Button Clicked!");
 		System.out.println("listener trigger");
 		if (e.getSource() == buttonConnect) {
