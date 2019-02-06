@@ -106,7 +106,7 @@ public class Gui extends JPanel implements ActionListener {
 	}
 
 	private void initializeHeartGif() {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
+		ImageIcon ii = new ImageIcon(this.getClass().getResource("static.png"));
 		JLabel imageLabel = new JLabel();
 		imageLabel.setIcon(ii);
 		gifPanel.add(imageLabel);
@@ -136,37 +136,88 @@ public class Gui extends JPanel implements ActionListener {
 				buttonConnect.setText("run");
 				freqText.setEnabled(true);
 				textPane.setBackground(Color.WHITE);
+				ImageIcon ii = new ImageIcon(this.getClass().getResource("static.png"));
+				JLabel imageLabel = new JLabel();
+				imageLabel.setIcon(ii);
+				gifPanel.removeAll();
+				gifPanel.add(imageLabel);
+				this.getParent().revalidate();
+				this.getParent().repaint();
+			}
+			if(model.getServerState()) {
+				System.out.println(e.getSource());
+				if (checkButtonSelected()==0) {
+					ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
+					JLabel imageLabel = new JLabel();
+					imageLabel.setIcon(ii);
+					gifPanel.removeAll();
+					gifPanel.add(imageLabel);
+					this.getParent().revalidate();
+					this.getParent().repaint();
+					model.setHeartState(0);
+
+				} else if (checkButtonSelected()==1) {
+					ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
+					JLabel imageLabel = new JLabel();
+					imageLabel.setIcon(ii);
+					this.gifPanel.removeAll();
+					this.gifPanel.add(imageLabel);
+					this.getParent().revalidate();
+					this.getParent().repaint();
+					model.setHeartState(1);
+				} else if (checkButtonSelected()==2) {
+					ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
+					JLabel imageLabel = new JLabel();
+					imageLabel.setIcon(ii);
+					this.gifPanel.removeAll();
+					this.gifPanel.add(imageLabel);
+					this.getParent().revalidate();
+					this.getParent().repaint();
+					model.setHeartState(2);
+				}
+				
+				
+				
 			}
 		}
-		if (e.getSource() == resting) {
-			ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
-			JLabel imageLabel = new JLabel();
-			imageLabel.setIcon(ii);
-			gifPanel.removeAll();
-			gifPanel.add(imageLabel);
-			this.getParent().revalidate();
-			this.getParent().repaint();
-			model.setHeartState(0);
+		
+		
+		if(model.getServerState()) {
+			if (e.getSource() == resting ) {
+				ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
+				JLabel imageLabel = new JLabel();
+				imageLabel.setIcon(ii);
+				gifPanel.removeAll();
+				gifPanel.add(imageLabel);
+				this.getParent().revalidate();
+				this.getParent().repaint();
+				model.setHeartState(0);
 
-		} else if (e.getSource() == moderate) {
-			ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
-			JLabel imageLabel = new JLabel();
-			imageLabel.setIcon(ii);
-			this.gifPanel.removeAll();
-			this.gifPanel.add(imageLabel);
-			this.getParent().revalidate();
-			this.getParent().repaint();
-			model.setHeartState(1);
-		} else if (e.getSource() == vigorous) {
-			ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
-			JLabel imageLabel = new JLabel();
-			imageLabel.setIcon(ii);
-			this.gifPanel.removeAll();
-			this.gifPanel.add(imageLabel);
-			this.getParent().revalidate();
-			this.getParent().repaint();
-			model.setHeartState(2);
+			} else if (e.getSource() == moderate) {
+				ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
+				JLabel imageLabel = new JLabel();
+				imageLabel.setIcon(ii);
+				this.gifPanel.removeAll();
+				this.gifPanel.add(imageLabel);
+				this.getParent().revalidate();
+				this.getParent().repaint();
+				model.setHeartState(1);
+			} else if (e.getSource() == vigorous) {
+				ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
+				JLabel imageLabel = new JLabel();
+				imageLabel.setIcon(ii);
+				this.gifPanel.removeAll();
+				this.gifPanel.add(imageLabel);
+				this.getParent().revalidate();
+				this.getParent().repaint();
+				model.setHeartState(2);
+			}
+			
+			
+			
 		}
+
+
 	}
 
 	private int checkButtonSelected(){

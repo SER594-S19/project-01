@@ -57,11 +57,13 @@ public class Model {
     }
 
     public void start() {
+    		this.serverState=true;
         executorService.submit(dataGenerator);
         executorService.submit(threadPublisher);
     }
 
     public void stop() {
+    		this.serverState=false;
         dataGenerator.stop();
         threadPublisher.stop();
     }
