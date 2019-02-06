@@ -4,13 +4,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import Core.DataGenerator;
+
 /**
  * Put together a dataGenerator and a publisher. 
  * It read from the dataGenerator and publish in a port using the publisher.
  * A GUI control the model and can start, stop or shutdown it.
  * 
- * @author javiergs
- * @version 20190130
  */
 public class Model {
 

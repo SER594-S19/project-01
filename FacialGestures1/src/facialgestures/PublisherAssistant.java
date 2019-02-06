@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Observable;
 
+import Core.DataGenerator;
+
 public class PublisherAssistant implements Runnable {
 
   protected Socket socket;
