@@ -10,16 +10,19 @@ package Core;
 public class Data {
 
     private double time;
-    private double value;
+    private double voltage;
+    private double conductance;
 
-    public Data(double time, double value) {
+    public Data(double time, double volvalue, double convalue) {
         this.time = time;
-        this.value = value;
+        this.voltage = volvalue;
+        this.conductance = convalue;
     }
 
-    public void setData(double data) {
+    public void setData(double volvalue, double convalue) {
       time=0;
-      value=data;
+      voltage=volvalue;
+      conductance=convalue;
     }
 
     public double getTime() {
@@ -30,17 +33,23 @@ public class Data {
 		this.time = time;
 	}
 
-	public double getValue() {
-		return value;
+	public double getVoltage() {
+		return voltage;
 	}
+    public double getConductance() {
+        return conductance;
+    }
 
-	public void setValue(double value) {
-		this.value = value;
+	public void setVoltage(double value) {
+		this.voltage = value;
 	}
-    
-  @Override
+    public void setConductance(double value) {
+        this.conductance = value;
+    }
+
+    @Override
   public String toString() {
-    return "Data{" + "time=" + time + ", value=" + value + '}';
+    return "Data{" + "time=" + time + ", voltage=" + voltage + ", conductance=" + voltage + '}';
   }
      
 }

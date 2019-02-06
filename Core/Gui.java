@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Calendar;
 
+import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,48 +24,75 @@ public class Gui extends JPanel implements ActionListener {
   private static Model model;
 
   private final int PORT = 1594;
+  private JPanel sliderPanel;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
-  JSlider slider;
-  private int index;
+  //JSlider slider;
+  JSlider voltage, conductance;
 
-  private Component createPanelConductance() {
-    JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
-    slider.setMajorTickSpacing(10);
-    slider.setPaintTicks(true);
+    private int index;
 
-    Hashtable conductanceLabels = new Hashtable();
-    conductanceLabels.put(new Integer( 0 ), new JLabel("0") );
-    conductanceLabels.put(new Integer( 1 ), new JLabel("1") );
-    conductanceLabels.put(new Integer( 2 ), new JLabel("2") );
-    conductanceLabels.put(new Integer( 3 ), new JLabel("3") );
+//  private Component createSliders() {
+//
+//      sliderPanel= new JPanel();
+//      sliderPanel.setLayout(new GridLayout(6,1));
+//      sliderPanel.setMinimumSize(new Dimension(600, 300));
+//
+//      voltage.setMajorTickSpacing(10);
+//      voltage.setMinorTickSpacing(1);
+//      voltage.setPaintTicks(true);
+//      voltage.setPaintLabels(true);
+//
+//      conductance.setMajorTickSpacing(10);
+//      conductance.setMinorTickSpacing(1);
+//      conductance.setPaintTicks(true);
+//      conductance.setPaintLabels(true);
+//
+//      //addSlider(voltage, "voltage", "voltage");
+//      //addSlider(conductance, "conductance", "conductance");
+//
+//
+//      return sliderPanel;
+//
+//  }
 
-    slider.setLabelTable(conductanceLabels);
-    slider.setPaintLabels(true);
+    private Component createPanelConductance() {
+        JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
+        slider.setMajorTickSpacing(10);
+        slider.setPaintTicks(true);
 
-    slider.addChangeListener(changeListener);
+        Hashtable conductanceLabels = new Hashtable();
+        conductanceLabels.put(new Integer( 0 ), new JLabel("0") );
+        conductanceLabels.put(new Integer( 1 ), new JLabel("1") );
+        conductanceLabels.put(new Integer( 2 ), new JLabel("2") );
+        conductanceLabels.put(new Integer( 3 ), new JLabel("3") );
 
-    return slider;
-  }
+        slider.setLabelTable(conductanceLabels);
+        slider.setPaintLabels(true);
 
-  private Component createPanelVoltage() {
-	    JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
-	    slider.setMajorTickSpacing(10);
-	    slider.setPaintTicks(true);
-	    
-	    Hashtable voltageLabels = new Hashtable();
-	    voltageLabels.put(new Integer( 0 ), new JLabel("0") );
-	    voltageLabels.put(new Integer( 1 ), new JLabel("1") );
-	    voltageLabels.put(new Integer( 2 ), new JLabel("2") );
-	    voltageLabels.put(new Integer( 3 ), new JLabel("3") );
+        slider.addChangeListener(changeListener);
 
-	    slider.setLabelTable(voltageLabels);
-	    slider.setPaintLabels(true);
+        return slider;
+    }
 
-	    slider.addChangeListener(changeListener);
+    private Component createPanelVoltage() {
+        JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
+        slider.setMajorTickSpacing(10);
+        slider.setPaintTicks(true);
 
-	    return slider;
-  }
+        Hashtable voltageLabels = new Hashtable();
+        voltageLabels.put(new Integer( 0 ), new JLabel("0") );
+        voltageLabels.put(new Integer( 1 ), new JLabel("1") );
+        voltageLabels.put(new Integer( 2 ), new JLabel("2") );
+        voltageLabels.put(new Integer( 3 ), new JLabel("3") );
+
+        slider.setLabelTable(voltageLabels);
+        slider.setPaintLabels(true);
+
+        slider.addChangeListener(changeListener);
+
+        return slider;
+    }
   
   private Component createPanelSouth() {
 
@@ -81,36 +110,86 @@ public class Gui extends JPanel implements ActionListener {
     return panel;
   }
 
+
+//    public void addSlider(JSlider s, String description, String dataParam)
+//    {
+//         ChangeListener listener = new ChangeListener(){
+//            public void stateChanged(ChangeEvent event)
+//            {
+//                // update text field when the slider value changes
+//                DataGenerator dataGen = new DataGenerator();
+////
+//
+//                JSlider source = (JSlider) event.getSource();
+//
+//
+//                System.out.println(source.getValue());
+//                dataGen.updateParam(dataParam, (double) source.getValue());
+//            }
+//        };
+//
+//        s.addChangeListener(listener);
+//        JPanel panel = new JPanel();
+//        panel.add(new JLabel(description));
+//        panel.add(s);
+//        sliderPanel.add(panel);
+//    }
+
   public ChangeListener changeListener = new ChangeListener() {
 	  //making the slider react to changing positions
-	  public void stateChanged(ChangeEvent ce){
-		  slider = (JSlider) ce.getSource();
-		  if (!slider.getValueIsAdjusting())
+	  public void stateChanged(ChangeEvent event){
+          DataGenerator dataGen = new DataGenerator();
+          voltage = (JSlider) event.getSource();
+
+          //JSlider source = (JSlider) event.getSource();
+		  if (!voltage.getValueIsAdjusting())
 		  {
-			  System.out.println(slider.getValue());
-			  index = slider.getValue();
-			  if(!(slider.getValue() == 0))
+			  System.out.println(voltage.getValue());
+              //dataGen.updateVoltage((double) voltage.getValue());
+              index = voltage.getValue();
+			  if(!(voltage.getValue() == 0))
 			  {
-			 
+
 			  }
-			  if(!(slider.getValue() == 1))
+			  if(!(voltage.getValue() == 1))
 			  {
-			  
+
 			  }
-			  if(!(slider.getValue() == 2))
+			  if(!(voltage.getValue() == 2))
 			  {
-			  
+
 			  }
 		  }
 	  }
   };
+
+//    public void dataGen(){
+//        Boolean stop = false;
+//        double timeStamp=0;
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 0);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//        long initialTime = calendar.getTimeInMillis();
+//
+//
+//        while (!stop) {
+//            System.out.println("data generator running");
+//            timeStamp = (System.currentTimeMillis() - initialTime) * .001;
+//            System.out.println("Data{" + "time=" + timeStamp + ", voltage=" + voltage.getValue() + ", conductance=" + conductance.getValue() + "}");
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException ex) {
+//            }
+//        }
+//    }
   
   public Gui() {
 
     model = new Model(new DataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
-    //this.add(createPanelNorth(), BorderLayout.NORTH);
+    //this.add(voltage, BorderLayout.NORTH);
     this.add(createPanelVoltage(), BorderLayout.NORTH);
     this.add(createPanelConductance(), BorderLayout.CENTER);
     
@@ -128,6 +207,7 @@ public class Gui extends JPanel implements ActionListener {
     if (e.getSource() == buttonConnect) {
       if (buttonConnect.getText().compareTo("run") == 0) {
             System.out.println("start");
+            //dataGen();
         model.start();
         buttonConnect.setText("stop");
       } else if (buttonConnect.getText().compareTo("stop") == 0) {
@@ -137,8 +217,9 @@ public class Gui extends JPanel implements ActionListener {
       }
     }
   }
-  
-  public static void main(String[] args) {
+
+
+    public static void main(String[] args) {
 
     JFrame frame = new JFrame("Simulator");
     frame.setLayout(new GridLayout(1, 1));
