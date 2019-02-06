@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Observable;
 
-import Core.DataGenerator;
+import facialgestures.DataGenerator;
 
 public class PublisherAssistant implements Runnable {
 

@@ -1,10 +1,11 @@
 package facialgestures;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import Core.DataGenerator;
+import facialgestures.DataGenerator;
 
 /**
  * Put together a dataGenerator and a publisher. 
@@ -17,6 +18,7 @@ public class Model {
   private final ExecutorService executorService;
   private final DataGenerator dataGenerator;
   private final Publisher threadPublisher;
+  private ArrayList<Double> facialValues = new ArrayList<>();
 
   public Model(DataGenerator device, Publisher publisher) {
     executorService = Executors.newCachedThreadPool();
@@ -25,7 +27,16 @@ public class Model {
     dataGenerator.addObserver(threadPublisher);
   }
 
-  public void shutdown() {
+  public ArrayList<Double> getFacialValues() {
+	return facialValues;
+}
+
+public void setFacialValues(ArrayList<Double> facialValues) {
+	this.facialValues = facialValues;
+	this.dataGenerator.setFacialValues(this.facialValues);
+}
+
+public void shutdown() {
     dataGenerator.stop();
     threadPublisher.stop();
     executorService.shutdown();

@@ -2,16 +2,21 @@ package facialgestures;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Observable;
 import java.util.stream.DoubleStream;
 
 class DataGenerator extends Observable implements Runnable {
 
-  private Data data;
+  private FacialData data;
   private boolean stop = false;
+  private ArrayList<Double> facialValues = new ArrayList<>(); 
+  public ArrayList<Double> getFacialValues() {
+	return facialValues;
+}
 
-  public void stop() {
+public void stop() {
     this.stop = true;
   }
 
@@ -32,7 +37,7 @@ class DataGenerator extends Observable implements Runnable {
     while (!stop) {
               System.out.println("data generator running");
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-      createAndNotify(timeStamp, Math.random());
+      createAndNotify(timeStamp, getFacialValues());
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {
@@ -40,10 +45,10 @@ class DataGenerator extends Observable implements Runnable {
     }
   }
 
-  private void createAndNotify(double timestampsystem, double s) {
+  private void createAndNotify(double timestampsystem, ArrayList<Double> facialValues) {
                   System.out.println("notifying ...");                 
                   getSecureRandomNumber(0.0,1.0);
-   // data = new Data(timestampsystem, s);
+    data = new FacialData(timestampsystem, facialValues);
     setChanged();
     notifyObservers();
   }
@@ -62,5 +67,12 @@ class DataGenerator extends Observable implements Runnable {
     	}
 	  return randomValue;
   }
+
+public void setFacialValues(ArrayList<Double> facialValues) {
+	// TODO Auto-generated method stub
+	this.facialValues = facialValues;
+	
+	
+}
 
 }
