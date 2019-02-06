@@ -25,23 +25,6 @@ public class Gui extends JPanel implements ActionListener {
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
   JSlider slider;
-  
-  private Component createPanelNorth() {
-	  JSlider slider = new JSlider(JSlider.HORIZONTAL,0,2,0);
-	  slider.setMajorTickSpacing(10);
-	  slider.setPaintTicks(true);
-	  
-	  Hashtable sliderlabels = new Hashtable();
-	  sliderlabels.put(new Integer( 0 ), new JLabel("Voltage") );
-	  sliderlabels.put(new Integer( 1 ), new JLabel("Conductance") );
-	  sliderlabels.put(new Integer( 2 ), new JLabel("V & C") );
-	  slider.setLabelTable(sliderlabels);
-	  slider.setPaintLabels(true);
-	  
-	  slider.addChangeListener(changeListener);
-	  
-	  return slider;
-  }
 
   private Component createPanelConductance() {
     JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
@@ -103,7 +86,7 @@ public class Gui extends JPanel implements ActionListener {
 		  slider = (JSlider) ce.getSource();
 		  if(!(slider.getValue() == 0))
 		  {
-			  
+			 buttonConnect.addAncestorListener(this);
 		  }
 		  if(!(slider.getValue() == 1))
 		  {
