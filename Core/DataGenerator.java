@@ -2,16 +2,18 @@ package Core;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Observable;
 
 class DataGenerator extends Observable implements Runnable {
 
   private Data data;
+  private Gui val;
   private boolean stop = false;
 
 
 
-  protected static HashMap<String, Double> faceParameters = new HashMap<>()
+  protected static HashMap<String, Double> faceParameters = new HashMap<String, Double>()
   {
     {
       put("agreement", (double) 0);
@@ -39,7 +41,7 @@ class DataGenerator extends Observable implements Runnable {
 
     Calendar calendar = Calendar.getInstance();
     long initialTime = calendar.getTimeInMillis();
-    double timeStamp;
+    double timeStamp = 0;
 
 
     while (!stop) {
@@ -51,8 +53,26 @@ class DataGenerator extends Observable implements Runnable {
       float thinkInput = (float) (faceParameters.get("thinking")/10);
       float unsureInput = (float) (faceParameters.get("unsure")/10);
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-
-
+      float agree =  (float) ((agreeInput - 0.1) + new Random().nextFloat()*(agreeInput - (agreeInput - 0.1)));
+      float disagree =  (float) ((disagreeInput - 0.1) + new Random().nextFloat()*(disagreeInput - (disagreeInput - 0.1)));
+      float frustrate =  (float) ((frusInput - 0.1) + new Random().nextFloat()*(frusInput - (frusInput - 0.1)));
+      float concentrate =  (float) ((concenInput - 0.1) + new Random().nextFloat()*(concenInput - (concenInput - 0.1)));
+      float thinking =  (float) ((thinkInput - 0.1) + new Random().nextFloat()*(thinkInput - (thinkInput - 0.1)));
+      float unsure = (float) ((unsureInput - 0.1) + new Random().nextFloat()*(unsureInput - (unsureInput - 0.1)));
+      
+      if (agree < 0) 
+      	agree = (float) 0.0000000;
+      if (disagree < 0) 
+      	disagree = (float) 0.0000000;
+      if (frustrate < 0) 
+      	frustrate = (float) 0.0000000;
+      if (concentrate < 0) 
+      	concentrate = (float) 0.0000000;
+      if (thinking < 0) 
+      	thinking = (float) 0.0000000;
+      if (unsure < 0) 
+    	unsure = (float) 0.0000000;
+      
       createAndNotify(timeStamp, agree, disagree, frustrate, concentrate, thinking, unsure);
       try {
         Thread.sleep(1000);
