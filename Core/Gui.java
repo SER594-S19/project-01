@@ -25,6 +25,7 @@ public class Gui extends JPanel implements ActionListener {
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
   JSlider slider;
+  private int index;
 
   private Component createPanelConductance() {
     JSlider slider = new JSlider(JSlider.HORIZONTAL,0,3,0);
@@ -84,17 +85,22 @@ public class Gui extends JPanel implements ActionListener {
 	  //making the slider react to changing positions
 	  public void stateChanged(ChangeEvent ce){
 		  slider = (JSlider) ce.getSource();
-		  if(!(slider.getValue() == 0))
+		  if (!slider.getValueIsAdjusting())
 		  {
-			 buttonConnect.addAncestorListener(this);
-		  }
-		  if(!(slider.getValue() == 1))
-		  {
+			  System.out.println(slider.getValue());
+			  index = slider.getValue();
+			  if(!(slider.getValue() == 0))
+			  {
+			 
+			  }
+			  if(!(slider.getValue() == 1))
+			  {
 			  
-		  }
-		  if(!(slider.getValue() == 2))
-		  {
+			  }
+			  if(!(slider.getValue() == 2))
+			  {
 			  
+			  }
 		  }
 	  }
   };
