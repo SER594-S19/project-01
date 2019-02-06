@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="324.0" prefWidth="540.0" style="-fx-border-color: black; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Core.Controller">
+   <children>
+      <JFXSlider fx:id="agreement" blockIncrement="1.0" layoutX="382.0" layoutY="26.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderAgreementDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="32.414215087890625" AnchorPane.topAnchor="26.0" />
+      <JFXSlider fx:id="disagreement" blockIncrement="1.0" indicatorPosition="RIGHT" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderDisagreementDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="70.0" />
+      <JFXSlider fx:id="frustate" blockIncrement="1.0" indicatorPosition="RIGHT" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderFrustateDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="110.0" />
+      <JFXSlider fx:id="concentrate" blockIncrement="1.0" indicatorPosition="RIGHT" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderConcentrateDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="150.0" />
+      <JFXSlider fx:id="unsure" blockIncrement="1.0" indicatorPosition="RIGHT" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderUnsureDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="230.0" />
+      <Label layoutX="279.0" layoutY="36.0" prefHeight="17.0" prefWidth="108.0" text="AGREE" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="33.0" />
+      <JFXSlider fx:id="thinking" blockIncrement="1.0" indicatorPosition="RIGHT" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseReleased="#sliderThinkingDragged" showTickLabels="true" showTickMarks="true" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="190.0" />
+      <Label layoutX="277.0" layoutY="76.0" prefHeight="17.0" prefWidth="109.0" text="DISAGREE" AnchorPane.leftAnchor="274.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="73.0" />
+      <Label layoutX="279.0" layoutY="116.0" prefHeight="17.0" prefWidth="108.0" text="FRUSTATE" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="113.0" />
+      <Label layoutX="260.0" layoutY="155.0" prefHeight="17.0" prefWidth="112.0" text="CONCENTRATE" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="188.0" AnchorPane.topAnchor="155.0" />
+      <Label layoutX="279.0" layoutY="196.0" prefHeight="17.0" prefWidth="108.0" text="THINKING" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="193.0" />
+      <Label layoutX="285.0" layoutY="236.0" prefHeight="17.0" prefWidth="101.0" text="UNSURE" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="233.0" />
+      <Ellipse fx:id="face" fill="DODGERBLUE" layoutX="125.0" layoutY="124.0" radiusX="101.0" radiusY="108.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="322.0" />
+      <QuadCurve fx:id="smile" controlY="30.0" endX="50.0" endY="2.0" fill="DODGERBLUE" layoutX="125.0" layoutY="167.0" startX="-50.0" startY="2.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="373.0" />
+      <AnchorPane layoutX="2.0" layoutY="266.0" prefHeight="54.0" prefWidth="540.0" style="-fx-background-color: lightgreen; -fx-border-width: 2px; -fx-border-color: blue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Publishing At Port:" />
+            <Label id="portNumber" fx:id="portNumber" layoutX="134.0" layoutY="14.0" prefHeight="17.0" prefWidth="48.0" text="1594" />
+            <JFXToggleButton fx:id="toggle" layoutX="374.0" layoutY="-7.0" prefHeight="60.0" prefWidth="122.0" text="RUN" AnchorPane.rightAnchor="54.0" />
+         </children>
+      </AnchorPane>
+      <Circle fx:id="leftEye" fill="DODGERBLUE" layoutX="76.0" layoutY="81.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="456.0" />
+      <Circle fx:id="rightEye" fill="DODGERBLUE" layoutX="175.0" layoutY="81.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="357.0" />
+      <Line fx:id="nose" endX="100.0" endY="-4.0" layoutX="38.0" layoutY="129.0" rotate="81.9" startX="75.0" AnchorPane.leftAnchor="112.70710754394531" AnchorPane.rightAnchor="409.2928924560547" />
+   </children>
+</AnchorPane>
