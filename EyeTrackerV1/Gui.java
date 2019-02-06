@@ -23,6 +23,7 @@ import Core.Publisher;
 public class Gui extends JPanel implements ActionListener
 {
 
+  private static final long serialVersionUID = 1L; 	
   private static Model model;
   protected HashMap<String, Integer> eyeParameters;
   

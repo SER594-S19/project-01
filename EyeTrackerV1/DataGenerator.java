@@ -11,6 +11,7 @@ public class DataGenerator extends Observable implements Runnable
   private boolean stop = false;
   protected static HashMap<String, Double> eyeParameters = new HashMap<String,Double>() 
   {
+	private static final long serialVersionUID = 1L;   
 	  {
 	put("pupilLeft", 0.0);
 	put("pupilRight", 0.0);
