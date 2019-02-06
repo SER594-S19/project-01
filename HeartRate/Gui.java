@@ -101,6 +101,7 @@ public class Gui extends JPanel implements ActionListener {
 
 		buttonConnect.addActionListener(this);
 		buttonConnect.setEnabled(true);
+		buttonConnect.setBackground(Color.GREEN);
 
 		return panel;
 	}
@@ -127,6 +128,7 @@ public class Gui extends JPanel implements ActionListener {
 					model.setHeartState(selectedAction);
 					freqText.setEnabled(false);
 					buttonConnect.setText("stop");
+					buttonConnect.setBackground(Color.RED);
 				} else {
 					JOptionPane.showMessageDialog(new JPanel(), "Frequency entered is not valid", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -134,6 +136,7 @@ public class Gui extends JPanel implements ActionListener {
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				model.stop();
 				buttonConnect.setText("run");
+				buttonConnect.setBackground(Color.GREEN);
 				freqText.setEnabled(true);
 				textPane.setBackground(Color.WHITE);
 				ImageIcon ii = new ImageIcon(this.getClass().getResource("static.png"));
