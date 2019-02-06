@@ -37,8 +37,9 @@ public class Model {
     }
   }
 
-  public void start() {
+  public void start(String emotionTogenerate) {
         System.out.println("model start");
+    dataGenerator.setEmotion(emotionTogenerate);
     executorService.submit(dataGenerator);
     executorService.submit(threadPublisher);
   }
