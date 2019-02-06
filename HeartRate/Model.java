@@ -18,7 +18,6 @@ public class Model {
     private final ExecutorService executorService;
     private final HRDataGenerator dataGenerator;
     private final Publisher threadPublisher;
-    private int heartState;
     private boolean serverState;
 
     public Model(HRDataGenerator device, Publisher publisher) {
@@ -26,16 +25,10 @@ public class Model {
         dataGenerator = device;
         threadPublisher = publisher;
         dataGenerator.addObserver(threadPublisher);
-        heartState = 0;
         serverState = false;
     }
 
-    public int getHeartState() {
-        return heartState;
-    }
-
     public void setHeartState(int heartState) {
-        this.heartState = heartState;
         dataGenerator.setHeartState(heartState);
     }
 
@@ -45,6 +38,10 @@ public class Model {
 
     public void setServerState(boolean serverState) {
         this.serverState = serverState;
+    }
+
+    public void setFrequency(double frequency) {
+        dataGenerator.setFrequency(frequency);
     }
 
     public void shutdown() {

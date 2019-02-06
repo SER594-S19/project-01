@@ -1,62 +1,66 @@
 package HeartRate;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 
 import Core.Publisher;
-import javax.swing.JTextPane;		
-import java.awt.Font;
 
 public class Gui extends JPanel implements ActionListener {
 
+	private static Gui instance = null;
 	private static Model model;
 
-	private final int PORT = 1594;
-	protected JLabel labelPublishPort;
+	private int PORT = 1594;
+
+	private JTextField portText = new JTextField("1594");
+	private JTextField freqText = new JTextField("1");
+
 	private final JButton buttonConnect = new JButton("run");
 	private final JRadioButton resting = new JRadioButton("Resting", true);
 	private final JRadioButton moderate = new JRadioButton("Moderate Exercise");
 	private final JRadioButton vigorous = new JRadioButton("Vigorous Exercise");
-	private int selectedAction = 0;
+	private final JPanel gifPanel = new JPanel();
+	private final JTextPane textPane = new JTextPane();
 
-	// private final JSplitPane splitPane;
+	public static Gui getInstance()
+	{
+		if (instance == null)
+			instance = new Gui();
 
-	private JPanel gifPanel = new JPanel();
-	private JTextPane textPane = new JTextPane();
-	
-	private Component createPanelSouth() {
-		
-		JPanel labels = new JPanel();
-		labels.setBackground(Color.GRAY);
-		labels.add(new JLabel("  Publishing at port: "));
-		labelPublishPort = new JLabel("" + PORT);
-		labels.add(labelPublishPort);
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.setBackground(Color.CYAN);
-		panel.add(labels, BorderLayout.WEST);
-		panel.add(buttonConnect, BorderLayout.EAST);
-		buttonConnect.addActionListener(this);
-		buttonConnect.setEnabled(true);
-		textPane.setForeground(Color.BLACK);		
-		textPane.setFont(new Font("Tahoma", Font.BOLD, 19));		
-		textPane.setEnabled(false);		
-		textPane.setEditable(true);		
-		panel.add(textPane, BorderLayout.NORTH);
-		return panel;
+		return instance;
+	}
+
+	private Gui() {
+
+		model = new Model(new HRDataGenerator(), new Publisher(PORT));
+		this.setBackground(Color.WHITE);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		this.add(createNorthComponent());
+		this.add(createButtonGroups());
+		initializeHeartGif();
+		this.add(gifPanel);
+		this.add(createConsole());
+		this.add(createPanelSouth());
+
+		Dimension screen = getToolkit().getScreenSize();
+		this.setSize(screen.width / 2, 3 * screen.height / 6);
+		this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
+	}
+
+	private Component createNorthComponent() {
+		JPanel top = new JPanel(new GridLayout(2, 2));
+		top.add(new JLabel("Enter Port Number: "));
+		top.add(portText);
+		top.add(new JLabel("Enter Frequency: "));
+		top.add(freqText);
+
+		portText.setEnabled(false);
+
+		return top;
 	}
 
 	private Component createButtonGroups() {
@@ -75,10 +79,32 @@ public class Gui extends JPanel implements ActionListener {
 		vigorous.addActionListener(this);
 
 		return buttons;
-
 	}
 
+	private Component createConsole() {
+		JPanel panel = new JPanel(new GridLayout());
+
+		textPane.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textPane.setEnabled(false);
+		textPane.setEditable(true);
+		textPane.setPreferredSize(new Dimension(200, 150));
+
+		JScrollPane scrollPane = new JScrollPane(textPane);
+		panel.add(scrollPane);
+
+		return panel;
+	}
 	
+	private Component createPanelSouth() {
+		JPanel panel = new JPanel(new GridLayout());
+		panel.add(buttonConnect);
+
+		buttonConnect.addActionListener(this);
+		buttonConnect.setEnabled(true);
+
+		return panel;
+	}
+
 	private void initializeHeartGif() {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource("slow_heart.gif"));
 		JLabel imageLabel = new JLabel();
@@ -87,45 +113,28 @@ public class Gui extends JPanel implements ActionListener {
 
 	}
 
-	// private Component createGroupButtons
-
-	public Gui() {
-
-		model = new Model(new HRDataGenerator(), new Publisher(PORT));
-		this.setBackground(Color.WHITE);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-		this.add(createButtonGroups());
-		initializeHeartGif();
-		this.add(gifPanel);
-		this.add(createPanelSouth());
-
-		Dimension screen = getToolkit().getScreenSize();
-		this.setSize(screen.width / 2, 3 * screen.height / 6);
-		this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
-		System.out.println("gui done");
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("listener trigger");
+		int selectedAction;
+
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
-				buttonConnect.setBackground(Color.green);
-				System.out.println("start");
-				selectedAction = checkButtonSelected();
-				model.start();
-				model.setHeartState(selectedAction);
-				buttonConnect.setText("stop");
-				buttonConnect.setBackground(Color.red);
-				textPane.setText("SERVER IS RUNNING...");
-				textPane.setBackground(Color.WHITE);
+				if (isFrequencyValid()) {
+					textPane.setText("SERVER IS RUNNING...");
+					selectedAction = checkButtonSelected();
+					model.setFrequency(Double.parseDouble(freqText.getText()));
+					model.start();
+					model.setHeartState(selectedAction);
+					freqText.setEnabled(false);
+					buttonConnect.setText("stop");
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(), "Frequency entered is not valid", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
-				System.out.println("stop");
 				model.stop();
 				buttonConnect.setText("run");
-				buttonConnect.setBackground(Color.green);
-				textPane.setText("SERVER IS STOPPED");
+				freqText.setEnabled(true);
 				textPane.setBackground(Color.WHITE);
 			}
 		}
@@ -137,11 +146,9 @@ public class Gui extends JPanel implements ActionListener {
 			gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
-			selectedAction = 0;
 			model.setHeartState(0);
 
 		} else if (e.getSource() == moderate) {
-			System.out.println("test");
 			ImageIcon ii = new ImageIcon(this.getClass().getResource("normal_heart.gif"));
 			JLabel imageLabel = new JLabel();
 			imageLabel.setIcon(ii);
@@ -149,7 +156,6 @@ public class Gui extends JPanel implements ActionListener {
 			this.gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
-			selectedAction = 1;
 			model.setHeartState(1);
 		} else if (e.getSource() == vigorous) {
 			ImageIcon ii = new ImageIcon(this.getClass().getResource("fast_heart.gif"));
@@ -159,18 +165,37 @@ public class Gui extends JPanel implements ActionListener {
 			this.gifPanel.add(imageLabel);
 			this.getParent().revalidate();
 			this.getParent().repaint();
-			selectedAction = 2;
 			model.setHeartState(2);
 		}
 	}
 
-	public static void main(String[] args) {
+	private int checkButtonSelected(){
+		if(resting.isSelected())
+			return 0;
+		else if(moderate.isSelected())
+			return 1;
+		else
+			return 2;
+	}
 
-		JFrame frame = new JFrame("Simulator");
+	private boolean isFrequencyValid() {
+		try {
+			return Double.parseDouble(freqText.getText()) > 0;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	public void setTextPane(String data) {
+		String currentText = textPane.getText();
+		textPane.setText(currentText + "\n" + data);
+	}
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Heart Rate Simulator");
 		frame.getContentPane().setLayout(new GridLayout(1, 1));
 		frame.setLayout(new GridLayout(1, 1));
-		frame.getContentPane().add(new Gui());
-		// frame.add(new ButtonGroup());
+		frame.getContentPane().add(Gui.getInstance());
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent e) {
@@ -182,15 +207,4 @@ public class Gui extends JPanel implements ActionListener {
 		frame.setPreferredSize(new Dimension(400, 400));
 		frame.setVisible(true);
 	}
-
-	private int checkButtonSelected(){
-		if(resting.isSelected())
-			return 0;
-		else if(moderate.isSelected()){
-			return 1;
-		}
-		else
-			return 2;
-	}
-
 }

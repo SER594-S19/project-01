@@ -13,6 +13,7 @@ public class HRDataGenerator extends DataGenerator implements Runnable  {
   private HeartData data;
   private boolean stop = false;
   private int heartState;
+  private double frequency;
 
   public HRDataGenerator() {
     heartState = 0;
@@ -20,6 +21,10 @@ public class HRDataGenerator extends DataGenerator implements Runnable  {
 
   public void setHeartState(int heartState) {
     this.heartState = heartState;
+  }
+
+  public void setFrequency(double frequency) {
+    this.frequency = frequency;
   }
 
   public void stop() {
@@ -45,13 +50,13 @@ public class HRDataGenerator extends DataGenerator implements Runnable  {
       
       createAndNotify(timeStamp, generateValues(heartState));
       try {
-        Thread.sleep(1000);
+        Thread.sleep((long)(frequency * 1000));
       } catch (InterruptedException ex) {
       }
     }
   }
 
-  public List<Integer> generateValues(int heartState) {
+  private List<Integer> generateValues(int heartState) {
     int startRange, endRange;
     switch(heartState) {
       case 0: startRange = 60;
@@ -74,8 +79,9 @@ public class HRDataGenerator extends DataGenerator implements Runnable  {
     return values;
   }
 
-  public void createAndNotify(double timestampsystem, List<Integer> values) {
-    data = new HeartData(timestampsystem, values);
+  private void createAndNotify(double timeStamp, List<Integer> values) {
+    data = new HeartData(timeStamp, values);
+    Gui.getInstance().setTextPane(data.toString());
     setChanged();
     notifyObservers();
   }
