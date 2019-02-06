@@ -10,6 +10,15 @@ class DataGenerator extends Observable implements Runnable {
 
   private Data data;
   private boolean stop = false;
+  private String emotionFromGUI;
+  
+  public String getEmotion() {
+		return emotionFromGUI;
+  }
+
+  public void setEmotion(String emotion) {
+	this.emotionFromGUI = emotion;
+  }
 
   public void stop() {
     this.stop = true;
@@ -41,11 +50,11 @@ class DataGenerator extends Observable implements Runnable {
     }
   }
   
-  private double getValueBetweenExpRange(SecureRandom rand,int low,int high) {
+  private double getValueBetweenExpRange(SecureRandom rand,String createEmo) {
 	  Random r = new Random();
 	  int powerOf = 0;
-	  if(low != 0 && high != 0 ) {
-		  powerOf = r.nextInt(high-low) + low;
+	  if(!createEmo.equals(this.emotionFromGUI)){
+		  powerOf = r.nextInt(Constants.RANGE_HIGH-Constants.RANGE_LOW) + Constants.RANGE_LOW;
 	  }
 	  double randomValue = rand.nextDouble()/Math.pow(10, powerOf);
 	  return randomValue;
@@ -54,17 +63,16 @@ class DataGenerator extends Observable implements Runnable {
   private void createAndNotify(double timestampsystem) {
                   System.out.println("notifying ...");
     SecureRandom random = new SecureRandom();
-    double agreementRange = getValueBetweenExpRange(random,Constants.RANGEAGREEMENT0,Constants.RANGEAGREEMENT1);
-    double concentratingRange = getValueBetweenExpRange(random,Constants.RANGECONCENTRATING0,Constants.RANGECONCENTRATING1);
-    double disagreementRange = getValueBetweenExpRange(random,Constants.RANGEDISAGREEMENT0,Constants.RANGEDISAGREEMENT1);
-    double interestedRange = getValueBetweenExpRange(random,Constants.RANGEINTERESTED0,Constants.RANGEINTERESTED1);
-    double thinkingRange = getValueBetweenExpRange(random,Constants.RANGETHINKING0,Constants.RANGETHINKING1);
-	double unsureRange = getValueBetweenExpRange(random,Constants.RANGEUNSURE0,Constants.RANGEUNSURE1);
+    double agreementRange = getValueBetweenExpRange(random,"Agreement");
+    double concentratingRange = getValueBetweenExpRange(random,"Concentrating");
+    double disagreementRange = getValueBetweenExpRange(random,"Disagreement");
+    double interestedRange = getValueBetweenExpRange(random,"Interested");
+    double thinkingRange = getValueBetweenExpRange(random,"Thinking");
+	double unsureRange = getValueBetweenExpRange(random,"Unsure");
     data = new Data(timestampsystem, agreementRange, concentratingRange, disagreementRange, interestedRange, thinkingRange, unsureRange);
     System.out.println("Data generator generated:"+data);
     setChanged();
     notifyObservers();
   }
-  
 
 }

@@ -24,6 +24,7 @@ private static Model model;
   private final int PORT = 5914;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("RUN");
+  private static String setEmotion = "Agreement";
   
   JLabel moodGif;
 
@@ -109,14 +110,18 @@ private static Model model;
 
   @Override
   public void actionPerformed(ActionEvent e) { 
-	  /*moodGif.setIcon(createImageIcon(e.getActionCommand()
-              + ".gif")); */
+	String emotion = e.getActionCommand();
+	if(!emotion.equals("RUN")) {
+		setEmotion = emotion;
+		moodGif.setIcon(createImageIcon(e.getActionCommand()
+              + ".gif"));
+	}
 	  
     System.out.println("listener trigger");
     if (e.getSource() == buttonConnect) {
       if (buttonConnect.getText().compareTo("RUN") == 0) {
             System.out.println("start");
-        model.start();
+        model.start(setEmotion);
         buttonConnect.setText("STOP");
       } else if (buttonConnect.getText().compareTo("STOP") == 0) {
                     System.out.println("stop");
