@@ -7,8 +7,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,20 +20,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.*;
 
-import Core.DataGenerator;
-
 public class Gui extends JPanel implements ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
 	private static Model model;
-
 	private final int PORT = 1594;
 	protected JLabel labelPublishPort;
 	private final JButton buttonConnect = new JButton("run");
+	static String engageIcon = "Engagement";
+    static String shortTermIcon = "Short Term Excitement";
+    static String longTermIcon = "Long Term Excitement";
+    static String meditateIcon = "Meditation";
+    static String frustrateIcon = "Frustration";
 
 	private Component createPanelSouth() {
 
@@ -219,6 +218,7 @@ public class Gui extends JPanel implements ActionListener {
     slider.setMaximum(1);
     slider.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num.setText("1");
         	else
@@ -237,6 +237,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_1.setBounds(107, 55, 100, 50);
     slider_1.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num1.setText("1");
         	else
@@ -255,6 +256,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_2.setBounds(107, 90, 100, 50);
     slider_2.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num2.setText("1");
         	else
@@ -273,6 +275,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_3.setBounds(107, 125, 100, 50);
     slider_3.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num3.setText("1");
         	else
@@ -291,6 +294,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_4.setBounds(107, 160, 100, 50);
     slider_4.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num4.setText("1");
         	else
@@ -309,6 +313,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_5.setBounds(107, 195, 100, 50);
     slider_5.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());
         	if(((JSlider)e.getSource()).getValue()==1)
         		num5.setText("1");
         	else
@@ -327,6 +332,7 @@ public class Gui extends JPanel implements ActionListener {
     slider_6.setBounds(107, 230, 100, 50);
     slider_6.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
+        	System.out.println(((JSlider)e.getSource()).getValue());	
         	if(((JSlider)e.getSource()).getValue()==1)
         		num6.setText("1");
         	else
@@ -338,6 +344,7 @@ public class Gui extends JPanel implements ActionListener {
     JPanel panel_2 = new JPanel();
     panel_2.setBounds(334, 28, 339, 497);
     panel_2.setLayout(null);
+    setBorder(BorderFactory.createEmptyBorder(15,15,15,15));  
     
     JLabel engage = new JLabel("Engagement");
     engage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -359,29 +366,34 @@ public class Gui extends JPanel implements ActionListener {
     med.setBounds(26, 100, 130, 25);
     panel_2.add(med);
     
-    JLabel fru = new JLabel("Frustation");
+    JLabel fru = new JLabel("Frustration");
     fru.setHorizontalAlignment(SwingConstants.CENTER);
     fru.setBounds(26, 125, 130, 25);
     panel_2.add(fru);
     
-    JRadioButton radioButton_10 = new JRadioButton("");
+    JRadioButton radioButton_10 = new JRadioButton(engageIcon);
     radioButton_10.setBounds(170, 25, 21, 23);
+    radioButton_10.setActionCommand(engageIcon);
     panel_2.add(radioButton_10);
     
-    JRadioButton radioButton_11 = new JRadioButton("");
+    JRadioButton radioButton_11 = new JRadioButton(shortTermIcon);
     radioButton_11.setBounds(170, 50, 21, 23);
+    radioButton_11.setActionCommand(shortTermIcon);
     panel_2.add(radioButton_11);
     
-    JRadioButton radioButton_12 = new JRadioButton("");
+    JRadioButton radioButton_12 = new JRadioButton(longTermIcon);
     radioButton_12.setBounds(170, 75, 21, 23);
+    radioButton_12.setActionCommand(longTermIcon);
     panel_2.add(radioButton_12);
     
-    JRadioButton radioButton_13 = new JRadioButton("");
+    JRadioButton radioButton_13 = new JRadioButton(meditateIcon);
     radioButton_13.setBounds(170, 100, 21, 23);
+    radioButton_13.setActionCommand(meditateIcon);
     panel_2.add(radioButton_13);
     
-    JRadioButton radioButton_14 = new JRadioButton("");
+    JRadioButton radioButton_14 = new JRadioButton(frustrateIcon);
     radioButton_14.setBounds(170, 125, 21, 23);
+    radioButton_14.setActionCommand(frustrateIcon);
     panel_2.add(radioButton_14);
     
     ButtonGroup group = new ButtonGroup();
@@ -392,30 +404,29 @@ public class Gui extends JPanel implements ActionListener {
     group.add(radioButton_14);
     
     radioButton_10.addActionListener(this);
-    radioButton_11.addActionListener(this);
-    radioButton_12.addActionListener(this);
-    radioButton_13.addActionListener(this);
-    radioButton_14.addActionListener(this); 
-    
-		/*
-		 * Icon imgIcon = new ImageIcon(this.getClass().getResource("Thinking.gif"));
-		 * JLabel gifLabel = new JLabel(imgIcon); gifLabel.setBounds(668, 43, 46, 14);
-		 * panel_2.add(gifLabel);
-		 */
-    
-    
+	radioButton_11.addActionListener(this);
+	radioButton_12.addActionListener(this);
+	radioButton_13.addActionListener(this);
+	radioButton_14.addActionListener(this);  
+
+	JLabel gifIcon = new JLabel(createImageIcon("FacialGestures" + ".gif"));
+	gifIcon.setBounds(197, 55, 280, 200);
+	panel_2.add(gifIcon, BorderLayout.CENTER);
+   
     JTabbedPane tp=new JTabbedPane();  
     tp.setBounds(50,50,200,200);  
     tp.add("Expressive_binary",panel);  
     tp.add("Expressive_continuous",panel_1);  
     tp.add("Affective",panel_2);  
     add(tp);
-    
     System.out.println("gui done");
   }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		 gifIcon.setIcon(createImageIcon(e.getActionCommand()
+	              + ".gif"));
+            System.out.println("Button Clicked!");
 		System.out.println("listener trigger");
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
@@ -430,6 +441,15 @@ public class Gui extends JPanel implements ActionListener {
 		}
 	}
 
+	protected static ImageIcon createImageIcon(String path) {
+	      java.net.URL gifURL = Gui.class.getResource(path);
+	      if (gifURL != null) {
+	          return new ImageIcon(gifURL);
+	      } else {
+	          System.err.println("");
+	          return null;
+	      }
+	  }
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame("Simulator");
@@ -446,5 +466,4 @@ public class Gui extends JPanel implements ActionListener {
 		frame.setSize(500, 400);
 		frame.setVisible(true);
 	}
-
 }
