@@ -32,6 +32,7 @@ public class Gui extends JPanel implements ActionListener {
     static String longTermIcon = "Long Term Excitement";
     static String meditateIcon = "Meditation";
     static String frustrateIcon = "Frustration";
+    JLabel gifIcon;
 
 	private Component createPanelSouth() {
 
@@ -409,7 +410,7 @@ public class Gui extends JPanel implements ActionListener {
 	radioButton_13.addActionListener(this);
 	radioButton_14.addActionListener(this);  
 
-	JLabel gifIcon = new JLabel(createImageIcon("FacialGestures" + ".gif"));
+	gifIcon = new JLabel(createImageIcon("" + ".gif"));
 	gifIcon.setBounds(197, 55, 280, 200);
 	panel_2.add(gifIcon, BorderLayout.CENTER);
    
