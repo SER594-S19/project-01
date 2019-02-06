@@ -65,151 +65,18 @@ public class Gui extends JPanel implements ActionListener {
     panelId.add(id);
     panel.add(panelId, BorderLayout.NORTH);
 
-
-    /**JPanel labelSig = new JPanel();
-    //labelSig.setBackground(Color.GRAY);
-    labelSig.add(new JLabel(" Signal "));
-    JPanel panelSig = new JPanel(new BorderLayout());
-    panelSig.setLayout(new GridLayout(1,2));
-    JTextField signal = new JTextField();
-    panelSig.add(labelSig, BorderLayout.WEST);
-    panelSig.add(signal);*/
     panel.add(processPanel(" Signal "));
-
-    /**JPanel labelBlink = new JPanel();
-    //labelBlink.setBackground(Color.GRAY);
-    labelBlink.add(new JLabel(" Blink "));
-    JPanel panelBlink = new JPanel(new BorderLayout());
-    panelBlink.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField blink = new JTextField();
-    panelBlink.add(labelBlink, BorderLayout.WEST);
-    panelBlink.add(blink);*/
     panel.add(processPanel(" Blink "));
-
-
-    /**JPanel labelWinkL  = new JPanel();
-    //labelWinkL.setBackground(Color.GRAY);
-    labelWinkL.add(new JLabel(" WinkL "));
-    JPanel panelWinkL = new JPanel(new BorderLayout());
-    panelWinkL.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField WinkL = new JTextField();
-    panelWinkL.add(labelWinkL, BorderLayout.WEST);
-    panelWinkL.add(WinkL);*/
     panel.add(processPanel(" WinkL "), BorderLayout.AFTER_LAST_LINE);
-
-
-    /**JPanel labelWinkR  = new JPanel();
-    //labelWinkR.setBackground(Color.GRAY);
-    labelWinkR.add(new JLabel(" WinkR "));
-    JPanel panelWinkR = new JPanel(new BorderLayout());
-    panelWinkR.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField WinkR = new JTextField();
-    panelWinkR.add(labelWinkR, BorderLayout.WEST);
-    panelWinkR.add(WinkR);*/
     panel.add(processPanel(" WinkR "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelLookL  = new JPanel();
-    //labelLookL.setBackground(Color.GRAY);
-    labelLookL.add(new JLabel(" LookL "));
-    JPanel panelLookL = new JPanel(new BorderLayout());
-    panelLookL.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField LookL= new JTextField();
-    panelLookL.add(labelLookL, BorderLayout.WEST);
-    panelLookL.add(LookL);*/
     panel.add(processPanel(" LookL "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelLookR  = new JPanel();
-    //labelLookR.setBackground(Color.GRAY);
-    labelLookR.add(new JLabel(" LookR "));
-    JPanel panelLookR = new JPanel(new BorderLayout());
-    panelLookR.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField LookR= new JTextField();
-    panelLookR.add(labelLookR, BorderLayout.WEST);
-    panelLookR.add(LookR);*/
     panel.add(processPanel(" LookR "), BorderLayout.AFTER_LAST_LINE);
-
-
-    /**JPanel labelEyebrow   = new JPanel();
-    //labelEyebrow.setBackground(Color.GRAY);
-    labelEyebrow.add(new JLabel(" Eyebrow"));
-    JPanel panelEyebrow = new JPanel(new BorderLayout());
-    panelEyebrow.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField Eyebrow= new JTextField();
-    panelEyebrow.add(labelEyebrow, BorderLayout.WEST);
-    panelEyebrow.add(Eyebrow);*/
     panel.add(processPanel(" Eyebrow "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelFurrow   = new JPanel();
-    //labelFurrow.setBackground(Color.GRAY);
-    labelFurrow.add(new JLabel(" Furrow"));
-    JPanel panelFurrow = new JPanel(new BorderLayout());
-    panelFurrow.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField Furrow= new JTextField();
-    panelFurrow.add(labelFurrow, BorderLayout.WEST);
-    panelFurrow.add(Furrow);*/
     panel.add(processPanel(" Furrow "), BorderLayout.AFTER_LAST_LINE);
-
-
-    /**JPanel labelSmile  = new JPanel();
-    //labelSmile.setBackground(Color.GRAY);
-    labelSmile.add(new JLabel(" Smile"));
-    JPanel panelSmile = new JPanel(new BorderLayout());
-    panelSmile.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField Smile= new JTextField();
-    panelSmile.add(labelSmile, BorderLayout.WEST);
-    panelSmile.add(Smile);*/
     panel.add(processPanel(" Smile "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelClench  = new JPanel();
-    //labelClench.setBackground(Color.GRAY);
-    labelClench.add(new JLabel(" Clench"));
-    JPanel panelClench = new JPanel(new BorderLayout());
-    panelClench.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField Clench= new JTextField();
-    panelClench.add(labelClench, BorderLayout.WEST);
-    panelClench.add(Clench);*/
     panel.add(processPanel(" Clench "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelSmirkL  = new JPanel();
-    //labelSmirkL.setBackground(Color.GRAY);
-    labelSmirkL.add(new JLabel(" SmirkL"));
-    JPanel panelSmirkL = new JPanel(new BorderLayout());
-    panelSmirkL.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField SmirkL= new JTextField();
-    panelSmirkL.add(labelSmirkL, BorderLayout.WEST);
-    panelSmirkL.add(SmirkL);*/
     panel.add(processPanel(" SmirkL "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelSmirkR  = new JPanel();
-    //labelSmirkR.setBackground(Color.GRAY);
-    labelSmirkR.add(new JLabel(" SmirkR"));
-    JPanel panelSmirkR = new JPanel(new BorderLayout());
-    panelSmirkR.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField SmirkR= new JTextField();
-    panelSmirkR.add(labelSmirkR, BorderLayout.WEST);
-    panelSmirkR.add(SmirkR);*/
     panel.add(processPanel(" SmirkR "), BorderLayout.AFTER_LAST_LINE);
-
-    /**JPanel labelLaugh  = new JPanel();
-    //labelLaugh.setBackground(Color.GRAY);
-    labelLaugh.add(new JLabel(" Laugh"));
-    JPanel panelLaugh = new JPanel(new BorderLayout());
-    panelLaugh.setLayout(new GridLayout(1,2));
-    //panelId.setBackground(Color.CYAN);
-    JTextField Laugh= new JTextField();
-    panelLaugh.add(labelLaugh, BorderLayout.WEST);
-    panelLaugh.add(Laugh);*/
     panel.add(processPanel(" Laugh "), BorderLayout.AFTER_LAST_LINE);
 
     return panel;
