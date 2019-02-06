@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import Core.Publisher;
+import javax.swing.JTextPane;		
+import java.awt.Font;
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -34,9 +36,10 @@ public class Gui extends JPanel implements ActionListener {
 	// private final JSplitPane splitPane;
 
 	private JPanel gifPanel = new JPanel();
-
+	private JTextPane textPane = new JTextPane();
+	
 	private Component createPanelSouth() {
-
+		
 		JPanel labels = new JPanel();
 		labels.setBackground(Color.GRAY);
 		labels.add(new JLabel("  Publishing at port: "));
@@ -48,6 +51,11 @@ public class Gui extends JPanel implements ActionListener {
 		panel.add(buttonConnect, BorderLayout.EAST);
 		buttonConnect.addActionListener(this);
 		buttonConnect.setEnabled(true);
+		textPane.setForeground(Color.BLACK);		
+		textPane.setFont(new Font("Tahoma", Font.BOLD, 19));		
+		textPane.setEnabled(false);		
+		textPane.setEditable(true);		
+		panel.add(textPane, BorderLayout.NORTH);
 		return panel;
 	}
 
@@ -93,7 +101,7 @@ public class Gui extends JPanel implements ActionListener {
 		this.add(createPanelSouth());
 
 		Dimension screen = getToolkit().getScreenSize();
-		this.setSize(screen.width / 2, 3 * screen.height / 4);
+		this.setSize(screen.width / 2, 3 * screen.height / 6);
 		this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
 		System.out.println("gui done");
 	}
@@ -110,11 +118,15 @@ public class Gui extends JPanel implements ActionListener {
 				model.setHeartState(selectedAction);
 				buttonConnect.setText("stop");
 				buttonConnect.setBackground(Color.red);
+				textPane.setText("SERVER IS RUNNING...");
+				textPane.setBackground(Color.WHITE);
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				System.out.println("stop");
 				model.stop();
 				buttonConnect.setText("run");
 				buttonConnect.setBackground(Color.green);
+				textPane.setText("SERVER IS STOPPED");
+				textPane.setBackground(Color.WHITE);
 			}
 		}
 		if (e.getSource() == resting) {
@@ -155,8 +167,9 @@ public class Gui extends JPanel implements ActionListener {
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame("Simulator");
+		frame.getContentPane().setLayout(new GridLayout(1, 1));
 		frame.setLayout(new GridLayout(1, 1));
-		frame.add(new Gui());
+		frame.getContentPane().add(new Gui());
 		// frame.add(new ButtonGroup());
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
