@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 /*The Controller class is connected with the faceEmotions.fxml file,
 it handles slider events and face changes. Also it implements the method model.start()
-* and also sends paramets to the ModelGenerator class. */
+* and also sends parameters to the ModelGenerator class. There is a listener toogle, */
 
 public class Controller implements Initializable {
     private static Model model;

@@ -1,4 +1,4 @@
-
+package Core;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -134,7 +134,7 @@ public class Gui1 extends JPanel implements ActionListener {
 
     JFrame frame = new JFrame("Simulator");
     frame.setLayout(new GridLayout(1, 1));
-    frame.add(new Gui());
+    frame.add(new Gui1());
     frame.addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {

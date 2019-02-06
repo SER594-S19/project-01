@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.stage.WindowEvent;
 
 
-/* This is the Main Server class which loads the fxml file "FaceEmotions.fxml" into a new scene.*/
+/* This is the Main Server class which loads the fxml file "FaceEmotions.fxml" into a new scene. Extends Application.*/
 
 public class Gui extends Application {
   private final int PORT = 1594;
