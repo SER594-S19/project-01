@@ -10,7 +10,7 @@ package Core;
 public class Data {
 
     private double time;
-    private double value;
+    //private double value;
     private double agreement;
     private double concentrating;
     private double disagreement;
@@ -67,20 +67,13 @@ public class Data {
 		this.unsure = unsure;
 	}
 
-	public Data(double time, double value) {
+	/*public Data(double time, double value) {
         this.time = time;
         this.value = value;
-    }
+    } */
 	
 	public Data(double time, double val1, double val2 , double val3, double val4, double val5, double val6) {
         this.time = time;
-        /*
-         * private double agreement;
-    private double concentrating;
-    private double disagreement;
-    private double interested;
-    private double thinking;
-	private double unsure;*/
         this.agreement = val1;
         this.concentrating = val2;
         this.disagreement = val3;
@@ -89,14 +82,14 @@ public class Data {
         this.unsure = val6;
     }
 
-    public void setData(double data) {
+    /*public void setData(double data) {
       time=0;
       value=data;
-    }
+    } */
 
   @Override
   public String toString() {
-    return "Data{" + "time=" + time + ", value=" + value + '}';
+    return "Data{" + "time="+ ", agreement="+agreement+", concentrating="+concentrating+", disagreement="+disagreement+", interested="+interested+", thinking="+thinking+", unsure="+unsure+'}';
   }
      
 }

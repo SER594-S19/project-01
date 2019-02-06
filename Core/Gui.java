@@ -109,19 +109,19 @@ private static Model model;
 
   @Override
   public void actionPerformed(ActionEvent e) { 
-	  moodGif.setIcon(createImageIcon(e.getActionCommand()
-              + ".gif"));
+	  /*moodGif.setIcon(createImageIcon(e.getActionCommand()
+              + ".gif")); */
 	  
     System.out.println("listener trigger");
     if (e.getSource() == buttonConnect) {
-      if (buttonConnect.getText().compareTo("run") == 0) {
+      if (buttonConnect.getText().compareTo("RUN") == 0) {
             System.out.println("start");
         model.start();
-        buttonConnect.setText("stop");
-      } else if (buttonConnect.getText().compareTo("stop") == 0) {
+        buttonConnect.setText("STOP");
+      } else if (buttonConnect.getText().compareTo("STOP") == 0) {
                     System.out.println("stop");
         model.stop();
-        buttonConnect.setText("run");
+        buttonConnect.setText("RUN");
       }
     }
   }

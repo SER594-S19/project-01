@@ -18,11 +18,12 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   private final ExecutorService service;
   private JTextArea textArea = new JTextArea();
   private JButton buttonConnect = new JButton("connect");
+  private final int PORT = 5914;
   
   public ClientDemo() {
 
     service = Executors.newCachedThreadPool();
-    subscriber = new Subscriber("localhost", 1594);
+    subscriber = new Subscriber("localhost", PORT);
    
     setLayout(new BorderLayout());
     add(textArea, BorderLayout.CENTER);  
