@@ -10,7 +10,6 @@ package Core;
 public class Data {
 
     private double time;
-    //private double value;
     private double agreement;
     private double concentrating;
     private double disagreement;
@@ -66,11 +65,6 @@ public class Data {
 	public void setUnsure(double unsure) {
 		this.unsure = unsure;
 	}
-
-	/*public Data(double time, double value) {
-        this.time = time;
-        this.value = value;
-    } */
 	
 	public Data(double time, double val1, double val2 , double val3, double val4, double val5, double val6) {
         this.time = time;
@@ -81,11 +75,6 @@ public class Data {
         this.thinking = val5;
         this.unsure = val6;
     }
-
-    /*public void setData(double data) {
-      time=0;
-      value=data;
-    } */
 
   @Override
   public String toString() {
