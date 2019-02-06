@@ -77,24 +77,26 @@ public class FacialData extends Data{
 		this.furrowBrow = furrowBrow;
 	}
 
-
-//    public FacialData(double time,double value, int lwink, int rwink, int lookLeft, int lookRight, double raiseBrow, double furrowBrow) {
-//		// TODO Auto-generated constructor stub
-//	
-//        super(time,value);
-//        this.lookLeft = lookLeft;
-//        this.lookRight = lookRight;
-//        this.raiseBrow = raiseBrow;
-//        this.furrowBrow = furrowBrow;
-//        this.lWink = lwink;
-//        this.rWink = rwink;
-//    }
-
     public FacialData(double timestampsystem, ArrayList<Double> facialValues) {
 		// TODO Auto-generated constructor stub
     	super(timestampsystem);
-    	//this.setBlink(Integer.parfacialValues.get(0));
-    	
+    	this.setBlink((int)Math.round(facialValues.get(0)));
+    	this.setlWink((int)Math.round(facialValues.get(1)));
+    	this.setrWink((int)Math.round(facialValues.get(2)));
+    	this.setLookLeft((int)Math.round(facialValues.get(3)));
+    	this.setLookRight((int)Math.round(facialValues.get(4)));
+    	this.setLeftSmirk(facialValues.get(5));
+    	this.setRighSmirk(facialValues.get(6));
+    	this.setRaiseBrow(facialValues.get(7));
+    	this.setFurrowBrow(facialValues.get(8));
+    	this.setSmile(facialValues.get(9));
+    	this.setLaugh(facialValues.get(10));
+    	this.setClench(facialValues.get(11));
+    	this.setEngagement((int)Math.round(facialValues.get(12)));
+    	this.setShortTermExcitement((int)Math.round(facialValues.get(13)));
+    	this.setLongTermExcitement((int)Math.round(facialValues.get(14)));
+    	this.setMeditation((int)Math.round(facialValues.get(15)));
+    	this.setFurstration((int)Math.round(facialValues.get(16)));
 	}
 
 

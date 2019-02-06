@@ -46,19 +46,23 @@ public void stop() {
   }
 
   private void createAndNotify(double timestampsystem, ArrayList<Double> facialValues) {
-                  System.out.println("notifying ...");                 
-                  getSecureRandomNumber(0.0,1.0);
+    System.out.println("notifying ...");       
+    for(int index=5;index<=11;index++) {
+    	facialValues.set(index, getSecureRandomNumber(facialValues.get(index)));
+    }
+    
     data = new FacialData(timestampsystem, facialValues);
+    
     setChanged();
     notifyObservers();
   }
   
   
-  private double getSecureRandomNumber(double min , double max) {
+  private double getSecureRandomNumber(double max) {
 	  double randomValue = 0;
 	  try {
     	  SecureRandom instanceStrong = SecureRandom.getInstanceStrong();
-		DoubleStream doubles = instanceStrong.doubles(min,max);
+		DoubleStream doubles = instanceStrong.doubles(0.0,max);
 		randomValue = doubles.findAny().getAsDouble();
 		System.out.println("Random Num: " +randomValue);
     	} catch (NoSuchAlgorithmException e) {
