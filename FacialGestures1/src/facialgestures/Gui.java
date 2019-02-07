@@ -20,6 +20,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.*;
 
+import Core.Publisher;
+
 public class Gui extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
