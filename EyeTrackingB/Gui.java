@@ -1,33 +1,24 @@
 package Core;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import javax.swing.*;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.util.Calendar;
+import java.awt.event.*;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Calendar;
-import java.text.DecimalFormat;
-
 /**This runs the GUI simulator for Eye Tracking Device
  *  The simulator shows movement of eyes and validation scroller value from 0 - 4
  * @author Bharat Goel
  */
-ublic class Gui extends JPanel implements ActionListener {
-
+public class Gui extends JPanel implements ActionListener {
   private static Model model;
   private final int PORT = 1594;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
-
   private Scale mousePosition = new Scale(0, 0);
   private int validation;
   private long pupily;
@@ -60,11 +51,8 @@ ublic class Gui extends JPanel implements ActionListener {
     buttonConnect.addActionListener(this);
     buttonConnect.setEnabled(true);
     return panel;
-
   }
-
   public Gui() {
-
     model = new Model(new DataGenerator(), new Publisher(PORT));
     setPreferredSize(new Dimension(800, 600));
     addMouseMotionListener(new MouseHandler());
@@ -81,7 +69,6 @@ ublic class Gui extends JPanel implements ActionListener {
     Validation.setPaintLabels(true);
     Validation.addChangeListener(new ChangeListener(){ public void stateChanged(ChangeEvent e) {
         validation = Validation.getValue(); }});
-  
     Pupilx.setFont(new Font("Calibri", Font.BOLD, 20));
     Pupilx.setToolTipText("PUPIL RIGHT");
     Pupilx.setForeground(Color.WHITE);
@@ -111,7 +98,6 @@ ublic class Gui extends JPanel implements ActionListener {
             Pupilx.setValue((int)value);
         }
     });
-    
     Pupily.setFont(new Font("Calibri", Font.BOLD, 16));
     Pupily.setToolTipText("PUPIL LEFT");
     Pupily.setForeground(Color.WHITE);
@@ -141,20 +127,14 @@ ublic class Gui extends JPanel implements ActionListener {
             Pupily.setValue((int)value);
         }
     });
-    
   }
-
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-
     leftEye.draw(g, mousePosition);
     rightEye.draw(g, mousePosition);
   }
-
-
   private class MouseHandler extends MouseAdapter {
-
     @Override
     public void mouseMoved(MouseEvent e) {
       mousePosition.setX(e.getX());
@@ -192,7 +172,6 @@ ublic class Gui extends JPanel implements ActionListener {
           return max;
       }
   }
-
   @Override
   public void actionPerformed(ActionEvent e) {
     System.out.println("listener trigger");
@@ -208,10 +187,8 @@ ublic class Gui extends JPanel implements ActionListener {
       }
     }
   }
-
   public static Data getData(){
     return data;
-
   }
   public static void main(String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
@@ -231,24 +208,18 @@ ublic class Gui extends JPanel implements ActionListener {
         frame.getContentPane().add(Validation, BorderLayout.SOUTH);
         frame.getContentPane().add(text, BorderLayout.NORTH);
         frame.getContentPane().add(Pupilx, BorderLayout.EAST);
-        frame.getContentPane().add(Pupily, BorderLayout.WEST);
-     
+        frame.getContentPane().add(Pupily, BorderLayout.WEST);   
         gui.requestFocus();
       }
-
     });
   }
 }
-
 class pupilControl extends JSlider {
-
     final int scale;
-
     public pupilControl(int min, int max, int value, int scale) {
         super(min, max, value);
         this.scale = scale;
     }
-
     public double getScaledValue() {
         return ((double)super.getValue()) / this.scale;
     }
