@@ -83,6 +83,21 @@ class DataGenerator extends Observable implements Runnable {
 
     }
   }
+  
+  public void run_data_generator(int value)
+    {
+        //input_face= value;
+        run();
+    }
+    
+
+    public void updateParam(String s, Double val) 
+    {
+  	  
+  	  faceParameters.put(s, Math.floor(val));
+  	  System.out.println(faceParameters);
+  	  
+    }
 
   public void run_data_generator(int value)
     {
