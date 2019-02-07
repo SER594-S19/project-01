@@ -10,20 +10,28 @@ package Core;
 public class Data {
 
     private double time;
-    private int x;
-    private int y;
-    private int scroll;
+    private int gx;
+    private int gy;
+    private long pupilx;
+    private long pupily;
+    private int validation;
+    private long fixation;
+    private long aoi;
 
-    public Data(double time, int x,int y, int scroll){
+    public Data(double time, int gx,int gy,long pupilx,long pupily, int validation,long fixation,long aoi){
         this.time=time;
-        this.x=x;
-        this.y=y;
-        this.scroll=scroll;
+        this.gx=gx;
+        this.gy=gy;
+        this.pupilx=pupilx;
+        this.pupily=pupily;
+        this.validation=validation;
+        this.fixation=fixation;
+        this.aoi=aoi;
     }
 
   @Override
   public String toString() {
-    return "Data{" + "time=" + time + ", x=" + x + ", y="+y +", scroll="+scroll +"}";
+    return "Data{" + "time=" + time + ", gx=" + gx + ", gy="+gy +", pupilx="+pupilx +", pupily="+pupily +", fixation="+fixation +", validation="+validation +", aoi="+aoi +"}";
   }
      
 }
