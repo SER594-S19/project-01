@@ -1,4 +1,4 @@
-package Core;
+package FaceSimulatorSumanth.Core;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
