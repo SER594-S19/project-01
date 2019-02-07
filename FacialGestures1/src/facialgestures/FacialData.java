@@ -192,7 +192,8 @@ public class FacialData extends Data{
 
 @Override
   public String toString() {
-    return "Facial Data = "+this.lookLeft+", "+this.lookRight+", "+this.raiseBrow+", "+this.furrowBrow+", "+this.lWink+", "+this.rWink;
+	
+    return "Facial Data = "+this.getBlink()+", "+this.getLeftSmirk();
   }
      
 }
