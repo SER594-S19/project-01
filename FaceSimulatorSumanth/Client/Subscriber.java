@@ -1,4 +1,4 @@
-package Client;
+package FaceSimulatorSumanth.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
