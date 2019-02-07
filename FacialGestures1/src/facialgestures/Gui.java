@@ -76,7 +76,8 @@ public class Gui extends JPanel implements ActionListener {
 
 	public Gui() {
 		expressionToIndexMapping();
-		
+		for(int i=0;i<17;i++)
+			arrayList.add(0.0);
     model = new Model(new FacialDataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
@@ -247,6 +248,7 @@ public class Gui extends JPanel implements ActionListener {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
         	num.setText(String.valueOf(value));	
+        	arrayList.set(5, value);
         }
     });
     panel_1.add(slider);
@@ -263,7 +265,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num1.setText(String.valueOf(value));			
+        	num1.setText(String.valueOf(value));	
+        	arrayList.set(6, value);
         }
     });
     panel_1.add(slider_1);
@@ -280,7 +283,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num2.setText(String.valueOf(value));		
+        	num2.setText(String.valueOf(value));	
+        	arrayList.set(7, value);
         }
     });
     panel_1.add(slider_2);    
@@ -297,7 +301,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num3.setText(String.valueOf(value));	 		
+        	num3.setText(String.valueOf(value));
+        	arrayList.set(8, value);
         }
     });
     panel_1.add(slider_3);
@@ -314,7 +319,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num4.setText(String.valueOf(value));	 		
+        	num4.setText(String.valueOf(value));
+        	arrayList.set(9, value);
         }
     });
     panel_1.add(slider_4);
@@ -331,7 +337,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num5.setText(String.valueOf(value));	 		
+        	num5.setText(String.valueOf(value));	
+        	arrayList.set(10, value);
         }
     });
     panel_1.add(slider_5);
@@ -348,7 +355,8 @@ public class Gui extends JPanel implements ActionListener {
         public void stateChanged(ChangeEvent e) {
         	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num6.setText(String.valueOf(value));		
+        	num6.setText(String.valueOf(value));
+        	arrayList.set(11, value);
         }
     });
     panel_1.add(slider_6);
