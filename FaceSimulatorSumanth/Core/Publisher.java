@@ -1,4 +1,4 @@
-package Core;
+package FaceSimulatorSumanth.Core;
 
 import java.io.IOException;
 import java.net.ServerSocket;
