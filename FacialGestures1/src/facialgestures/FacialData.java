@@ -193,7 +193,9 @@ public class FacialData extends Data{
 @Override
   public String toString() {
 	
-    return "Facial Data = "+this.getBlink()+", "+this.getLeftSmirk();
+    return "Facial Data : " + "Blink ="+this.getBlink() + "Left Smirk =" +this.getLeftSmirk() + "Right Smirk" +this.getRighSmirk() + "Smile" + this.getSmile() 
+    + "Laugh" + this.getLaugh() + "Clench" + this.getClench() + "Engagement" + getEngagement() + "ShortTermExcitement" + this.getShortTermExcitement() + 
+    "Long Term Excitement" + this.getLongTermExcitement() + "Meditation" + this.getMeditation() + "Frustation" + this.getFurstration();
   }
      
 }

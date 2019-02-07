@@ -53,21 +53,23 @@ class FacialDataGenerator extends DataGenerator implements Runnable {
 	    data = new FacialData(timestampsystem, facialValues);
 	    
 	    setChanged();
+	    data.toString();
 	    notifyObservers();
 	  }
 	  
 	  
 	  private double getSecureRandomNumber(double max) {
-		  double randomValue = 0;
-		  try {
-	    	  SecureRandom instanceStrong = SecureRandom.getInstanceStrong();
-			DoubleStream doubles = instanceStrong.doubles(0.0,max);
-			randomValue = doubles.findAny().getAsDouble();
-			System.out.println("Random Num: " +randomValue);
-	    	} catch (NoSuchAlgorithmException e) {
-	    		
-	    		e.printStackTrace();
-	    	}
+		  double randomValue = Math.random();
+//		  try {
+//	    	  SecureRandom instanceStrong = SecureRandom.getInstanceStrong();
+//			DoubleStream doubles = instanceStrong.doubles(0.0,max);
+//			randomValue = doubles.findAny().getAsDouble();
+//			System.out.println("Random Num: " +randomValue);
+//	    	} catch (NoSuchAlgorithmException e) {
+//	    		
+//	    		e.printStackTrace();
+//	    	}
+		  
 		  return randomValue;
 	  }
 
