@@ -1,4 +1,4 @@
-package Core;
+package FaceSimulatorSumanth.Core;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
