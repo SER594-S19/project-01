@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import Core.DataGenerator;
 
-/*
- * This class is used to generate values of heart rate Data
- *
- * @version 20190202
- *
- */
+/***
+ * This class generates heart rate data depending on the state of human activity.
+ * This data generated is sent to the client.
+ * @version 20190206
+*/
 
 public class HRDataGenerator extends DataGenerator implements Runnable  {
 
