@@ -49,7 +49,7 @@ class FacialDataGenerator extends DataGenerator implements Runnable {
 	    for(int index=5;index<=11;index++) {
 	    	facialValues.set(index, getSecureRandomNumber(facialValues.get(index)));
 	    }
-	    
+	    System.out.println("DG: " + facialValues);
 	    data = new FacialData(timestampsystem, facialValues);
 	    
 	    setChanged();

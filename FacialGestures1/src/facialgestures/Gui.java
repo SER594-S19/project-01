@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -27,6 +30,7 @@ public class Gui extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static Model model;
 	private final int PORT = 1594;
+	private JRadioButton radioButton;
 	protected JLabel labelPublishPort;
 	private final JButton buttonConnect = new JButton("run");
 	static String engageIcon = "Engagement";
@@ -34,16 +38,25 @@ public class Gui extends JPanel implements ActionListener {
     static String longTermIcon = "Long Term Excitement";
     static String meditateIcon = "Meditation";
     static String frustrateIcon = "Frustration";
-    static JSlider slider;
-    static JSlider slider_1;
-    static JSlider slider_2;
-    static JSlider slider_3;
-    static JSlider slider_4;
-    static JSlider slider_5;
-    static JSlider slider_6;
+    
+    static String blinkTrue = "Blink_1";
+    static String leftWinkTrue = "LWink_1";
+    static String rightWinkTrue = "RWink_1" ;
+    static String lookLeftTrue = "LookL_1";
+    static String lookRightTrue = "LookR_1";
+    
+    static String leftSmirk = "Left Smirk";
+    static String rightSmirk = "Right Smirk";
+    static String raiseBrow = "Raise Brow";
+    static String furrowBrow = "Furrow Brow";
+    static String smile = "Smile";
+    static String laugh = "Laugh";
+    static String clench = "Clench";
     JLabel gifIcon;
-    JLabel num;
-
+    HashMap<String, Integer> listOfExpressions = new HashMap<>();
+    ArrayList<Double> arrayList = new ArrayList<Double>();
+    JSlider slider;
+    
 
 	private Component createPanelSouth() {
 
@@ -62,7 +75,8 @@ public class Gui extends JPanel implements ActionListener {
 	}
 
 	public Gui() {
-
+		expressionToIndexMapping();
+		
     model = new Model(new FacialDataGenerator(), new Publisher(PORT));
     this.setBackground(Color.WHITE);
     this.setLayout(new BorderLayout());
@@ -100,43 +114,43 @@ public class Gui extends JPanel implements ActionListener {
     lblLookRight.setBounds(10, 175, 89, 25);
     panel.add(lblLookRight);
     
-    JRadioButton radioButton = new JRadioButton("");
+    radioButton = new JRadioButton("Blink_0");
     radioButton.setBounds(158, 33, 21, 23);
     panel.add(radioButton);
     
-    JRadioButton radioButton_1 = new JRadioButton("");
+	JRadioButton radioButton_1 = new JRadioButton(blinkTrue);
     radioButton_1.setBounds(216, 32, 21, 23);
     panel.add(radioButton_1);
     
-    JRadioButton radioButton_2 = new JRadioButton("");
+    JRadioButton radioButton_2 = new JRadioButton("LWink_0");
     radioButton_2.setBounds(158, 68, 21, 23);
     panel.add(radioButton_2);
     
-    JRadioButton radioButton_3 = new JRadioButton("");
+    JRadioButton radioButton_3 = new JRadioButton(leftWinkTrue);
     radioButton_3.setBounds(216, 68, 21, 23);
     panel.add(radioButton_3);
     
-    JRadioButton radioButton_4 = new JRadioButton("");
+    JRadioButton radioButton_4 = new JRadioButton("RWink_0");
     radioButton_4.setBounds(158, 104, 21, 23);
     panel.add(radioButton_4);
     
-    JRadioButton radioButton_5 = new JRadioButton("");
+    JRadioButton radioButton_5 = new JRadioButton(rightWinkTrue);
     radioButton_5.setBounds(216, 104, 21, 23);
     panel.add(radioButton_5);
     
-    JRadioButton radioButton_6 = new JRadioButton("");
+    JRadioButton radioButton_6 = new JRadioButton("LookL_0");
     radioButton_6.setBounds(158, 140, 21, 23);
     panel.add(radioButton_6);
     
-    JRadioButton radioButton_7 = new JRadioButton("");
+    JRadioButton radioButton_7 = new JRadioButton(lookLeftTrue);
     radioButton_7.setBounds(216, 140, 21, 23);
     panel.add(radioButton_7);
     
-    JRadioButton radioButton_8 = new JRadioButton("");
+    JRadioButton radioButton_8 = new JRadioButton("LookR_0");
     radioButton_8.setBounds(158, 176, 21, 23);
     panel.add(radioButton_8);
     
-    JRadioButton radioButton_9 = new JRadioButton("");
+    JRadioButton radioButton_9 = new JRadioButton(lookRightTrue);
     radioButton_9.setBounds(216, 176, 21, 23);
     panel.add(radioButton_9);
     
@@ -220,7 +234,7 @@ public class Gui extends JPanel implements ActionListener {
     lblClench.setBounds(26, 243, 89, 25);
     panel_1.add(lblClench);
     
-    num = new JLabel("1");
+    JLabel num = new JLabel("1");
     num.setHorizontalAlignment(SwingConstants.CENTER);
     num.setBounds(215, 25, 30, 25);
     panel_1.add(num);
@@ -229,11 +243,12 @@ public class Gui extends JPanel implements ActionListener {
     slider.setBounds(107, 15, 100, 50);
     slider.setMaximum(10);
     slider.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) { double value =
-	((JSlider)e.getSource()).getValue() * 0.1; System.out.println(value);
-	num.setText(String.valueOf(value));
-	}
-    	}); 
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
+            System.out.println(value);
+        	num.setText(String.valueOf(value));	
+        }
+    });
     panel_1.add(slider);
     
     JLabel num1 = new JLabel("1");
@@ -241,14 +256,14 @@ public class Gui extends JPanel implements ActionListener {
     num1.setBounds(215, 65, 30, 25);
     panel_1.add(num1); 
     
-    slider_1 = new JSlider();
-    slider.setMaximum(10);
+    JSlider slider_1 = new JSlider();
+    slider_1.setMaximum(10);
     slider_1.setBounds(107, 55, 100, 50);
     slider_1.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num1.setText(String.valueOf(value));	
+        	num1.setText(String.valueOf(value));			
         }
     });
     panel_1.add(slider_1);
@@ -258,16 +273,16 @@ public class Gui extends JPanel implements ActionListener {
     num2.setBounds(215, 100, 30, 25);
     panel_1.add(num2);
     
-    slider_2 = new JSlider();
+    JSlider slider_2 = new JSlider();
     slider_2.setMaximum(10);
     slider_2.setBounds(107, 90, 100, 50);
     slider_2.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num2.setText(String.valueOf(value));	
+        	num2.setText(String.valueOf(value));		
         }
-    	});
+    });
     panel_1.add(slider_2);    
    
     JLabel num3 = new JLabel("1");
@@ -275,14 +290,14 @@ public class Gui extends JPanel implements ActionListener {
     num3.setBounds(215, 135, 30, 25);
     panel_1.add(num3);
     
-    slider_3 = new JSlider();
+    JSlider slider_3 = new JSlider();
     slider_3.setMaximum(10);
     slider_3.setBounds(107, 125, 100, 50);
     slider_3.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num3.setText(String.valueOf(value));	
+        	num3.setText(String.valueOf(value));	 		
         }
     });
     panel_1.add(slider_3);
@@ -292,14 +307,14 @@ public class Gui extends JPanel implements ActionListener {
     num4.setBounds(215, 170, 30, 25);
     panel_1.add(num4);
     
-    slider_4 = new JSlider();
+    JSlider slider_4 = new JSlider();
     slider_4.setMaximum(10);
     slider_4.setBounds(107, 160, 100, 50);
     slider_4.addChangeListener(new ChangeListener() {
         public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num4.setText(String.valueOf(value));	
+        	num4.setText(String.valueOf(value));	 		
         }
     });
     panel_1.add(slider_4);
@@ -309,14 +324,14 @@ public class Gui extends JPanel implements ActionListener {
     num5.setBounds(215, 200, 30, 25);
     panel_1.add(num5);
     
-    slider_5 = new JSlider();
+    JSlider slider_5 = new JSlider();
     slider_5.setMaximum(10);
     slider_5.setBounds(107, 195, 100, 50);
     slider_5.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num5.setText(String.valueOf(value));	
+        	num5.setText(String.valueOf(value));	 		
         }
     });
     panel_1.add(slider_5);
@@ -330,10 +345,10 @@ public class Gui extends JPanel implements ActionListener {
     slider_6.setMaximum(10);
     slider_6.setBounds(107, 230, 100, 50);
     slider_6.addChangeListener(new ChangeListener() {
-    	public void stateChanged(ChangeEvent e) {
-            double value = ((JSlider)e.getSource()).getValue() * 0.1;
+        public void stateChanged(ChangeEvent e) {
+        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
             System.out.println(value);
-        	num6.setText(String.valueOf(value));	
+        	num6.setText(String.valueOf(value));		
         }
     });
     panel_1.add(slider_6);
@@ -370,27 +385,27 @@ public class Gui extends JPanel implements ActionListener {
     
     JRadioButton radioButton_10 = new JRadioButton(engageIcon);
     radioButton_10.setBounds(170, 25, 21, 23);
-    //radioButton_10.setActionCommand(engageIcon);
+    radioButton_10.setActionCommand(engageIcon);
     panel_2.add(radioButton_10);
     
     JRadioButton radioButton_11 = new JRadioButton(shortTermIcon);
     radioButton_11.setBounds(170, 50, 21, 23);
-    //radioButton_11.setActionCommand(shortTermIcon);
+    radioButton_11.setActionCommand(shortTermIcon);
     panel_2.add(radioButton_11);
     
     JRadioButton radioButton_12 = new JRadioButton(longTermIcon);
     radioButton_12.setBounds(170, 75, 21, 23);
-    //radioButton_12.setActionCommand(longTermIcon);
+    radioButton_12.setActionCommand(longTermIcon);
     panel_2.add(radioButton_12);
     
     JRadioButton radioButton_13 = new JRadioButton(meditateIcon);
     radioButton_13.setBounds(170, 100, 21, 23);
-    //radioButton_13.setActionCommand(meditateIcon);
+    radioButton_13.setActionCommand(meditateIcon);
     panel_2.add(radioButton_13);
     
     JRadioButton radioButton_14 = new JRadioButton(frustrateIcon);
     radioButton_14.setBounds(170, 125, 21, 23);
-    //radioButton_14.setActionCommand(frustrateIcon);
+    radioButton_14.setActionCommand(frustrateIcon);
     panel_2.add(radioButton_14);
     
     ButtonGroup group = new ButtonGroup();
@@ -419,23 +434,106 @@ public class Gui extends JPanel implements ActionListener {
     System.out.println("gui done");
   }
 
+	private void expressionToIndexMapping() {
+		listOfExpressions.put(blinkTrue, 0);
+		listOfExpressions.put(leftWinkTrue, 1);
+		listOfExpressions.put(rightWinkTrue, 2);
+		listOfExpressions.put(lookLeftTrue, 3);
+		listOfExpressions.put(lookRightTrue, 4);
+		listOfExpressions.put(leftSmirk, 5);
+		listOfExpressions.put(rightSmirk, 6);
+		listOfExpressions.put(raiseBrow, 7);
+		listOfExpressions.put(furrowBrow, 8);
+		listOfExpressions.put(smile, 9);
+		listOfExpressions.put(laugh, 10);
+		listOfExpressions.put(clench, 11);
+		listOfExpressions.put(engageIcon, 12);
+		listOfExpressions.put(shortTermIcon, 13);
+		listOfExpressions.put(longTermIcon, 14);
+		listOfExpressions.put(meditateIcon, 15);
+		listOfExpressions.put(frustrateIcon, 16);
+		
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		 gifIcon.setIcon(createImageIcon(e.getActionCommand()
 	              + ".gif"));
-		 
             System.out.println("Button Clicked!");
 		System.out.println("listener trigger");
+		
+		
+		for (int i = 0; i < 17; i++) {
+			arrayList.add(0.0);
+		}
+		
+		setExpressiveBinary(e, arrayList);
+		
+		
+		
+		setAffective(e, arrayList);
+		model.setFacialValues(arrayList);
+		
+
+
+
+
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
 				System.out.println("start");
+				model.setFacialValues(arrayList);
 				model.start();
+				
 				buttonConnect.setText("stop");
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				System.out.println("stop");
 				model.stop();
 				buttonConnect.setText("run");
 			}
+		}
+	
+		
+	}
+
+	private void setAffective(ActionEvent e, ArrayList<Double> arrayList) {
+		if(e.getActionCommand().equals(engageIcon))
+		{
+		arrayList.set(listOfExpressions.get(engageIcon), (double) 1);			
+		}
+		else if(e.getActionCommand().equals(shortTermIcon))
+		{
+		arrayList.set(listOfExpressions.get(shortTermIcon), (double) 1);			
+		}
+		else if(e.getActionCommand().equals(longTermIcon))
+		{
+		arrayList.set(listOfExpressions.get(longTermIcon), (double) 1);			
+		}
+		else if(e.getActionCommand().equals(meditateIcon))
+		{
+		arrayList.set(listOfExpressions.get(meditateIcon), (double) 1);			
+		}
+		else if(e.getActionCommand().equals(frustrateIcon))
+		{
+		arrayList.set(listOfExpressions.get(frustrateIcon), (double) 1);			
+		}
+	}
+
+	private void setExpressiveBinary(ActionEvent e, ArrayList<Double> arrayList) {
+		if(e.getActionCommand().equals(blinkTrue))
+			{
+			arrayList.set(listOfExpressions.get(blinkTrue), (double) 1);			
+			}
+		if(e.getActionCommand().equals(leftWinkTrue))
+		{arrayList.set(listOfExpressions.get(leftWinkTrue), (double) 1);
+		}
+		if(e.getActionCommand().equals(rightWinkTrue))
+		{arrayList.set(listOfExpressions.get(rightWinkTrue), (double) 1);
+		}
+		if(e.getActionCommand().equals(lookLeftTrue))
+		{arrayList.set(listOfExpressions.get(lookLeftTrue), (double) 1);
+		}
+		if(e.getActionCommand().equals(lookRightTrue))
+		{arrayList.set(listOfExpressions.get(lookRightTrue), (double) 1);
 		}
 	}
 
