@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
  * It read from the dataGenerator and publish in a port using the publisher.
  * A GUI control the model and can start, stop or shutdown it.
  *
- * @author nikitabahl
  * @version 20190202
  */
 public class Model {
@@ -20,6 +19,8 @@ public class Model {
     private final Publisher threadPublisher;
     private boolean serverState;
 
+
+    // Constructor for Model class
     public Model(HRDataGenerator device, Publisher publisher) {
         executorService = Executors.newCachedThreadPool();
         dataGenerator = device;
@@ -28,22 +29,27 @@ public class Model {
         serverState = false;
     }
 
+    // Method to set the state of heart rate in HRDataGenerator
     public void setHeartState(int heartState) {
         dataGenerator.setHeartState(heartState);
     }
 
+    // Method to get the Server state
     public boolean getServerState() {
         return serverState;
     }
 
+    // Method to set the Server state
     public void setServerState(boolean serverState) {
         this.serverState = serverState;
     }
 
+    // Method to set the frequency
     public void setFrequency(double frequency) {
         dataGenerator.setFrequency(frequency);
     }
 
+    // Method to close the server
     public void shutdown() {
         dataGenerator.stop();
         threadPublisher.stop();
@@ -56,12 +62,14 @@ public class Model {
         }
     }
 
+    // Method to start the server for sending data 
     public void start() {
     		this.serverState=true;
         executorService.submit(dataGenerator);
         executorService.submit(threadPublisher);
     }
 
+    // Method to stop the server from sending data
     public void stop() {
     		this.serverState=false;
         dataGenerator.stop();

@@ -3,10 +3,15 @@ package HeartRate;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import Core.Publisher;
+
+/*
+ * This class creates the GUI for Heart rate simulator
+ *
+ * @version 20190202
+ *
+ */
 
 public class Gui extends JPanel implements ActionListener {
 
