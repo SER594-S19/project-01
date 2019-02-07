@@ -10,13 +10,6 @@ import Core.Publisher;
  * @version 20190206
  */
 
-/*
- * This class creates the GUI for Heart rate simulator
- *
- * @version 20190202
- *
- */
-
 public class Gui extends JPanel implements ActionListener {
 
 	private static Gui instance = null;
@@ -34,6 +27,7 @@ public class Gui extends JPanel implements ActionListener {
 	private final JPanel gifPanel = new JPanel();
 	private final JTextPane textPane = new JTextPane();
 
+	// Method to get object of GUI class
 	public static Gui getInstance()
 	{
 		if (instance == null)
@@ -42,6 +36,7 @@ public class Gui extends JPanel implements ActionListener {
 		return instance;
 	}
 
+	// Constructor for GUI class that creates the JFrame
 	private Gui() {
 
 		model = new Model(new HRDataGenerator(), new Publisher(PORT));
@@ -60,6 +55,7 @@ public class Gui extends JPanel implements ActionListener {
 		this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
 	}
 
+	// Method to create the topmost element in the GUI
 	private Component createNorthComponent() {
 		JPanel top = new JPanel(new GridLayout(2, 2));
 		top.add(new JLabel("Enter Port Number: "));
@@ -72,6 +68,7 @@ public class Gui extends JPanel implements ActionListener {
 		return top;
 	}
 
+	// Method to create radio button group
 	private Component createButtonGroups() {
 		JPanel buttons = new JPanel();
 		ButtonGroup hrControlGroup = new ButtonGroup();
@@ -90,6 +87,7 @@ public class Gui extends JPanel implements ActionListener {
 		return buttons;
 	}
 
+	// Method used to create a Console in the GUI
 	private Component createConsole() {
 		JPanel panel = new JPanel(new GridLayout());
 
@@ -103,7 +101,8 @@ public class Gui extends JPanel implements ActionListener {
 
 		return panel;
 	}
-	
+
+	// Method used to create the JPanels for start/stop button
 	private Component createPanelSouth() {
 		JPanel panel = new JPanel(new GridLayout());
 		panel.add(buttonConnect);
@@ -115,6 +114,7 @@ public class Gui extends JPanel implements ActionListener {
 		return panel;
 	}
 
+	// Method used to create the initial static GIF
 	private void initializeHeartGif() {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource("static.png"));
 		JLabel imageLabel = new JLabel();
@@ -123,6 +123,7 @@ public class Gui extends JPanel implements ActionListener {
 
 	}
 
+	// Method for Action Listeners for button clicks
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int selectedAction;
@@ -183,6 +184,7 @@ public class Gui extends JPanel implements ActionListener {
 		}
 	}
 
+	// Method to update GIF based on state
 	private void updateHeartGif(String image) {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource(image));
 		JLabel imageLabel = new JLabel();
@@ -193,6 +195,7 @@ public class Gui extends JPanel implements ActionListener {
 		this.getParent().repaint();
 	}
 
+	// MEthod used to check state of radio buttons selected
 	private int checkButtonSelected(){
 		if(resting.isSelected())
 			return 0;
@@ -202,6 +205,7 @@ public class Gui extends JPanel implements ActionListener {
 			return 2;
 	}
 
+	// Method that is sued to validate the frequency entered
 	private boolean isFrequencyValid() {
 		try {
 			return Double.parseDouble(freqText.getText()) > 0;
@@ -210,11 +214,13 @@ public class Gui extends JPanel implements ActionListener {
 		}
 	}
 
+	// Method used to set the textPane data 
 	public void setTextPane(String data) {
 		String currentText = textPane.getText();
 		textPane.setText(currentText + "\n" + data);
 	}
 
+	// Method used to start the GUI application
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Heart Rate Simulator");
 		frame.getContentPane().setLayout(new GridLayout(1, 1));
