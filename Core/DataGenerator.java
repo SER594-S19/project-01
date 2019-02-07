@@ -10,18 +10,24 @@ class DataGenerator extends Observable implements Runnable {
   private boolean stop = false;
   //double timeStamp = 0;
 
+
+
   public void stop() {
     this.stop = true;
   }
 
-//  protected static HashMap<String, Double> skinP = new HashMap<String, Double>()
-//  {
-//    {
-//      put("voltage", (double) 0);
-//      put("conductance", (double) 0);
-//
-//    }
-//  };
+  protected static HashMap<String, Double> skinP = new HashMap<String, Double>()
+  {
+    {
+      put("voltage", (double) 0);
+      put("conductance", (double) 0);
+
+    }
+  };
+
+  public void updatePara(String desc,double value){
+      skinP.put(desc, value);
+  }
 
   public Object getObject() {
     return data;
@@ -39,21 +45,35 @@ class DataGenerator extends Observable implements Runnable {
 
     while (!stop) {
               System.out.println("data generator running");
-//      double volInput = (double) (skinP.get("agreement")/10);
-//      double conInput = (double) (skinP.get("disagreement")/10);
+      double volInput = (skinP.get("voltage")/1);
+      double conInput = (skinP.get("conductance")/1);
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
-//      double voltage =  (double) ((volInput - 0.1) + new Random().nextDouble()*(volInput - (volInput - 0.1)));
-//
-//      double conductance =  (double) ((conInput - 0.1) + new Random().nextDouble()*(conInput - (conInput - 0.1)));
-//
-//      if(voltage<0)
-//        voltage=0.0;
-//
-//      if(conductance<0)
-//        conductance=0.0;
+
+      double volMax=volInput+0.5;
+      double volMin=volInput-0.5;
+      if(volMin<0) volMin=0;
+      if(volMax>3) volMax=3;
+      double volRan= Math.random()*(volMax-volMin)+volMin;
+
+      double conMax=conInput+0.5;
+      double conMin=conInput-0.5;
+      if(conMin<0) conMin=0;
+      if(conMax>3) conMax=3;
+      double conRan= Math.random()*(conMax-conMin)+conMin;
 
 
-      createAndNotify(timeStamp, Math.random(), Math.random());
+      //double voltage =  ((volInput - 0.1) + Math.random()*(volInput - (volInput - 0.1)));
+
+      //double conductance =  ((conInput - 0.1) + Math.random()*(conInput - (conInput - 0.1)));
+
+      if(volRan<0)
+        volRan=0.0;
+
+      if(conRan<0)
+        conRan=0.0;
+
+
+      createAndNotify(timeStamp, volRan, conRan);
       try {
         Thread.sleep(1000);
       } catch (InterruptedException ex) {

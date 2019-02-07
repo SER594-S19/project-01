@@ -49,7 +49,7 @@ public class Data {
 
     @Override
   public String toString() {
-    return "Data{" + "time=" + time + ", voltage=" + voltage + ", conductance=" + voltage + '}';
+    return "Data{" + "time=" + time + ", voltage=" + voltage + ", conductance=" + conductance + '}';
   }
      
 }
