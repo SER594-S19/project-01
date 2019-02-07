@@ -2,7 +2,7 @@ package facialgestures;
 
 import java.util.ArrayList;
 
-import facialgestures.Data;
+import Core.Data;
 
 /**
  * This class encapsulates a timestamp for a row of data (one entry per channel)
@@ -79,7 +79,7 @@ public class FacialData extends Data{
 
     public FacialData(double timestampsystem, ArrayList<Double> facialValues) {
 		// TODO Auto-generated constructor stub
-    	super(timestampsystem);
+    	super(timestampsystem,0);
     	this.setBlink((int)Math.round(facialValues.get(0)));
     	this.setlWink((int)Math.round(facialValues.get(1)));
     	this.setrWink((int)Math.round(facialValues.get(2)));

@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import facialgestures.DataGenerator;
+import facialgestures.FacialDataGenerator;
 
 /**
  * Put together a dataGenerator and a publisher. 
@@ -16,11 +16,11 @@ import facialgestures.DataGenerator;
 public class Model {
 
   private final ExecutorService executorService;
-  private final DataGenerator dataGenerator;
+  private final FacialDataGenerator dataGenerator;
   private final Publisher threadPublisher;
   private ArrayList<Double> facialValues = new ArrayList<>();
 
-  public Model(DataGenerator device, Publisher publisher) {
+  public Model(FacialDataGenerator device, Publisher publisher) {
     executorService = Executors.newCachedThreadPool();
     dataGenerator = device;
     threadPublisher = publisher;
