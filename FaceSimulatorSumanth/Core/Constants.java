@@ -1,4 +1,4 @@
-package Core;
+package FaceSimulatorSumanth.Core;
 
 public class Constants {
 	
