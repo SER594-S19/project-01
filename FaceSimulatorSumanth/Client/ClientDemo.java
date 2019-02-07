@@ -1,4 +1,4 @@
-package Client;
+package FaceSimulatorSumanth.Client;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
