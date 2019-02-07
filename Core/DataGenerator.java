@@ -22,6 +22,8 @@ class DataGenerator extends Observable implements Runnable {
       put("concentrate", (double) 0);
       put("thinking", (double) 0);
       put("unsure", (double) 0);
+    
+    
 
     }
   };
