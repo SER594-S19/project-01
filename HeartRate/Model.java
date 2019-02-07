@@ -9,9 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Put together a dataGenerator and a publisher.
  * It read from the dataGenerator and publish in a port using the publisher.
  * A GUI control the model and can start, stop or shutdown it.
- *
- * @author nikitabahl
- * @version 20190202
+ * @version 20190206
  */
 public class Model {
 

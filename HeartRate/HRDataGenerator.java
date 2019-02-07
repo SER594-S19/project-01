@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
 import Core.DataGenerator;
 
+/***
+ * This class generates heart rate data depending on the state of human activity.
+ * This data generated is sent to the client.
+ * @version 20190206
+ */
 
 public class HRDataGenerator extends DataGenerator implements Runnable  {
 
@@ -55,7 +59,7 @@ public class HRDataGenerator extends DataGenerator implements Runnable  {
       }
     }
   }
-
+  
   private List<Integer> generateValues(int heartState) {
     int startRange, endRange;
     switch(heartState) {

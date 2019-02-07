@@ -3,10 +3,12 @@ package HeartRate;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import Core.Publisher;
+/***
+ * This is Main server class for graphical interface that displays different values for heart rate.
+ * @version 20190206
+ */
 
 public class Gui extends JPanel implements ActionListener {
 
@@ -130,7 +132,8 @@ public class Gui extends JPanel implements ActionListener {
 					buttonConnect.setText("stop");
 					buttonConnect.setBackground(Color.RED);
 				} else {
-					JOptionPane.showMessageDialog(new JPanel(), "Frequency entered is not valid", "Error",
+					JOptionPane.showMessageDialog(
+							new JPanel(), "Frequency entered is not valid", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
