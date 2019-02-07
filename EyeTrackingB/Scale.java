@@ -1,3 +1,5 @@
+package Core;
+
 /**This class is to scale & move pupil with mouse movement
  *
  * @author Bharat Goel
