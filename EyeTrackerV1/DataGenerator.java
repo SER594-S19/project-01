@@ -1,5 +1,7 @@
 package EyeTrackerV1;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Observable;
@@ -25,7 +27,9 @@ public class DataGenerator extends Observable implements Runnable
   }
 	  };
 
-
+public DataEyeTracker getDataEyeTracker() {
+	return data;
+}
   public void stop() 
   {
     this.stop = true;
@@ -85,6 +89,7 @@ public class DataGenerator extends Observable implements Runnable
   //methods to generate 9 other parameters
   public static Double generateGpxValue() 
   {
+	  
 	  return eyeParameters.get("gpxValue");
 	  
   }
@@ -92,8 +97,8 @@ public class DataGenerator extends Observable implements Runnable
   {
 	  return eyeParameters.get("gpyValue");
 		  
-	  }
-  public static double generatePupilLeft()
+  }
+  public static double generatePupilLeft() 
   {
 	  return eyeParameters.get("pupilLeft");
 		  

@@ -29,6 +29,10 @@ public class Model
 		dataGenerator.addObserver(threadPublisher);
 
 	}
+	
+	public DataGenerator getDataGenerator() {
+		return dataGenerator;
+	}
 
 	public void shutdown()
 	{

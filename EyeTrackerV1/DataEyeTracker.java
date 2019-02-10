@@ -106,6 +106,9 @@ public class DataEyeTracker extends Data
 		this.validityL = d;
 		this.validityR = e;
 	}
+	
+	
+	
 
 	public double getPupilLeft()
 	{

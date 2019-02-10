@@ -7,9 +7,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Enumeration;
 import java.util.HashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,8 +24,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Core.Publisher;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
-public class Gui extends JPanel implements ActionListener
+public class Gui extends JPanel implements ActionListener,MouseListener
 {
 
   private static final long serialVersionUID = 1L; 	
@@ -41,6 +48,7 @@ public void setEyeParameters(HashMap<String, Integer> eyeParameters)
   private final int PORT = 1594;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
+  private JPanel sliderPanel_1;
 
   private Component createPanelSouth()
   {
@@ -67,18 +75,22 @@ public void setEyeParameters(HashMap<String, Integer> eyeParameters)
     Dimension screen = getToolkit().getScreenSize();
     this.setSize(screen.width / 2, 3 * screen.height / 4);
     this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
-    JPanel sliderPanel = new JPanel();
-    createSliderPanel(sliderPanel, "pupilLeft", 2, 8, 5);
-    createSliderPanel(sliderPanel, "pupilRight", 2, 8, 5);
-    createSliderPanel(sliderPanel, "gpxValue", 0, 28.8, 14.4);
-    createSliderPanel(sliderPanel, "gpyValue", 0, 18.8, 9.4);
-    createSliderPanel(sliderPanel, "validityL", 0, 4, 2);
-    createSliderPanel(sliderPanel, "validityR", 0, 4, 2);
-    createSliderPanel(sliderPanel, "fixationValue", 0, 50, 25);
-    createSliderPanel(sliderPanel, "event", 1, 4, 2);
-    createSliderPanel(sliderPanel, "aoi", 1, 4, 2);
+    sliderPanel_1 = new JPanel();
+   
+    createSliderPanel(sliderPanel_1, "pupilLeft", 2, 8, 5);
+    createSliderPanel(sliderPanel_1, "pupilRight", 2, 8, 5);
+   
+    createSliderPanel(sliderPanel_1, "validityL", 0, 4, 2);
+    createSliderPanel(sliderPanel_1, "validityR", 0, 4, 2);
+    createSliderPanel(sliderPanel_1, "fixationValue", 0, 50, 25);
+    createSliderPanel(sliderPanel_1, "event", 1, 4, 2);
+    createSliderPanel(sliderPanel_1, "aoi", 1, 4, 2);
+    
+    
+    
     System.out.println("gui done");
   }
+
 
 private void createSliderPanel(JPanel sliderPanel, String s, double min, double max, double mid) 
 {
@@ -106,11 +118,13 @@ private JPanel createSlider(JSlider slider, String s)
        public void stateChanged(ChangeEvent event)
        {
           // update text field when the slider value changes
-    	   DataGenerator dataGen = new DataGenerator();
+    	   
     	   
     	   
           JSlider source = (JSlider) event.getSource();
-          dataGen.updateParam(s, source.getValue()/100.0);
+          model.getDataGenerator().updateParam(s, source.getValue()/100.0);
+          
+          
        }
     };
     slider.addChangeListener(listener);
@@ -144,8 +158,9 @@ private JPanel createSlider(JSlider slider, String s)
   {
 
     JFrame frame = new JFrame("Eye Tracker Simulator");
-    frame.setLayout(new GridLayout(1, 1));
-    frame.add(new Gui());
+    frame.getContentPane().setLayout(new GridLayout(1, 1));
+    frame.getContentPane().add(new Gui());
+    
     frame.addWindowListener(new java.awt.event.WindowAdapter()
     {
       @Override
@@ -155,9 +170,53 @@ private JPanel createSlider(JSlider slider, String s)
         System.exit(0);
       }
     });
+    frame.addMouseListener(new MouseAdapter() {
+        //override the method
+	  public void mouseClicked(MouseEvent e) {
+	  	// TODO Auto-generated method stub
+		  
+		
+		  if (model.getDataGenerator() != null )
+		  {
+			  model.getDataGenerator().updateParam("gpxValue", (double) e.getX());
+			  model.getDataGenerator().updateParam("gpYValue", (double) e.getY());
+		  }
+	  }
+    });
     frame.pack();
     frame.setSize(500, 300);
     frame.setVisible(true);
   }
+
+@Override
+public void mouseClicked(MouseEvent e) {
+	// TODO Auto-generated method stub
+
+	
+}
+
+@Override
+public void mousePressed(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseReleased(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseEntered(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void mouseExited(MouseEvent e) {
+	// TODO Auto-generated method stub
+	
+}
   
 }
