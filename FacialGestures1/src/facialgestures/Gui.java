@@ -56,10 +56,8 @@ public class Gui extends JPanel implements ActionListener {
     HashMap<String, Integer> listOfExpressions = new HashMap<>();
     ArrayList<Double> arrayList = new ArrayList<Double>();
     JSlider slider;
-    
-
+ 
 	private Component createPanelSouth() {
-
 		JPanel labels = new JPanel();
 		labels.setBackground(Color.GRAY);
 		labels.add(new JLabel("  Publishing at port: "));
@@ -80,7 +78,28 @@ public class Gui extends JPanel implements ActionListener {
 	    return radioButton;
 	}
 	
-
+	public JLabel label(String name, int x_axis, int y_axis){
+		JLabel label = new JLabel(name);
+	    label.setHorizontalAlignment(SwingConstants.CENTER);
+	    label.setBounds(x_axis, y_axis, 89, 25);
+	    return label;
+	}
+	
+	public JSlider addSlider(JLabel labelNum, int x_axis, int y_axis, int val) {
+		JSlider slider = new JSlider();
+		slider.setBounds(x_axis, y_axis, 100, 50);
+	    slider.setMaximum(10);
+	    slider.addChangeListener(new ChangeListener() {
+	        public void stateChanged(ChangeEvent e) {
+	        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
+	            System.out.println(value);
+	        	labelNum.setText(String.valueOf(value));	
+	        	arrayList.set(5, value);
+	        }
+	    });
+	    return slider;
+	}
+	
 	public Gui() {
 		expressionToIndexMapping();
 		for(int i=0;i<17;i++)
@@ -93,320 +112,156 @@ public class Gui extends JPanel implements ActionListener {
     this.setSize(screen.width / 2, 3 * screen.height / 4);
     this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
    
-    JPanel panel = new JPanel();
-    panel.setBounds(0, 28, 331, 497);
-    panel.setLayout(null);
+    JPanel expressive_bin = new JPanel();
+    expressive_bin.setBounds(0, 28, 331, 497);
+    expressive_bin.setLayout(null);
     
-    JLabel lblNewLabel = new JLabel("Blink");
-    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel.setBounds(10, 31, 89, 25);
-    panel.add(lblNewLabel);
+    JLabel lblBlink = label("Blink", 26, 31);
+    expressive_bin.add(lblBlink);
+    JLabel lblLeftWink = label("Left Wink", 26, 67);
+    expressive_bin.add(lblLeftWink);
+    JLabel lblRightWink = label("Raise Wink", 26, 103);
+    expressive_bin.add(lblRightWink);
+    JLabel lblLookLeft = label("Look Left", 26, 139);
+    expressive_bin.add(lblLookLeft);
+    JLabel lblLookRight = label("Look Right", 26, 175);
+    expressive_bin.add(lblLookRight);
+ 
+    JRadioButton radioButtonBlink = radio_button("Blink_0", 33);
+    expressive_bin.add(radioButtonBlink);
     
-    JLabel lblLeftWink = new JLabel("Left Wink");
-    lblLeftWink.setHorizontalAlignment(SwingConstants.CENTER);
-    lblLeftWink.setBounds(10, 67, 89, 25);
-    panel.add(lblLeftWink);
+    JRadioButton radioButtonLWink = radio_button("LWink_0", 68);
+    expressive_bin.add(radioButtonLWink);
     
-    JLabel lblRightWink = new JLabel("Right Wink");
-    lblRightWink.setHorizontalAlignment(SwingConstants.CENTER);
-    lblRightWink.setBounds(10, 103, 89, 25);
-    panel.add(lblRightWink);
+    JRadioButton radioButtonRwink = radio_button("RWink_0", 104);
+    expressive_bin.add(radioButtonRwink);
     
-    JLabel lblLookLeft = new JLabel("Look Left");
-    lblLookLeft.setHorizontalAlignment(SwingConstants.CENTER);
-    lblLookLeft.setBounds(10, 139, 89, 25);
-    panel.add(lblLookLeft);
+    JRadioButton radioButtonLLeft = radio_button("LookL_0", 140);
+    expressive_bin.add(radioButtonLLeft);
     
-    JLabel lblLookRight = new JLabel("Look Right");
-    lblLookRight.setHorizontalAlignment(SwingConstants.CENTER);
-    lblLookRight.setBounds(10, 175, 89, 25);
-    panel.add(lblLookRight);
-    
-    JRadioButton radioButton = radio_button("Blink_0", 33);
-    panel.add(radioButton);
-    
-    JRadioButton radioButton_2 = radio_button("LWink_0", 68);
-    panel.add(radioButton_2);
-    
-    JRadioButton radioButton_4 = radio_button("RWink_0", 104);
-    panel.add(radioButton_4);
-    
-    JRadioButton radioButton_6 = radio_button("LookL_0", 140);
-    panel.add(radioButton_6);
-    
-    JRadioButton radioButton_8 = radio_button("LookR_0", 176);
-    panel.add(radioButton_8);
+    JRadioButton radioButtonLRight = radio_button("LookR_0", 176);
+    expressive_bin.add(radioButtonLRight);
     
     ButtonGroup group1 = new ButtonGroup();
-    group1.add(radioButton);
-    group1.add(radioButton_2);
-    group1.add(radioButton_4);
-    group1.add(radioButton_6);
-    group1.add(radioButton_8);
+    group1.add(radioButtonBlink);
+    group1.add(radioButtonLWink);
+    group1.add(radioButtonRwink);
+    group1.add(radioButtonLLeft);
+    group1.add(radioButtonLRight);
     
-    radioButton.addActionListener(this);
-//    radioButton_1.addActionListener(this);
-    radioButton_2.addActionListener(this);
-//    radioButton_3.addActionListener(this);
-    radioButton_4.addActionListener(this);
-//    radioButton_5.addActionListener(this);
-    radioButton_6.addActionListener(this);
-//    radioButton_7.addActionListener(this);
-    radioButton_8.addActionListener(this);
-//    radioButton_9.addActionListener(this);    
+    radioButtonBlink.addActionListener(this);
+    radioButtonLWink.addActionListener(this);
+    radioButtonRwink.addActionListener(this);
+    radioButtonLLeft.addActionListener(this);
+    radioButtonLRight.addActionListener(this);
     
-//    JLabel lblNewLabel_1 = new JLabel("0");
-//    lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-//    lblNewLabel_1.setBounds(147, 12, 46, 14);
-//    panel.add(lblNewLabel_1);
+    JPanel expressive_cont = new JPanel();
+    expressive_cont.setBounds(334, 28, 339, 497);
+    expressive_cont.setLayout(null);
     
-//    JLabel label = new JLabel("1");
-//    label.setHorizontalAlignment(SwingConstants.CENTER);
-//    label.setBounds(202, 12, 46, 14);
-//    panel.add(label);
+    JLabel lblLeftSmirk = label("Left Smirk", 26, 25);
+    expressive_cont.add(lblLeftSmirk);
+    JLabel lblRightSmirk = label("Right Smirk", 26, 61);
+    expressive_cont.add(lblRightSmirk);
+    JLabel lblRaiseBurrow = label("Raise Brow", 26, 97);
+    expressive_cont.add(lblRaiseBurrow);
+    JLabel lblFurrowBrow = label("Furrow Brow", 26, 137);
+    expressive_cont.add(lblFurrowBrow);
+    JLabel lblSmile = label("Smile", 26, 173);
+    expressive_cont.add(lblSmile);
+    JLabel lblLaugh = label("Laugh", 26, 209);
+    expressive_cont.add(lblLaugh);
+    JLabel lblClench = label("Clench", 26, 243);
+    expressive_cont.add(lblClench);
     
-    JPanel panel_1 = new JPanel();
-    panel_1.setBounds(334, 28, 339, 497);
-    panel_1.setLayout(null);
+    JLabel num = label("1", 215, 25);
+    expressive_cont.add(num);
+    JLabel num1 = label("1", 215, 65);
+    expressive_cont.add(num1);
+    JLabel num2 = label("1", 215, 100);
+    expressive_cont.add(num2);
+    JLabel num3 = label("1", 215, 135);
+    expressive_cont.add(num3);
+    JLabel num4 = label("1", 215, 170);
+    expressive_cont.add(num4);
+    JLabel num5 = label("1", 215, 200);
+    expressive_cont.add(num5);
+    JLabel num6 = label("1", 215, 240);
+    expressive_cont.add(num6);
     
-    JLabel lblLeftSmirk = new JLabel("Left Smirk");
-    lblLeftSmirk.setHorizontalAlignment(SwingConstants.CENTER);
-    lblLeftSmirk.setBounds(26, 25, 89, 25);
-    panel_1.add(lblLeftSmirk);
+//  Adding Sliders
     
-    JLabel lblRightSmirk = new JLabel("Right Smirk");
-    lblRightSmirk.setHorizontalAlignment(SwingConstants.CENTER);
-    lblRightSmirk.setBounds(26, 61, 89, 25);
-    panel_1.add(lblRightSmirk);
+    JSlider slider = addSlider(num, 107, 15, 5);
+    JSlider slider_1 = addSlider(num1, 107, 55, 6);
+    JSlider slider_2 = addSlider(num2, 107, 90, 7);
+    JSlider slider_3 = addSlider(num3, 107, 125, 8);
+    JSlider slider_4 = addSlider(num4, 107, 160, 9);
+    JSlider slider_5 = addSlider(num5, 107, 195, 10);
+    JSlider slider_6 = addSlider(num6, 107, 230, 11);
+
+    expressive_cont.add(slider);
+    expressive_cont.add(slider_1);
+    expressive_cont.add(slider_2);    
+    expressive_cont.add(slider_3);
+    expressive_cont.add(slider_4);
+    expressive_cont.add(slider_5);
+    expressive_cont.add(slider_6);
     
-    JLabel lblRaiseBurrow = new JLabel("Raise Brow");
-    lblRaiseBurrow.setHorizontalAlignment(SwingConstants.CENTER);
-    lblRaiseBurrow.setBounds(26, 97, 89, 25);
-    panel_1.add(lblRaiseBurrow);
-    
-    JLabel lblFurrowBrow = new JLabel("Furrow Brow");
-    lblFurrowBrow.setHorizontalAlignment(SwingConstants.CENTER);
-    lblFurrowBrow.setBounds(26, 137, 89, 25);
-    panel_1.add(lblFurrowBrow);
-    
-    JLabel lblSmile = new JLabel("Smile");
-    lblSmile.setHorizontalAlignment(SwingConstants.CENTER);
-    lblSmile.setBounds(26, 173, 89, 25);
-    panel_1.add(lblSmile);
-    
-    JLabel lblLaugh = new JLabel("Laugh");
-    lblLaugh.setHorizontalAlignment(SwingConstants.CENTER);
-    lblLaugh.setBounds(26, 209, 89, 25);
-    panel_1.add(lblLaugh);
-    
-    JLabel lblClench = new JLabel("Clench");
-    lblClench.setHorizontalAlignment(SwingConstants.CENTER);
-    lblClench.setBounds(26, 243, 89, 25);
-    panel_1.add(lblClench);
-    
-    JLabel num = new JLabel("1");
-    num.setHorizontalAlignment(SwingConstants.CENTER);
-    num.setBounds(215, 25, 30, 25);
-    panel_1.add(num);
-    
-    slider = new JSlider();
-    slider.setBounds(107, 15, 100, 50);
-    slider.setMaximum(10);
-    slider.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num.setText(String.valueOf(value));	
-        	arrayList.set(5, value);
-        }
-    });
-    panel_1.add(slider);
-    
-    JLabel num1 = new JLabel("1");
-    num1.setHorizontalAlignment(SwingConstants.CENTER);
-    num1.setBounds(215, 65, 30, 25);
-    panel_1.add(num1); 
-    
-    JSlider slider_1 = new JSlider();
-    slider_1.setMaximum(10);
-    slider_1.setBounds(107, 55, 100, 50);
-    slider_1.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num1.setText(String.valueOf(value));	
-        	arrayList.set(6, value);
-        }
-    });
-    panel_1.add(slider_1);
-    
-    JLabel num2 = new JLabel("1");
-    num2.setHorizontalAlignment(SwingConstants.CENTER);
-    num2.setBounds(215, 100, 30, 25);
-    panel_1.add(num2);
-    
-    JSlider slider_2 = new JSlider();
-    slider_2.setMaximum(10);
-    slider_2.setBounds(107, 90, 100, 50);
-    slider_2.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num2.setText(String.valueOf(value));	
-        	arrayList.set(7, value);
-        }
-    });
-    panel_1.add(slider_2);    
-   
-    JLabel num3 = new JLabel("1");
-    num3.setHorizontalAlignment(SwingConstants.CENTER);
-    num3.setBounds(215, 135, 30, 25);
-    panel_1.add(num3);
-    
-    JSlider slider_3 = new JSlider();
-    slider_3.setMaximum(10);
-    slider_3.setBounds(107, 125, 100, 50);
-    slider_3.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num3.setText(String.valueOf(value));
-        	arrayList.set(8, value);
-        }
-    });
-    panel_1.add(slider_3);
-    
-    JLabel num4 = new JLabel("1");
-    num4.setHorizontalAlignment(SwingConstants.CENTER);
-    num4.setBounds(215, 170, 30, 25);
-    panel_1.add(num4);
-    
-    JSlider slider_4 = new JSlider();
-    slider_4.setMaximum(10);
-    slider_4.setBounds(107, 160, 100, 50);
-    slider_4.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num4.setText(String.valueOf(value));
-        	arrayList.set(9, value);
-        }
-    });
-    panel_1.add(slider_4);
-   
-    JLabel num5 = new JLabel("1");
-    num5.setHorizontalAlignment(SwingConstants.CENTER);
-    num5.setBounds(215, 200, 30, 25);
-    panel_1.add(num5);
-    
-    JSlider slider_5 = new JSlider();
-    slider_5.setMaximum(10);
-    slider_5.setBounds(107, 195, 100, 50);
-    slider_5.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num5.setText(String.valueOf(value));	
-        	arrayList.set(10, value);
-        }
-    });
-    panel_1.add(slider_5);
-    
-    JLabel num6 = new JLabel("1");
-    num6.setHorizontalAlignment(SwingConstants.CENTER);
-    num6.setBounds(215, 240, 30, 25);
-    panel_1.add(num6);  
-    
-    JSlider slider_6 = new JSlider();
-    slider_6.setMaximum(10);
-    slider_6.setBounds(107, 230, 100, 50);
-    slider_6.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-            System.out.println(value);
-        	num6.setText(String.valueOf(value));
-        	arrayList.set(11, value);
-        }
-    });
-    panel_1.add(slider_6);
-    
-    JPanel panel_2 = new JPanel();
-    panel_2.setBounds(334, 28, 339, 497);
-    panel_2.setLayout(null);
+//    Panel 3 : Affective Panel starts from here
+    JPanel affective = new JPanel();
+    affective.setBounds(334, 28, 339, 497);
+    affective.setLayout(null);
     setBorder(BorderFactory.createEmptyBorder(15,15,15,15));  
     
-    JLabel engage = new JLabel("Engagement");
-    engage.setHorizontalAlignment(SwingConstants.CENTER);
-    engage.setBounds(26, 25, 130, 25);
-    panel_2.add(engage);
+    JLabel engage = label("Engagement", 26, 25);
+    affective.add(engage);
+    JLabel sExcite = label("Short Term Excitement", 26, 50);
+    affective.add(sExcite);
+    JLabel lExcite = label("Long Term Excitement", 26, 75);
+    affective.add(lExcite);
+    JLabel med = label("Meditation", 26, 100);
+    affective.add(med);
+    JLabel fru = label("Frustration", 26, 125);
+    affective.add(fru);
     
-    JLabel sExcite = new JLabel("Short Term Excitement");
-    sExcite.setHorizontalAlignment(SwingConstants.CENTER);
-    sExcite.setBounds(26, 50, 130, 25);
-    panel_2.add(sExcite);
-    
-    JLabel lExcite = new JLabel("Long Term Excitement");
-    lExcite.setHorizontalAlignment(SwingConstants.CENTER);
-    lExcite.setBounds(26, 75, 130, 25);
-    panel_2.add(lExcite);
-    
-    JLabel med = new JLabel("Meditation");
-    med.setHorizontalAlignment(SwingConstants.CENTER);
-    med.setBounds(26, 100, 130, 25);
-    panel_2.add(med);
-    
-    JLabel fru = new JLabel("Frustration");
-    fru.setHorizontalAlignment(SwingConstants.CENTER);
-    fru.setBounds(26, 125, 130, 25);
-    panel_2.add(fru);
-    
-    JRadioButton radioButton_10 = new JRadioButton(engageIcon);
-    radioButton_10.setBounds(170, 25, 21, 23);
-    radioButton_10.setActionCommand(engageIcon);
-    panel_2.add(radioButton_10);
-    
-    JRadioButton radioButton_11 = new JRadioButton(shortTermIcon);
-    radioButton_11.setBounds(170, 50, 21, 23);
-    radioButton_11.setActionCommand(shortTermIcon);
-    panel_2.add(radioButton_11);
-    
-    JRadioButton radioButton_12 = new JRadioButton(longTermIcon);
-    radioButton_12.setBounds(170, 75, 21, 23);
-    radioButton_12.setActionCommand(longTermIcon);
-    panel_2.add(radioButton_12);
-    
-    JRadioButton radioButton_13 = new JRadioButton(meditateIcon);
-    radioButton_13.setBounds(170, 100, 21, 23);
-    radioButton_13.setActionCommand(meditateIcon);
-    panel_2.add(radioButton_13);
-    
-    JRadioButton radioButton_14 = new JRadioButton(frustrateIcon);
-    radioButton_14.setBounds(170, 125, 21, 23);
-    radioButton_14.setActionCommand(frustrateIcon);
-    panel_2.add(radioButton_14);
+    JRadioButton radioButtonEngage = radio_button(engageIcon, 25);
+    radioButtonEngage.setActionCommand(engageIcon);
+    JRadioButton radioButtonST = radio_button(shortTermIcon, 50);
+    radioButtonST.setActionCommand(shortTermIcon);
+    JRadioButton radioButtonLT = radio_button(longTermIcon, 75);
+    radioButtonLT.setActionCommand(longTermIcon);
+    JRadioButton radioButtonMed = radio_button(meditateIcon, 100);
+    radioButtonMed.setActionCommand(meditateIcon);
+    JRadioButton radioButtonFrus = radio_button(frustrateIcon, 125);
+    radioButtonFrus.setActionCommand(frustrateIcon);
+    affective.add(radioButtonEngage);
+    affective.add(radioButtonST);
+    affective.add(radioButtonLT);
+    affective.add(radioButtonMed);
+    affective.add(radioButtonFrus);
     
     ButtonGroup group = new ButtonGroup();
-    group.add(radioButton_10);
-    group.add(radioButton_11);
-    group.add(radioButton_12);
-    group.add(radioButton_13);
-    group.add(radioButton_14);
+    group.add(radioButtonEngage);
+    group.add(radioButtonST);
+    group.add(radioButtonLT);
+    group.add(radioButtonMed);
+    group.add(radioButtonFrus);
     
-    radioButton_10.addActionListener(this);
-	radioButton_11.addActionListener(this);
-	radioButton_12.addActionListener(this);
-	radioButton_13.addActionListener(this);
-	radioButton_14.addActionListener(this);  
+    radioButtonEngage.addActionListener(this);
+	radioButtonST.addActionListener(this);
+	radioButtonLT.addActionListener(this);
+	radioButtonMed.addActionListener(this);
+	radioButtonFrus.addActionListener(this);  
 
 	gifIcon = new JLabel(createImageIcon("" + ".gif"));
 	gifIcon.setBounds(197, 55, 280, 200);
-	panel_2.add(gifIcon, BorderLayout.CENTER);
+	affective.add(gifIcon, BorderLayout.CENTER);
    
     JTabbedPane tp=new JTabbedPane();  
     tp.setBounds(50,50,200,200);  
-    tp.add("Expressive_binary",panel);  
-    tp.add("Expressive_continuous",panel_1);  
-    tp.add("Affective",panel_2);  
+    tp.add("Expressive_binary",expressive_bin);  
+    tp.add("Expressive_continuous",expressive_cont);  
+    tp.add("Affective",affective);  
     add(tp);
     System.out.println("gui done");
   }
@@ -429,7 +284,6 @@ public class Gui extends JPanel implements ActionListener {
 		listOfExpressions.put(longTermIcon, 14);
 		listOfExpressions.put(meditateIcon, 15);
 		listOfExpressions.put(frustrateIcon, 16);
-		
 	}
 
 	@Override
@@ -438,22 +292,14 @@ public class Gui extends JPanel implements ActionListener {
 	              + ".gif"));
             System.out.println("Button Clicked!");
 		System.out.println("listener trigger");
-		
-		
+	
 		for (int i = 0; i < 17; i++) {
 			arrayList.add(0.0);
 		}
 		
 		setExpressiveBinary(e, arrayList);
-		
-		
-		
 		setAffective(e, arrayList);
 		model.setFacialValues(arrayList);
-		
-
-
-
 
 		if (e.getSource() == buttonConnect) {
 			if (buttonConnect.getText().compareTo("run") == 0) {
@@ -468,8 +314,6 @@ public class Gui extends JPanel implements ActionListener {
 				buttonConnect.setText("run");
 			}
 		}
-	
-		
 	}
 
 	private void setAffective(ActionEvent e, ArrayList<Double> arrayList) {
