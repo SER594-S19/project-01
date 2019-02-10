@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -18,7 +21,7 @@ public class Gui extends JPanel implements ActionListener{
   private final int PORT = 1594;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
-
+  public static List<JTextField> arr=new ArrayList<>();
   private Component createPanelSouth() {
 
     JPanel labels = new JPanel();
@@ -36,9 +39,6 @@ public class Gui extends JPanel implements ActionListener{
 
   }
 
-  
-  
-  
   public Gui() {
 
     model = new Model(new DataGenerator(), new Publisher(PORT));

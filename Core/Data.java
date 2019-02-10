@@ -10,8 +10,10 @@ package Core;
 public class Data {
 
     private double time;
-    // representing 14 channels of bci
+    // representing 14 channels (raw data) of bci
     private double[] values=new double[14];
+//    private Expressions expressions;
+//    private AffectiveEmotions emotions;
 
     public Data(double time, double[] values) {
         this.time = time;

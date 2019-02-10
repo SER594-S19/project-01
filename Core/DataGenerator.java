@@ -31,7 +31,9 @@ class DataGenerator extends Observable implements Runnable {
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
       double[] values=new double[14];
       for(int i=0;i<values.length;i++) {
-        values[i]=Math.random();
+    	double val=Math.random();
+        values[i]=val;
+        Gui.arr.get(i).setText(String.valueOf(val));
       }
       createAndNotify(timeStamp, values);
       try {
