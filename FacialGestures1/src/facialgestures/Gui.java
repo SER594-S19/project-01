@@ -73,6 +73,13 @@ public class Gui extends JPanel implements ActionListener {
 		buttonConnect.setEnabled(true);
 		return panel;
 	}
+	
+	public JRadioButton radio_button(String name, int y_axis){
+		JRadioButton radioButton = new JRadioButton(name);
+	    radioButton.setBounds(158, y_axis, 21, 23);
+	    return radioButton;
+	}
+	
 
 	public Gui() {
 		expressionToIndexMapping();
@@ -115,86 +122,48 @@ public class Gui extends JPanel implements ActionListener {
     lblLookRight.setBounds(10, 175, 89, 25);
     panel.add(lblLookRight);
     
-    radioButton = new JRadioButton("Blink_0");
-    radioButton.setBounds(158, 33, 21, 23);
+    JRadioButton radioButton = radio_button("Blink_0", 33);
     panel.add(radioButton);
     
-	JRadioButton radioButton_1 = new JRadioButton(blinkTrue);
-    radioButton_1.setBounds(216, 32, 21, 23);
-    panel.add(radioButton_1);
-    
-    JRadioButton radioButton_2 = new JRadioButton("LWink_0");
-    radioButton_2.setBounds(158, 68, 21, 23);
+    JRadioButton radioButton_2 = radio_button("LWink_0", 68);
     panel.add(radioButton_2);
     
-    JRadioButton radioButton_3 = new JRadioButton(leftWinkTrue);
-    radioButton_3.setBounds(216, 68, 21, 23);
-    panel.add(radioButton_3);
-    
-    JRadioButton radioButton_4 = new JRadioButton("RWink_0");
-    radioButton_4.setBounds(158, 104, 21, 23);
+    JRadioButton radioButton_4 = radio_button("RWink_0", 104);
     panel.add(radioButton_4);
     
-    JRadioButton radioButton_5 = new JRadioButton(rightWinkTrue);
-    radioButton_5.setBounds(216, 104, 21, 23);
-    panel.add(radioButton_5);
-    
-    JRadioButton radioButton_6 = new JRadioButton("LookL_0");
-    radioButton_6.setBounds(158, 140, 21, 23);
+    JRadioButton radioButton_6 = radio_button("LookL_0", 140);
     panel.add(radioButton_6);
     
-    JRadioButton radioButton_7 = new JRadioButton(lookLeftTrue);
-    radioButton_7.setBounds(216, 140, 21, 23);
-    panel.add(radioButton_7);
-    
-    JRadioButton radioButton_8 = new JRadioButton("LookR_0");
-    radioButton_8.setBounds(158, 176, 21, 23);
+    JRadioButton radioButton_8 = radio_button("LookR_0", 176);
     panel.add(radioButton_8);
-    
-    JRadioButton radioButton_9 = new JRadioButton(lookRightTrue);
-    radioButton_9.setBounds(216, 176, 21, 23);
-    panel.add(radioButton_9);
     
     ButtonGroup group1 = new ButtonGroup();
     group1.add(radioButton);
-    group1.add(radioButton_1);
-    
-    ButtonGroup group2 = new ButtonGroup();
-    group2.add(radioButton_2);
-    group2.add(radioButton_3);
-    
-    ButtonGroup group3 = new ButtonGroup();
-    group3.add(radioButton_4);
-    group3.add(radioButton_5);
-    
-    ButtonGroup group4 = new ButtonGroup();
-    group4.add(radioButton_6);
-    group4.add(radioButton_7);
-    
-    ButtonGroup group5 = new ButtonGroup();
-    group5.add(radioButton_8);
-    group5.add(radioButton_9);
+    group1.add(radioButton_2);
+    group1.add(radioButton_4);
+    group1.add(radioButton_6);
+    group1.add(radioButton_8);
     
     radioButton.addActionListener(this);
-    radioButton_1.addActionListener(this);
+//    radioButton_1.addActionListener(this);
     radioButton_2.addActionListener(this);
-    radioButton_3.addActionListener(this);
+//    radioButton_3.addActionListener(this);
     radioButton_4.addActionListener(this);
-    radioButton_5.addActionListener(this);
+//    radioButton_5.addActionListener(this);
     radioButton_6.addActionListener(this);
-    radioButton_7.addActionListener(this);
+//    radioButton_7.addActionListener(this);
     radioButton_8.addActionListener(this);
-    radioButton_9.addActionListener(this);    
+//    radioButton_9.addActionListener(this);    
     
-    JLabel lblNewLabel_1 = new JLabel("0");
-    lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-    lblNewLabel_1.setBounds(147, 12, 46, 14);
-    panel.add(lblNewLabel_1);
+//    JLabel lblNewLabel_1 = new JLabel("0");
+//    lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+//    lblNewLabel_1.setBounds(147, 12, 46, 14);
+//    panel.add(lblNewLabel_1);
     
-    JLabel label = new JLabel("1");
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    label.setBounds(202, 12, 46, 14);
-    panel.add(label);
+//    JLabel label = new JLabel("1");
+//    label.setHorizontalAlignment(SwingConstants.CENTER);
+//    label.setBounds(202, 12, 46, 14);
+//    panel.add(label);
     
     JPanel panel_1 = new JPanel();
     panel_1.setBounds(334, 28, 339, 497);
