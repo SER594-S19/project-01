@@ -3,7 +3,7 @@ package Core;
 import java.util.Calendar;
 import java.util.Observable;
 
-class DataGenerator extends Observable implements Runnable {
+public class DataGenerator extends Observable implements Runnable {
 
   private Data data;
   private boolean stop = false;
