@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 public class Gui extends JPanel implements ActionListener {
@@ -16,7 +19,7 @@ public class Gui extends JPanel implements ActionListener {
   private final int PORT = 1594;
   protected JLabel labelPublishPort;
   private final JButton buttonConnect = new JButton("run");
-
+  public static List<JTextField> arr=new ArrayList<>();
   private Component createPanelSouth() {
 
     JPanel labels = new JPanel();
@@ -41,6 +44,7 @@ public class Gui extends JPanel implements ActionListener {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(1,2));
         JTextField signal = new JTextField();
+        arr.add(signal);
         panel.add(label, BorderLayout.WEST);
         panel.add(signal);
         
@@ -50,21 +54,9 @@ public class Gui extends JPanel implements ActionListener {
   private Component createPanelInput(){
     JPanel panel = new JPanel(new BorderLayout());
     panel.setLayout(new GridLayout(14,1));
-    //panel.setBounds(10,10,100,100);
+   
 
-
-    JPanel labels = new JPanel();
-    //labels.setBackground(Color.GRAY);
-    labels.add(new JLabel(" ID "));
-    JPanel panelId = new JPanel(new BorderLayout());
-    panelId.setLayout(new GridLayout(1,2));
-    panelId.setBackground(Color.CYAN);
-    JTextField id = new JTextField();
-    labels.setSize(200,100);
-    panelId.add(labels, BorderLayout.WEST);
-    panelId.add(id);
-    panel.add(panelId, BorderLayout.NORTH);
-
+    panel.add(processPanel(" ID "));
     panel.add(processPanel(" Signal "));
     panel.add(processPanel(" Blink "));
     panel.add(processPanel(" WinkL "), BorderLayout.AFTER_LAST_LINE);
