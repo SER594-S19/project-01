@@ -213,26 +213,26 @@ public class Gui extends JPanel implements ActionListener {
     affective.setLayout(null);
     setBorder(BorderFactory.createEmptyBorder(15,15,15,15));  
     
-    JLabel engage = label("Engagement", 26, 25);
+    JLabel engage = label("Engagement", 26, 40);
     affective.add(engage);
-    JLabel sExcite = label("Short Term Excitement", 26, 50);
+    JLabel sExcite = label("Short Term Excitement", 26, 75);
     affective.add(sExcite);
-    JLabel lExcite = label("Long Term Excitement", 26, 75);
+    JLabel lExcite = label("Long Term Excitement", 26, 110);
     affective.add(lExcite);
-    JLabel med = label("Meditation", 26, 100);
+    JLabel med = label("Meditation", 26, 145);
     affective.add(med);
-    JLabel fru = label("Frustration", 26, 125);
+    JLabel fru = label("Frustration", 26, 180);
     affective.add(fru);
     
-    JRadioButton radioButtonEngage = radio_button(engageIcon, 25);
+    JRadioButton radioButtonEngage = radio_button(engageIcon, 40);
     radioButtonEngage.setActionCommand(engageIcon);
-    JRadioButton radioButtonST = radio_button(shortTermIcon, 50);
+    JRadioButton radioButtonST = radio_button(shortTermIcon, 75);
     radioButtonST.setActionCommand(shortTermIcon);
-    JRadioButton radioButtonLT = radio_button(longTermIcon, 75);
+    JRadioButton radioButtonLT = radio_button(longTermIcon, 110);
     radioButtonLT.setActionCommand(longTermIcon);
-    JRadioButton radioButtonMed = radio_button(meditateIcon, 100);
+    JRadioButton radioButtonMed = radio_button(meditateIcon, 145);
     radioButtonMed.setActionCommand(meditateIcon);
-    JRadioButton radioButtonFrus = radio_button(frustrateIcon, 125);
+    JRadioButton radioButtonFrus = radio_button(frustrateIcon, 180);
     radioButtonFrus.setActionCommand(frustrateIcon);
     affective.add(radioButtonEngage);
     affective.add(radioButtonST);
@@ -254,7 +254,7 @@ public class Gui extends JPanel implements ActionListener {
 	radioButtonFrus.addActionListener(this);  
 
 	gifIcon = new JLabel(createImageIcon("" + ".gif"));
-	gifIcon.setBounds(197, 55, 280, 200);
+	gifIcon.setBounds(197, 30, 280, 200);
 	affective.add(gifIcon, BorderLayout.CENTER);
    
     JTabbedPane tp=new JTabbedPane();  
