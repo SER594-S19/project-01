@@ -1,5 +1,6 @@
 package Core;
 
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.Observable;
 
@@ -39,6 +40,8 @@ public class DataGenerator extends Observable implements Runnable {
       for(int i=0;i<values.length;i++) {
     	double val=Math.random();
         values[i]=val;
+        NewGui.channelLabels.get(i).setText(val+"");
+        setBackGround(val,i);
        }
       data.setValues(values);
       data.setTimeStamp(timeStamp);
@@ -54,6 +57,20 @@ public class DataGenerator extends Observable implements Runnable {
     System.out.println("notifying ...");
     setChanged();
     notifyObservers();
+  }
+  
+  private void setBackGround(double val,int index) {
+	  if(val<0.2 && val>0) {
+		  NewGui.channelButtons.get(index).setBackground(Color.pink);
+	  } else if(val<0.4 && val>0.2) {
+		  NewGui.channelButtons.get(index).setBackground(Color.ORANGE);
+	  } else if(val<0.6 && val>0.4) {
+		  NewGui.channelButtons.get(index).setBackground(Color.RED);
+	  } else if(val<0.8 && val>0.6) {
+		  NewGui.channelButtons.get(index).setBackground(Color.MAGENTA);
+	  } else  {
+		  NewGui.channelButtons.get(index).setBackground(Color.black);
+	  }
   }
 
 }
