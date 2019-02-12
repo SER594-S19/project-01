@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
 import javax.swing.JSlider;
 
 public class Expressions extends JPanel {
@@ -103,8 +104,8 @@ public class Expressions extends JPanel {
 		JSlider smirkSlider = new JSlider();
 		smirkSlider.setMinorTickSpacing(1);
 		smirkSlider.setValue(0);
-		smirkSlider.setMaximum(1);
-		smirkSlider.setMinimum(-1);
+		smirkSlider.setMaximum(100);
+		smirkSlider.setMinimum(-100);
 		smirkSlider.setBounds(259, 44, 200, 26);
 		add(smirkSlider);
 		
@@ -119,8 +120,8 @@ public class Expressions extends JPanel {
 		//slider for clench and smile.
 		JSlider clenchSlider = new JSlider();
 		clenchSlider.setValue(0);
-		clenchSlider.setMinimum(-1);
-		clenchSlider.setMaximum(1);
+		clenchSlider.setMinimum(-100);
+		clenchSlider.setMaximum(100);
 		clenchSlider.setBounds(259, 123, 200, 26);
 		add(clenchSlider);
 		
@@ -135,14 +136,27 @@ public class Expressions extends JPanel {
 		//sliders for laugh.
 		JSlider laughSlider = new JSlider();
 		laughSlider.setValue(0);
-		laughSlider.setMaximum(1);
+		laughSlider.setMaximum(100);
 		laughSlider.setBounds(259, 210, 200, 26);
 		add(laughSlider);
 		
 		JLabel lblLaugh = new JLabel("Laugh");
 		lblLaugh.setBounds(336, 235, 46, 32);
 		add(lblLaugh);
+		
+		new ExpressionController(smirkSlider,clenchSlider, laughSlider,
+					blinkButtonGroup, visionButtonGroup, eyeBrowButtonGroup);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(224, 47, 1, 2);
+		add(separator_3);
 
+	}
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+		frame.getContentPane().add(new Expressions());
 	}
 	
 	
