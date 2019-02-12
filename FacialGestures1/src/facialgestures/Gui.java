@@ -81,7 +81,7 @@ public class Gui extends JPanel implements ActionListener {
 	public JLabel label(String name, int x_axis, int y_axis){
 		JLabel label = new JLabel(name);
 	    label.setHorizontalAlignment(SwingConstants.CENTER);
-	    label.setBounds(x_axis, y_axis, 89, 25);
+	    label.setBounds(x_axis, y_axis, 100, 25);
 	    return label;
 	}
 	
@@ -116,15 +116,15 @@ public class Gui extends JPanel implements ActionListener {
     expressive_bin.setBounds(0, 28, 331, 497);
     expressive_bin.setLayout(null);
     
-    JLabel lblBlink = label("Blink", 26, 31);
+    JLabel lblBlink = label("Blink", 16, 31);
     expressive_bin.add(lblBlink);
-    JLabel lblLeftWink = label("Left Wink", 26, 67);
+    JLabel lblLeftWink = label("Left Wink", 16, 67);
     expressive_bin.add(lblLeftWink);
-    JLabel lblRightWink = label("Raise Wink", 26, 103);
+    JLabel lblRightWink = label("Raise Wink", 16, 103);
     expressive_bin.add(lblRightWink);
-    JLabel lblLookLeft = label("Look Left", 26, 139);
+    JLabel lblLookLeft = label("Look Left", 16, 139);
     expressive_bin.add(lblLookLeft);
-    JLabel lblLookRight = label("Look Right", 26, 175);
+    JLabel lblLookRight = label("Look Right", 16, 175);
     expressive_bin.add(lblLookRight);
  
     JRadioButton radioButtonBlink = radio_button("Blink_0", 33);
@@ -159,19 +159,19 @@ public class Gui extends JPanel implements ActionListener {
     expressive_cont.setBounds(334, 28, 339, 497);
     expressive_cont.setLayout(null);
     
-    JLabel lblLeftSmirk = label("Left Smirk", 26, 25);
+    JLabel lblLeftSmirk = label("Left Smirk", 16, 25);
     expressive_cont.add(lblLeftSmirk);
-    JLabel lblRightSmirk = label("Right Smirk", 26, 61);
+    JLabel lblRightSmirk = label("Right Smirk", 16, 61);
     expressive_cont.add(lblRightSmirk);
-    JLabel lblRaiseBurrow = label("Raise Brow", 26, 97);
+    JLabel lblRaiseBurrow = label("Raise Brow", 16, 97);
     expressive_cont.add(lblRaiseBurrow);
-    JLabel lblFurrowBrow = label("Furrow Brow", 26, 137);
+    JLabel lblFurrowBrow = label("Furrow Brow", 16, 137);
     expressive_cont.add(lblFurrowBrow);
-    JLabel lblSmile = label("Smile", 26, 173);
+    JLabel lblSmile = label("Smile", 16, 173);
     expressive_cont.add(lblSmile);
-    JLabel lblLaugh = label("Laugh", 26, 209);
+    JLabel lblLaugh = label("Laugh", 16, 209);
     expressive_cont.add(lblLaugh);
-    JLabel lblClench = label("Clench", 26, 243);
+    JLabel lblClench = label("Clench", 16, 243);
     expressive_cont.add(lblClench);
     
     JLabel num = label("1", 215, 25);
@@ -213,15 +213,15 @@ public class Gui extends JPanel implements ActionListener {
     affective.setLayout(null);
     setBorder(BorderFactory.createEmptyBorder(15,15,15,15));  
     
-    JLabel engage = label("Engagement", 26, 40);
+    JLabel engage = label("Engagement", 16, 40);
     affective.add(engage);
-    JLabel sExcite = label("Short Term Excitement", 26, 75);
+    JLabel sExcite = label("Short Term Excitement", 16, 75);
     affective.add(sExcite);
-    JLabel lExcite = label("Long Term Excitement", 26, 110);
+    JLabel lExcite = label("Long Term Excitement", 16, 110);
     affective.add(lExcite);
-    JLabel med = label("Meditation", 26, 145);
+    JLabel med = label("Meditation", 16, 145);
     affective.add(med);
-    JLabel fru = label("Frustration", 26, 180);
+    JLabel fru = label("Frustration", 16, 180);
     affective.add(fru);
     
     JRadioButton radioButtonEngage = radio_button(engageIcon, 40);
