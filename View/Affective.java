@@ -12,13 +12,12 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeListener;
 
 import controller.AffectiveController;
-
-import javax.swing.event.ChangeEvent;
+import Core.*;
 
 public class Affective extends JPanel{
 
 	
-	public Affective() {
+	public Affective(DataGenerator dg) {
 		setLayout(null);
 		
 		JLabel lblAffective = new JLabel("Affective");
@@ -79,29 +78,29 @@ public class Affective extends JPanel{
 		sliderLTEngagement.setSnapToTicks(true);
 		sliderLTEngagement.setMinorTickSpacing(1);
 		sliderLTEngagement.setValue(0);
-		sliderLTEngagement.setBounds(203, 198, 209, 29);
+		sliderLTEngagement.setBounds(203, 210, 209, 29);
 		add(sliderLTEngagement);
 	
 		
-		new AffectiveController(sliderFrustration,sliderEngagement,sliderMeditation,sliderSTEngagement,sliderLTEngagement);
+		new AffectiveController(sliderFrustration,sliderEngagement,sliderMeditation,sliderSTEngagement,sliderLTEngagement,dg);
 		
 	}
 	
 	
-	public static void main (String [] args) {
-		
-		JFrame frame = new JFrame();
-		frame.setSize(500, 400);
-		frame.getContentPane().add(new Affective());
-		
-		
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-		      @Override
-		      public void windowClosing(java.awt.event.WindowEvent e) {
-		        System.exit(0);
-		      }
-		    });
-		
-		frame.setVisible(true);
-	}
+//	public static void main (String [] args) {
+//		
+//		JFrame frame = new JFrame();
+//		frame.setSize(500, 400);
+//		frame.getContentPane().add(new Affective());
+//		
+//		
+//		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+//		      @Override
+//		      public void windowClosing(java.awt.event.WindowEvent e) {
+//		        System.exit(0);
+//		      }
+//		    });
+//		
+//		frame.setVisible(true);
+//	}
 }

@@ -11,6 +11,26 @@ public class AffectiveData {
 	
 
 
+	public double getFrustration() {
+		return frustration;
+	}
+
+	public double getEngagement() {
+		return engagement;
+	}
+
+	public double getMeditation() {
+		return meditation;
+	}
+
+	public double getStengagement() {
+		return stengagement;
+	}
+
+	public double getLtengagement() {
+		return ltengagement;
+	}
+
 	public AffectiveData() {
 		// TODO Auto-generated constructor stub
 	}
