@@ -1,4 +1,3 @@
-package com.intro;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
