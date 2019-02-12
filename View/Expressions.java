@@ -8,6 +8,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 
+import controller.ExpressionController;
+
 public class Expressions extends JPanel {
 	private final ButtonGroup blinkButtonGroup = new ButtonGroup();
 	private final ButtonGroup visionButtonGroup = new ButtonGroup();

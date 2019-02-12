@@ -8,6 +8,8 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Model.ExpressionData;
+
 public class ExpressionController {
 	
 	private JSlider smirkSlider;
