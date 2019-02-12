@@ -8,6 +8,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 
+import Core.DataGenerator;
 import controller.ExpressionController;
 
 public class Expressions extends JPanel {
@@ -18,7 +19,7 @@ public class Expressions extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Expressions() {
+	public Expressions(DataGenerator dg) {
 		setLayout(null);
 		
 		//label for eye blink
@@ -146,20 +147,22 @@ public class Expressions extends JPanel {
 		lblLaugh.setBounds(336, 235, 46, 32);
 		add(lblLaugh);
 		
-		new ExpressionController(smirkSlider,clenchSlider, laughSlider,
-					blinkButtonGroup, visionButtonGroup, eyeBrowButtonGroup);
 		
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(224, 47, 1, 2);
 		add(separator_3);
 
+		new ExpressionController(smirkSlider,clenchSlider, laughSlider,
+				blinkButtonGroup, visionButtonGroup, eyeBrowButtonGroup,dg);
+	
+		
 	}
 	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setVisible(true);
-		frame.getContentPane().add(new Expressions());
-	}
+//	public static void main(String[] args) {
+//		JFrame frame = new JFrame();
+//		frame.setVisible(true);
+//		frame.getContentPane().add(new Expressions());
+//	}
 	
 	
 }

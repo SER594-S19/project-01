@@ -72,10 +72,10 @@ public class Subscriber extends Observable implements Runnable {
         setChanged();
         notifyObservers();
       }
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException ex) {
-      }
+//      try {
+//        Thread.sleep(100);
+//      } catch (InterruptedException ex) {
+//      }
   System.out.println("in hello end while" + stop);
     }
                   System.out.println("in hello end loop");

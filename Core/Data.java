@@ -3,6 +3,7 @@ package Core;
 import com.sun.jmx.snmp.Timestamp;
 
 import Model.AffectiveData;
+import Model.ExpressionData;
 import View.Affective;
 
 /**
@@ -18,6 +19,7 @@ public class Data {
     private double[] values=new double[14];
 //    private Expressions expressions;
     private AffectiveData affective;
+    private ExpressionData expressive;
     
     public AffectiveData getAffective() {
 		return affective;
@@ -26,7 +28,15 @@ public class Data {
 	public void setAffective(AffectiveData affective) {
 		this.affective = affective;
 	}
+	
+	public ExpressionData getExpressive() {
+		return expressive;
+	}
 
+	public void setExpressive(ExpressionData expressive) {
+		this.expressive = expressive;
+	}
+	
 	public Data(double time, double[] values,AffectiveData affectiveData) {
         this.time = time; 
         this.values = values;
@@ -57,7 +67,12 @@ public class Data {
         data+="meditation: "+affective.getMeditation()+"\n";
         data+="short term engagement: "+affective.getStengagement()+"\n";
         data+="long term engagement: "+affective.getLtengagement()+"\n";
+        data+= "blink"+ expressive.getBlink()+"\n";
+        data+= "smirkLeft" + expressive.getSmirkLeft()+"\n";
+        data+= "smirkRight "+ expressive.getSmirkRight()+"\n";
         return data;
       //return "Data{" + "time=" + time + ", value=" + value + '}';
   }
+
+
 }

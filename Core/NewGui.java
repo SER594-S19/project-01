@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import View.Affective;
+import View.*;
 
 import java.awt.FlowLayout;
 import java.awt.Color;
@@ -153,7 +153,7 @@ public class NewGui extends JFrame implements ActionListener{
 		brainImagePanel.add(brainLabel);
 		brainLabel.setIcon(new ImageIcon(NewGui.class.getResource("/Core/brain.jpg")));
 
-		View.Expressions expressivePanel=new View.Expressions();
+		Expressions expressivePanel=new Expressions(dataGenerator);
 		expressivePanel.setBounds(780, 78, 564, 317);
 		getContentPane().add(expressivePanel);
 		expressivePanel.setLayout(null);
