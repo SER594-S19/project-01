@@ -1,6 +1,6 @@
 package Client;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -8,25 +8,14 @@ import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.*;
-import javax.swing.text.StyledDocument;
-import java.awt.GridLayout;
-import java.awt.Color;
 
 public class ClientDemo extends JFrame implements Observer, ActionListener {
 
-  private static final Logger LOGGER = Logger.getLogger(ClientDemo.class.getName());
-  private final Subscriber subscriber;
+  private final Subscriber  [] subscriber = new Subscriber[2];
   private final ExecutorService service;
-  private JTextPane textArea = new JTextPane();
+  private JTextArea textArea = new JTextArea();
   private JButton buttonConnect = new JButton("connect");
-  StyledDocument doc = textArea.getStyledDocument();
-
-  JScrollPane scrollPane = new JScrollPane(textArea);
-
   private JPanel processPanel(String lableName) {
 
     JPanel label = new JPanel();
@@ -94,18 +83,21 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     panel.add(processPanel(" Eye "),BorderLayout.AFTER_LAST_LINE);
     return panel;
   }
-
   public ClientDemo() {
 
     service = Executors.newCachedThreadPool();
-    subscriber = new Subscriber("localhost", 1594);
-    setLayout(new GridLayout(1,2));
-    //setLayout(new BorderLayout());
-    add(ClientPanel(), BorderLayout.NORTH);
 
-    add(scrollPane, BorderLayout.CENTER);
-    /*
-    add(buttonConnect, BorderLayout.SOUTH);  
+    // TO TEST, RUN TWO SERVERS IN PORTS 1594 and 1595
+
+    subscriber[0] = new Subscriber("localhost", 1594);
+    subscriber[1] = new Subscriber("localhost", 1595);
+
+    //setLayout(new BorderLayout());
+    setLayout(new GridLayout(1,2));
+    add(ClientPanel(), BorderLayout.NORTH);
+    add(textArea, BorderLayout.CENTER);
+
+    //add(buttonConnect, BorderLayout.SOUTH);
     buttonConnect.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
@@ -114,19 +106,20 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         System.exit(0);
       }
     });
-    */
     setSize(500,500);
     setVisible(true);
-    
+
   }
 
   private void close() {
     System.out.println("clossing ....... +++++++");
-    subscriber.stop();
+    subscriber[0].stop();
+    subscriber[1].stop();
   }
-  
-    private void shutdown() {
-    subscriber.stop();
+
+  private void shutdown() {
+    subscriber[0].stop();
+    subscriber[1].stop();
     service.shutdown();
     try {
       if (!service.awaitTermination(10, TimeUnit.SECONDS)) {
@@ -135,34 +128,31 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     } catch (InterruptedException ex) {
     }
   }
-  
+
 
   @Override
   public void update(Observable o, Object arg) {
     String data = ((Subscriber) o).getObject().toString();
-    if (data.compareTo("FIN") != 0) {
-    	try
-    	{
-    	    doc.insertString(doc.getLength(), data + "\n", null);
-    	} catch(Exception e) { 
-    		LOGGER.log(Level.SEVERE, "Exception while writing in client", e);
-    	}
-    } else {
+    if (data.compareTo("FIN") != 0)
+      textArea.append(data + "\n" );
+    else {
       close();
       buttonConnect.setEnabled(true);
-    }    
+    }
   }
 
   public static void main(String[] args) {
     ClientDemo tester = new ClientDemo();
-     
+
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     buttonConnect.setEnabled(false);
-    service.submit(subscriber);
-    subscriber.addObserver(this); 
-    
+    service.submit(subscriber[0]);
+    subscriber[0].addObserver(this);
+
+    service.submit(subscriber[1]);
+    subscriber[1].addObserver(this);
   }
 }
