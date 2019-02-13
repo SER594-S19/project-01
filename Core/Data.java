@@ -68,9 +68,20 @@ public class Data {
         data+="meditation: "+affective.getMeditation()+"\n";
         data+="short term engagement: "+affective.getStengagement()+"\n";
         data+="long term engagement: "+affective.getLtengagement()+"\n";
+        
         data+= "blink"+ expressive.getBlink()+"\n";
+        data+= "winkLeft" + expressive.getWinkLeft()+"\n";
+        data+=  "winkRight" + expressive.getWinkRight()+"\n";
         data+= "smirkLeft" + expressive.getSmirkLeft()+"\n";
         data+= "smirkRight "+ expressive.getSmirkRight()+"\n";
+        data+= "smile" + expressive.getSmile()+"\n";
+        data+=  "Clench"+ expressive.getClench()+"\n";
+        data+= "Furrow"+ expressive.getFurrow()+ "\n";
+        data+= "Look Left"+ expressive.getLookLeft()+ "\n";
+        data+= "Look Right"+ expressive.getLookRight()+"\n";
+        data+= "Raise Brow"+ expressive.getRaiseBrow() +"\n";
+        data+= "Laugh"+ expressive.getLaugh()+"\n";
+       
         return data;
       //return "Data{" + "time=" + time + ", value=" + value + '}';
   }
