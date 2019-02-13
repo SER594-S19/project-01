@@ -152,7 +152,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     service.submit(subscriber[0]);
     subscriber[0].addObserver(this);
 
-    service.submit(subscriber[1]);
-    subscriber[1].addObserver(this);
+    //service.submit(subscriber[1]);
+    //subscriber[1].addObserver(this);
   }
 }
