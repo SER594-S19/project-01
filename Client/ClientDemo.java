@@ -8,20 +8,28 @@ import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.*;
+import javax.swing.text.StyledDocument;
 
 public class ClientDemo extends JFrame implements Observer, ActionListener {
 
+  private static final Logger LOGGER = Logger.getLogger(ClientDemo.class.getName());
   private final Subscriber  [] subscriber = new Subscriber[2];
   private final ExecutorService service;
-  private JTextArea textArea = new JTextArea();
+  private JTextPane textArea = new JTextPane();
   private JButton buttonConnect = new JButton("connect");
+  StyledDocument doc = textArea.getStyledDocument();
+  JScrollPane scrollPane = new JScrollPane(textArea);
+  
   private JPanel processPanel(String lableName) {
 
     JPanel label = new JPanel();
     label.setLayout(new GridLayout(1,1));
     label.add(new JLabel(lableName),BorderLayout.WEST);
-
+    
     JPanel ip = new JPanel();
     ip.setLayout(new GridLayout(1,2));
     JTextField ipInput = new JTextField();
@@ -95,8 +103,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     //setLayout(new BorderLayout());
     setLayout(new GridLayout(1,2));
     add(ClientPanel(), BorderLayout.NORTH);
-    add(textArea, BorderLayout.CENTER);
-
+   // add(textArea, BorderLayout.CENTER);
+    add(scrollPane, BorderLayout.CENTER);
     //add(buttonConnect, BorderLayout.SOUTH);
     buttonConnect.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
@@ -133,9 +141,13 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   @Override
   public void update(Observable o, Object arg) {
     String data = ((Subscriber) o).getObject().toString();
-    if (data.compareTo("FIN") != 0)
-      textArea.append(data + "\n" );
-    else {
+    if (data.compareTo("FIN") != 0) {
+    	try {
+    	    doc.insertString(doc.getLength(), data + "\n", null);
+    	} catch(Exception e) { 
+    		LOGGER.log(Level.SEVERE, "Exception while writing in client", e);
+    	}
+    } else {
       close();
       buttonConnect.setEnabled(true);
     }
