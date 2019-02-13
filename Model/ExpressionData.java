@@ -2,6 +2,18 @@ package Model;
 
 public class ExpressionData {
 	private double blink = 0 ;
+	private double winkLeft = 0;
+	private	double winkRight = 0;
+	private double lookLeft = 0;
+	private double lookRight = 0;
+	private double smirkLeft = 0;
+	private double smirkRight = 0;
+	private double clench = 0;
+	private double smile = 0;
+	private double laugh = 0;
+	private double raiseBrow = 0;
+	private double furrow = 0;
+	
 	public double getBlink() {
 		return blink;
 	}
@@ -98,17 +110,6 @@ public class ExpressionData {
 		this.furrow = furrow;
 	}
 
-	private double winkLeft = 0;
-	private	double winkRight = 0;
-	private double lookLeft = 0;
-	private double lookRight = 0;
-	private double smirkLeft = 0;
-	private double smirkRight = 0;
-	private double clench = 0;
-	private double smile = 0;
-	private double laugh = 0;
-	private double raiseBrow = 0;
-	private double furrow = 0;
 	
 	public ExpressionData() {
 		

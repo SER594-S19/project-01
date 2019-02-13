@@ -283,14 +283,14 @@ public class NewGui extends JFrame implements ActionListener{
 		brainLabel.setIcon(new ImageIcon(NewGui.class.getResource("/Core/brain.jpg")));
 
 
-
-		expressivePanel.setBounds(780, 78, 564, 317);
+		
+		expressivePanel.setBounds(730, 78, 614, 321);
 		getContentPane().add(expressivePanel);
 		expressivePanel.setLayout(null);
 
-
-		affectivePanel.setSize(564, 317);
-		affectivePanel.setLocation(780, 411);
+		
+		affectivePanel.setSize(614, 315);
+		affectivePanel.setLocation(730, 413);
 		getContentPane().add(affectivePanel);
 
 	}

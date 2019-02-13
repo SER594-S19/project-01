@@ -37,10 +37,11 @@ public class Data {
 		this.expressive = expressive;
 	}
 	
-	public Data(double time, double[] values,AffectiveData affectiveData) {
+	public Data(double time, double[] values,AffectiveData affectiveData, ExpressionData expressive) {
         this.time = time; 
         this.values = values;
         this.affective=affectiveData;
+        this.expressive = expressive;
     }
 
     public void setValues(double[] data) {

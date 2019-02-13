@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Observable;
 
 import Model.AffectiveData;
+import Model.ExpressionData;
 
 public class DataGenerator extends Observable implements Runnable {
 
@@ -20,7 +21,7 @@ public class DataGenerator extends Observable implements Runnable {
   }
   
   public DataGenerator() {
-	  this.data=new Data(0,new double[14],new AffectiveData());
+	  this.data=new Data(0,new double[14],new AffectiveData(),new ExpressionData());
   }
 
   @Override 
@@ -60,6 +61,7 @@ public class DataGenerator extends Observable implements Runnable {
   }
   
   private void setBackGround(double val,int index) {
+	  NewGui.channelButtons.get(index).setOpaque(true);
 	  if(val<0.2 && val>0) {
 		  NewGui.channelButtons.get(index).setBackground(Color.pink);
 	  } else if(val<0.4 && val>0.2) {
