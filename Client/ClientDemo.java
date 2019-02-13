@@ -17,14 +17,70 @@ import javax.swing.text.StyledDocument;
 public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   private static final Logger LOGGER = Logger.getLogger(ClientDemo.class.getName());
-  private Subscriber subscriber;
-  //private final Subscriber  [] subscriber = new Subscriber[2];
+  //private Subscriber subscriber;
+  private final Subscriber  [] subscriber = new Subscriber[5];
+  
+  private JTextField [] ipInput = new JTextField[5];
+  private JTextField [] portInput = new JTextField[5];
+  private JButton [] connect = new JButton[5];
+  private JButton [] disConnect = new JButton[5];
+  private int i = 0;
+  
+  
   private final ExecutorService service;
   private JTextPane textArea = new JTextPane();
   private JButton buttonConnect = new JButton("connect");
   StyledDocument doc = textArea.getStyledDocument();
   JScrollPane scrollPane = new JScrollPane(textArea);
   private Observer obs = this;
+  
+  private JPanel connectivityButton(int type) {
+	  
+	  JPanel connectCondition = new JPanel();
+	    connectCondition.setLayout(new GridLayout(1,3));
+	    JLabel condition = new JLabel("Connecting...");
+	    
+	    connect[type] = new JButton("Connect");
+    	connect[type].addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	          connect[type].setEnabled(false);
+	          subscriber[type] = new Subscriber(ipInput[type].getText(), ((portInput[type].getText().equals("")) ? 1594 : Integer.parseInt(portInput[type].getText())));
+	            service.submit(subscriber[type]);
+	            subscriber[type].addObserver(obs);
+	      }
+		});
+	
+	    addWindowListener(new java.awt.event.WindowAdapter() {
+	      @Override
+	      public void windowClosing(java.awt.event.WindowEvent e) {
+	        shutdown(type);
+	        System.exit(0);
+	      }
+	    });
+	
+	    disConnect[type] = new JButton("disconnect");
+	    disConnect[type].addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	          connect[type].setEnabled(true);
+	          shutdown(type);
+	          close(type);
+	      }
+	});
+	    
+	    addWindowListener(new java.awt.event.WindowAdapter() {
+	      @Override
+	      public void windowClosing(java.awt.event.WindowEvent e) {
+	        shutdown(type);
+	        System.exit(0);
+	      }
+	    });
+	
+	    connectCondition.add(condition);
+	    connectCondition.add(connect[type]);
+	    connectCondition.add(disConnect[type]);
+	    return connectCondition;
+	    
+  }
   
   private JPanel processPanel(String lableName) {
 
@@ -34,60 +90,77 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     
     JPanel ip = new JPanel();
     ip.setLayout(new GridLayout(1,2));
-    JTextField ipInput = new JTextField();
+    //JTextField ipInput = new JTextField();
+    ipInput[i] = new JTextField();
     ip.add(new JLabel("IP" ));
-    ip.add(ipInput);
+    ip.add(ipInput[i]);
 
     JPanel port = new JPanel();
     port.setLayout(new GridLayout(1,2));
-    JTextField portInput = new JTextField();
+    //JTextField portInput = new JTextField();
+    portInput[i] = new JTextField();
     port.add(new JLabel("Port" ));
-    port.add(portInput);
-
-    JPanel connectCondition = new JPanel();
+    port.add(portInput[i]);
+    
+    JPanel connectCondition = null;
+    if(!lableName.equals(" BCI ")) {
+    	connectCondition = connectivityButton(0);
+    }
+    else if(!lableName.equals(" Face ")) {
+    	connectCondition = connectivityButton(1);
+    }
+    else if(!lableName.equals(" Heart ")) {
+    	connectCondition = connectivityButton(2);
+    }
+    else if(!lableName.equals(" Skin ")) {
+    	connectCondition = connectivityButton(3);
+    }
+    else if(!lableName.equals(" Eye ")) {
+    	connectCondition = connectivityButton(4);
+    }
+    /*JPanel connectCondition = new JPanel();
     connectCondition.setLayout(new GridLayout(1,3));
     JLabel condition = new JLabel("Connecting...");
-    JButton connect = new JButton("Connect");
-    JButton disConnect = new JButton("DisConnect");
-    connect.addActionListener(new ActionListener() {
+    
+    connect[i] = new JButton("Connect");
+	connect[i].addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-          connect.setEnabled(false);
-          subscriber = new Subscriber(ipInput.getText(), Integer.parseInt(portInput.getText()));
-            service.submit(subscriber);
-            subscriber.addObserver(obs);
+          connect[i].setEnabled(false);
+          subscriber[i] = new Subscriber(ipInput[i].getText(), Integer.parseInt(portInput[i].getText()));
+            service.submit(subscriber[i]);
+            subscriber[i].addObserver(obs);
       }
-});
+	});
 
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
-        shutdown();
+        shutdown(i);
         System.exit(0);
       }
     });
 
-
-    disConnect.addActionListener(new ActionListener() {
+    disConnect[i] = new JButton("disconnect");
+    disConnect[i].addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-          connect.setEnabled(false);
-          shutdown();
-          close();
+          connect[i].setEnabled(false);
+          shutdown(i);
+          close(i);
       }
 });
     
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
-        shutdown();
+        shutdown(i);
         System.exit(0);
       }
     });
 
     connectCondition.add(condition);
-    connectCondition.add(connect);
-    connectCondition.add(disConnect);
-
-
+    connectCondition.add(connect[i]);
+    connectCondition.add(disConnect[i]); */
+    
     JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(4,1));
     panel.add(label,BorderLayout.NORTH);
@@ -95,7 +168,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     panel.add(port, BorderLayout.AFTER_LAST_LINE);
     panel.add(connectCondition, BorderLayout.AFTER_LAST_LINE);
     panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-
+    
+    i++;
     return panel;
   }
 
@@ -137,17 +211,17 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   }
 
-  private void close() {
+  private void close(int cnt) {
     System.out.println("clossing ....... +++++++");
     //subscriber[0].stop();
     //subscriber[1].stop();
-    subscriber.stop();
+    subscriber[cnt].stop();
   }
 
-  private void shutdown() {
+  private void shutdown(int cnt) {
     //subscriber[0].stop();
     //subscriber[1].stop();
-    subscriber.stop();
+    subscriber[cnt].stop();
     service.shutdown();
     try {
       if (!service.awaitTermination(10, TimeUnit.SECONDS)) {
@@ -168,7 +242,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     		LOGGER.log(Level.SEVERE, "Exception while writing in client", e);
     	}
     } else {
-      close();
+      //close();
       buttonConnect.setEnabled(true);
     }
   }
