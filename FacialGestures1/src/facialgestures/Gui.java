@@ -84,23 +84,30 @@ public class Gui extends JPanel implements ActionListener {
 	    label.setBounds(x_axis, y_axis, 100, 25);
 	    return label;
 	}
-	
-	public JSlider addSlider(JLabel labelNum, int x_axis, int y_axis, int val) {
-		JSlider slider = new JSlider();
-		slider.setBounds(x_axis, y_axis, 100, 50);
-	    slider.setMaximum(10);
-	    slider.addChangeListener(new ChangeListener() {
-	        public void stateChanged(ChangeEvent e) {
-	        	double value = ((JSlider)e.getSource()).getValue() * 0.1;
-	            System.out.println(value);
-	        	labelNum.setText(String.valueOf(value));	
-	        	arrayList.set(5, value);
-	        }
-	    });
-	    return slider;
-	}
-	
-	public Gui() {
+		
+	 public JSlider addSlider(JLabel labelNum, int x_axis, int y_axis, int val) {
+		 JSlider slider = new JSlider(); 
+		 slider.setBounds(x_axis, y_axis, 100, 50);
+		 slider.setMaximum(10); 
+		 slider.addChangeListener(new ChangeListener() {
+			 public void stateChanged(ChangeEvent e) {
+			 double value =((JSlider)e.getSource()).getValue() * 0.1;
+			 System.out.println(labelNum.getText());
+			 if(((JSlider)e.getSource()).getValue()>=5)
+			 {
+				 labelNum.setIcon(createImageIcon(labelNum.getText() + ".gif"));
+			 }
+			 else {
+				labelNum.setIcon(createImageIcon("Neutral" + ".gif"));
+			 }
+			 labelNum.setVisible(true);
+			 labelNum.setBounds(x_axis+116, y_axis+10, 40, 30);
+			 arrayList.set(5, value); 
+		 	}
+	 });
+	 return slider; }
+	 
+	 public Gui() {
 		expressionToIndexMapping();
 		for(int i=0;i<17;i++)
 			arrayList.add(0.0);
@@ -120,7 +127,7 @@ public class Gui extends JPanel implements ActionListener {
     expressive_bin.add(lblBlink);
     JLabel lblLeftWink = label("Left Wink", 16, 67);
     expressive_bin.add(lblLeftWink);
-    JLabel lblRightWink = label("Raise Wink", 16, 103);
+    JLabel lblRightWink = label("Right Wink", 16, 103);
     expressive_bin.add(lblRightWink);
     JLabel lblLookLeft = label("Look Left", 16, 139);
     expressive_bin.add(lblLookLeft);
@@ -174,19 +181,33 @@ public class Gui extends JPanel implements ActionListener {
     JLabel lblClench = label("Clench", 16, 243);
     expressive_cont.add(lblClench);
     
-    JLabel num = label("1", 215, 25);
+    JLabel num = label("",215, 25);
+    num.setText("Left Smirk");
+    num.setVisible(false);
     expressive_cont.add(num);
-    JLabel num1 = label("1", 215, 65);
+    JLabel num1 = label("", 215, 65);
+    num1.setText("Right Smirk");
+    num1.setVisible(false);
     expressive_cont.add(num1);
-    JLabel num2 = label("1", 215, 100);
+    JLabel num2 = label("", 215, 100);
+    num2.setText("Raise Brow");
+    num2.setVisible(false);
     expressive_cont.add(num2);
-    JLabel num3 = label("1", 215, 135);
+    JLabel num3 = label("", 215, 135);
+    num3.setText("Furrow Brow");
+    num3.setVisible(false);
     expressive_cont.add(num3);
-    JLabel num4 = label("1", 215, 170);
+    JLabel num4 = label("", 215, 170);
+    num4.setText("Smile");
+    num4.setVisible(false);
     expressive_cont.add(num4);
-    JLabel num5 = label("1", 215, 200);
+    JLabel num5 = label("", 215, 200);
+    num5.setText("Laugh");
+    num5.setVisible(false);
     expressive_cont.add(num5);
-    JLabel num6 = label("1", 215, 240);
+    JLabel num6 = label("", 215, 240);
+    num6.setText("Clench");
+    num6.setVisible(false);
     expressive_cont.add(num6);
     
 //  Adding Sliders
@@ -206,7 +227,7 @@ public class Gui extends JPanel implements ActionListener {
     expressive_cont.add(slider_4);
     expressive_cont.add(slider_5);
     expressive_cont.add(slider_6);
-    
+	
 //    Panel 3 : Affective Panel starts from here
     JPanel affective = new JPanel();
     affective.setBounds(334, 28, 339, 497);
@@ -290,7 +311,8 @@ public class Gui extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		 gifIcon.setIcon(createImageIcon(e.getActionCommand()
 	              + ".gif"));
-            System.out.println("Button Clicked!");
+		 
+        System.out.println(e.getActionCommand());
 		System.out.println("listener trigger");
 	
 		for (int i = 0; i < 17; i++) {
@@ -368,7 +390,6 @@ public class Gui extends JPanel implements ActionListener {
 	      }
 	  }
 	public static void main(String[] args) {
-
 		JFrame frame = new JFrame("Simulator");
 		frame.setLayout(new GridLayout(1, 1));
 		frame.add(new Gui());
