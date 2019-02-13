@@ -41,7 +41,7 @@ public class DataGenerator extends Observable implements Runnable {
       for(int i=0;i<values.length;i++) {
     	double val=Math.random();
         values[i]=val;
-        NewGui.channelLabels.get(i).setText(val+"");
+        Gui.channelLabels.get(i).setText(val+"");
         setBackGround(val,i);
        }
       data.setValues(values);
@@ -61,17 +61,17 @@ public class DataGenerator extends Observable implements Runnable {
   }
   
   private void setBackGround(double val,int index) {
-	  NewGui.channelButtons.get(index).setOpaque(true);
+	  Gui.channelButtons.get(index).setOpaque(true);
 	  if(val<0.2 && val>0) {
-		  NewGui.channelButtons.get(index).setBackground(Color.pink);
+		  Gui.channelButtons.get(index).setBackground(Color.pink);
 	  } else if(val<0.4 && val>0.2) {
-		  NewGui.channelButtons.get(index).setBackground(Color.ORANGE);
+		  Gui.channelButtons.get(index).setBackground(Color.ORANGE);
 	  } else if(val<0.6 && val>0.4) {
-		  NewGui.channelButtons.get(index).setBackground(Color.RED);
+		  Gui.channelButtons.get(index).setBackground(Color.RED);
 	  } else if(val<0.8 && val>0.6) {
-		  NewGui.channelButtons.get(index).setBackground(Color.MAGENTA);
+		  Gui.channelButtons.get(index).setBackground(Color.MAGENTA);
 	  } else  {
-		  NewGui.channelButtons.get(index).setBackground(Color.black);
+		  Gui.channelButtons.get(index).setBackground(Color.black);
 	  }
   }
 
