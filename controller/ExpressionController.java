@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -56,9 +58,9 @@ public class ExpressionController {
 			}
 		});
 
-		setChangeListeners(blinkButtonGroup);
-		setChangeListeners(visionButtonGroup);
-		setChangeListeners(eyeBrowButtonGroup);
+		setItemListeners(blinkButtonGroup);
+		setItemListeners(visionButtonGroup);
+		setItemListeners(eyeBrowButtonGroup);
 	}
 
 	/*
@@ -66,11 +68,12 @@ public class ExpressionController {
 	 * @param: buttonGroup of type ButtonGroup
 	 * referred from: https://stackoverflow.com/questions/201287/
 	 */
-	private void setChangeListeners(ButtonGroup buttonGroup) {
+	private void setItemListeners(ButtonGroup buttonGroup) {
 		for(Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-			buttons.nextElement().addChangeListener((new ChangeListener() {
-				public void stateChanged(ChangeEvent event) {
-					updateExpressionModel();
+			buttons.nextElement().addItemListener((new ItemListener() {
+				public void itemStateChanged(ItemEvent event) {
+					if(event.getStateChange() == ItemEvent.SELECTED)
+						updateExpressionModel();
 				}
 			}));
 		}
