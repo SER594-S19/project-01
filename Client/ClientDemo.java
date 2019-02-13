@@ -66,7 +66,15 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
       }
     });
 
-    disConnect.addActionListener(this);
+
+    disConnect.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          connect.setEnabled(false);
+          shutdown();
+          close();
+      }
+});
+    
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
