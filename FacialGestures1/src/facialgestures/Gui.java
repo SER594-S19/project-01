@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,29 +35,35 @@ public class Gui extends JPanel implements ActionListener {
 	protected JLabel labelPublishPort;
 	private final JButton buttonConnect = new JButton("run");
 	static String engageIcon = "Engagement";
-    static String shortTermIcon = "Short Term Excitement";
-    static String longTermIcon = "Long Term Excitement";
-    static String meditateIcon = "Meditation";
-    static String frustrateIcon = "Frustration";
-    
-    static String blinkTrue = "Blink_1";
-    static String leftWinkTrue = "LWink_1";
-    static String rightWinkTrue = "RWink_1" ;
-    static String lookLeftTrue = "LookL_1";
-    static String lookRightTrue = "LookR_1";
-    
-    static String leftSmirk = "Left Smirk";
-    static String rightSmirk = "Right Smirk";
-    static String raiseBrow = "Raise Brow";
-    static String furrowBrow = "Furrow Brow";
-    static String smile = "Smile";
-    static String laugh = "Laugh";
-    static String clench = "Clench";
-    JLabel gifIcon;
-    HashMap<String, Integer> listOfExpressions = new HashMap<>();
-    ArrayList<Double> arrayList = new ArrayList<Double>();
-    JSlider slider;
- 
+	static String shortTermIcon = "Short Term Excitement";
+	static String longTermIcon = "Long Term Excitement";
+	static String meditateIcon = "Meditation";
+	static String frustrateIcon = "Frustration";
+
+	static String blinkTrue = "Blink_0";
+	static String leftWinkTrue = "LWink_0";
+	static String rightWinkTrue = "RWink_0";
+	static String lookLeftTrue = "LookL_0";
+	static String lookRightTrue = "LookR_0";
+
+	static String leftSmirk = "Left Smirk";
+	static String rightSmirk = "Right Smirk";
+	static String raiseBrow = "Raise Brow";
+	static String furrowBrow = "Furrow Brow";
+	static String smile = "Smile";
+	static String laugh = "Laugh";
+	static String clench = "Clench";
+	JLabel gifIcon;
+	HashMap<String, Integer> listOfExpressions = new HashMap<>();
+	ArrayList<Double> arrayList = new ArrayList<Double>();
+	JSlider slider;
+
+	private Eye leftOfEye = new Eye(300 - 50, 100, 50, 20);
+	private Eye rightOfEye = new Eye(300 + 58, 100, 50, 20);
+	private VectorForEye position = new VectorForEye(300, 0);
+	public int mode = 0;// 1, 2, 3, 4, 5
+	public JPanel expressive_bin;
+
 	private Component createPanelSouth() {
 		JPanel labels = new JPanel();
 		labels.setBackground(Color.GRAY);
@@ -71,43 +78,42 @@ public class Gui extends JPanel implements ActionListener {
 		buttonConnect.setEnabled(true);
 		return panel;
 	}
-	
-	public JRadioButton radio_button(String name, int y_axis){
+
+	public JRadioButton radio_button(String name, int y_axis) {
 		JRadioButton radioButton = new JRadioButton(name);
-	    radioButton.setBounds(158, y_axis, 21, 23);
-	    return radioButton;
+		radioButton.setBounds(158, y_axis, 21, 23);
+		return radioButton;
 	}
-	
-	public JLabel label(String name, int x_axis, int y_axis){
+
+	public JLabel label(String name, int x_axis, int y_axis) {
 		JLabel label = new JLabel(name);
-	    label.setHorizontalAlignment(SwingConstants.CENTER);
-	    label.setBounds(x_axis, y_axis, 100, 25);
-	    return label;
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBounds(x_axis, y_axis, 100, 25);
+		return label;
 	}
-		
-	 public JSlider addSlider(JLabel labelNum, int x_axis, int y_axis, int val) {
-		 JSlider slider = new JSlider(); 
-		 slider.setBounds(x_axis, y_axis, 100, 50);
-		 slider.setMaximum(10); 
-		 slider.addChangeListener(new ChangeListener() {
-			 public void stateChanged(ChangeEvent e) {
-			 double value =((JSlider)e.getSource()).getValue() * 0.1;
-			 System.out.println(labelNum.getText());
-			 if(((JSlider)e.getSource()).getValue()>=5)
-			 {
-				 labelNum.setIcon(createImageIcon(labelNum.getText() + ".gif"));
-			 }
-			 else {
-				labelNum.setIcon(createImageIcon("Neutral" + ".gif"));
-			 }
-			 labelNum.setVisible(true);
-			 labelNum.setBounds(x_axis+116, y_axis+10, 40, 30);
-			 arrayList.set(5, value); 
-		 	}
-	 });
-	 return slider; }
-	 
-	 public Gui() {
+
+	public JSlider addSlider(JLabel labelNum, int x_axis, int y_axis, int val) {
+		JSlider slider = new JSlider();
+		slider.setBounds(x_axis, y_axis, 100, 50);
+		slider.setMaximum(10);
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				double value = ((JSlider) e.getSource()).getValue() * 0.1;
+				System.out.println(labelNum.getText());
+				if (((JSlider) e.getSource()).getValue() >= 5) {
+					labelNum.setIcon(createImageIcon(labelNum.getText() + ".gif"));
+				} else {
+					labelNum.setIcon(createImageIcon("Neutral" + ".gif"));
+				}
+				labelNum.setVisible(true);
+				labelNum.setBounds(x_axis + 116, y_axis + 10, 40, 30);
+				arrayList.set(5, value);
+			}
+		});
+		return slider;
+	}
+
+	public Gui() {
 		expressionToIndexMapping();
 		for(int i=0;i<17;i++)
 			arrayList.add(0.0);
@@ -119,9 +125,40 @@ public class Gui extends JPanel implements ActionListener {
     this.setSize(screen.width / 2, 3 * screen.height / 4);
     this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
    
-    JPanel expressive_bin = new JPanel();
+    expressive_bin = new JPanel()
+    		 {
+    		    	@Override
+    		        public void paintComponent(Graphics g) {
+    		            super.paintComponent(g);
+    		            if (mode == 1) {
+    		            	leftOfEye.draw(g, position, mode, false, Color.YELLOW);
+    		                rightOfEye.draw(g, position, mode, false, Color.YELLOW);
+    		            }
+    		            else if (mode == 2) {
+    		            	leftOfEye.draw(g, position, mode, false, Color.YELLOW);
+    		                rightOfEye.draw(g, new VectorForEye(357, 100), mode, true, Color.WHITE);
+    		            }
+    		            else if (mode == 3) {
+    		            	leftOfEye.draw(g, new VectorForEye(249, 100), mode, true, Color.WHITE);
+    		                rightOfEye.draw(g, position, mode, false, Color.YELLOW);
+    		            }
+    		            else if(mode == 4){
+    		            	leftOfEye.draw(g, new VectorForEye(0, 0), mode, true, Color.WHITE);
+    		                rightOfEye.draw(g, new VectorForEye(0, 0), mode, true, Color.WHITE);
+    		            }
+    		            else if(mode == 5){
+    		            	leftOfEye.draw(g, new VectorForEye(700, 0), mode, true, Color.WHITE);
+    		                rightOfEye.draw(g, new VectorForEye(700, 0), mode, true, Color.WHITE);
+    		            }
+    		            else {
+    		            	leftOfEye.draw(g, new VectorForEye(249.5, 99), mode, true, Color.WHITE);
+    		                rightOfEye.draw(g, new VectorForEye(358, 99), mode, true, Color.WHITE);
+    		            }
+    		        }
+    		    };
     expressive_bin.setBounds(0, 28, 331, 497);
     expressive_bin.setLayout(null);
+    expressive_bin.setBackground(Color.RED);
     
     JLabel lblBlink = label("Blink", 16, 31);
     expressive_bin.add(lblBlink);
@@ -309,16 +346,15 @@ public class Gui extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 gifIcon.setIcon(createImageIcon(e.getActionCommand()
-	              + ".gif"));
-		 
-        System.out.println(e.getActionCommand());
+		gifIcon.setIcon(createImageIcon(e.getActionCommand() + ".gif"));
+
+		System.out.println(e.getActionCommand());
 		System.out.println("listener trigger");
-	
+
 		for (int i = 0; i < 17; i++) {
 			arrayList.add(0.0);
 		}
-		
+
 		setExpressiveBinary(e, arrayList);
 		setAffective(e, arrayList);
 		model.setFacialValues(arrayList);
@@ -328,7 +364,7 @@ public class Gui extends JPanel implements ActionListener {
 				System.out.println("start");
 				model.setFacialValues(arrayList);
 				model.start();
-				
+
 				buttonConnect.setText("stop");
 			} else if (buttonConnect.getText().compareTo("stop") == 0) {
 				System.out.println("stop");
@@ -339,56 +375,93 @@ public class Gui extends JPanel implements ActionListener {
 	}
 
 	private void setAffective(ActionEvent e, ArrayList<Double> arrayList) {
-		if(e.getActionCommand().equals(engageIcon))
-		{
-		arrayList.set(listOfExpressions.get(engageIcon), (double) 1);			
-		}
-		else if(e.getActionCommand().equals(shortTermIcon))
-		{
-		arrayList.set(listOfExpressions.get(shortTermIcon), (double) 1);			
-		}
-		else if(e.getActionCommand().equals(longTermIcon))
-		{
-		arrayList.set(listOfExpressions.get(longTermIcon), (double) 1);			
-		}
-		else if(e.getActionCommand().equals(meditateIcon))
-		{
-		arrayList.set(listOfExpressions.get(meditateIcon), (double) 1);			
-		}
-		else if(e.getActionCommand().equals(frustrateIcon))
-		{
-		arrayList.set(listOfExpressions.get(frustrateIcon), (double) 1);			
+		if (e.getActionCommand().equals(engageIcon)) {
+			arrayList.set(listOfExpressions.get(engageIcon), (double) 1);
+		} else if (e.getActionCommand().equals(shortTermIcon)) {
+			arrayList.set(listOfExpressions.get(shortTermIcon), (double) 1);
+		} else if (e.getActionCommand().equals(longTermIcon)) {
+			arrayList.set(listOfExpressions.get(longTermIcon), (double) 1);
+		} else if (e.getActionCommand().equals(meditateIcon)) {
+			arrayList.set(listOfExpressions.get(meditateIcon), (double) 1);
+		} else if (e.getActionCommand().equals(frustrateIcon)) {
+			arrayList.set(listOfExpressions.get(frustrateIcon), (double) 1);
 		}
 	}
 
 	private void setExpressiveBinary(ActionEvent e, ArrayList<Double> arrayList) {
 		if(e.getActionCommand().equals(blinkTrue))
-			{
-			arrayList.set(listOfExpressions.get(blinkTrue), (double) 1);			
-			}
+		{
+			this.mode = 1;
+			arrayList.set(listOfExpressions.get(blinkTrue), (double) 1);	
+			this.expressive_bin.repaint();
+			new Thread(new Runnable() {
+				public void run() {
+					if(Gui.this.mode != 1) {
+						return;
+					}
+					while(true) {
+						if(Gui.this.mode != 1) {
+							return;
+						}
+						try {
+							
+							Thread.sleep(2000);
+							if(Gui.this.mode != 1) {
+								return;
+							}
+							Gui.this.mode = 0;
+							Gui.this.expressive_bin.repaint();
+							Thread.sleep(2000);
+							if(Gui.this.mode > 1) {
+								return;
+							}
+							Gui.this.mode = 1;
+							Gui.this.expressive_bin.repaint();
+						} catch (InterruptedException e) {
+							
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}).start();
+		}
 		if(e.getActionCommand().equals(leftWinkTrue))
-		{arrayList.set(listOfExpressions.get(leftWinkTrue), (double) 1);
+		{
+			this.mode = 2;
+			arrayList.set(listOfExpressions.get(leftWinkTrue), (double) 1);
+			this.expressive_bin.repaint();
 		}
 		if(e.getActionCommand().equals(rightWinkTrue))
-		{arrayList.set(listOfExpressions.get(rightWinkTrue), (double) 1);
+		{
+			this.mode = 3;
+			arrayList.set(listOfExpressions.get(rightWinkTrue), (double) 1);
+			this.expressive_bin.repaint();
 		}
 		if(e.getActionCommand().equals(lookLeftTrue))
-		{arrayList.set(listOfExpressions.get(lookLeftTrue), (double) 1);
+		{
+			this.mode = 4;
+			arrayList.set(listOfExpressions.get(lookLeftTrue), (double) 1);
+			this.expressive_bin.repaint();
 		}
 		if(e.getActionCommand().equals(lookRightTrue))
-		{arrayList.set(listOfExpressions.get(lookRightTrue), (double) 1);
+		{
+			this.mode = 5;
+			arrayList.set(listOfExpressions.get(lookRightTrue), (double) 1);
+			this.expressive_bin.repaint();
 		}
 	}
 
 	protected static ImageIcon createImageIcon(String path) {
-	      java.net.URL gifURL = Gui.class.getResource(path);
-	      if (gifURL != null) {
-	          return new ImageIcon(gifURL);
-	      } else {
-	          System.err.println("");
-	          return null;
-	      }
-	  }
+		java.net.URL gifURL = Gui.class.getResource(path);
+		if (gifURL != null) {
+			return new ImageIcon(gifURL);
+		} else {
+			System.err.println("");
+			return null;
+		}
+	}
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Simulator");
 		frame.setLayout(new GridLayout(1, 1));
