@@ -114,7 +114,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         System.exit(0);
       }
     });
-    setSize(500,500);
+    setSize(800,600);
     setVisible(true);
 
   }
