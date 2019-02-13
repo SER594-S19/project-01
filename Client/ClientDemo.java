@@ -17,12 +17,14 @@ import javax.swing.text.StyledDocument;
 public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   private static final Logger LOGGER = Logger.getLogger(ClientDemo.class.getName());
-  private final Subscriber  [] subscriber = new Subscriber[2];
+  private Subscriber subscriber;
+  //private final Subscriber  [] subscriber = new Subscriber[2];
   private final ExecutorService service;
   private JTextPane textArea = new JTextPane();
   private JButton buttonConnect = new JButton("connect");
   StyledDocument doc = textArea.getStyledDocument();
   JScrollPane scrollPane = new JScrollPane(textArea);
+  private Observer obs = this;
   
   private JPanel processPanel(String lableName) {
 
@@ -47,7 +49,15 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     JLabel condition = new JLabel("Connecting...");
     JButton connect = new JButton("Connect");
     JButton disConnect = new JButton("DisConnect");
-    connect.addActionListener(this);
+    connect.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          connect.setEnabled(false);
+          subscriber = new Subscriber(ipInput.getText(), Integer.parseInt(portInput.getText()));
+            service.submit(subscriber);
+            subscriber.addObserver(obs);
+      }
+});
+
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
@@ -97,8 +107,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
     // TO TEST, RUN TWO SERVERS IN PORTS 1594 and 1595
 
-    subscriber[0] = new Subscriber("localhost", 1594);
-    subscriber[1] = new Subscriber("localhost", 1595);
+    //subscriber[0] = new Subscriber("localhost", 1594);
+    //subscriber[1] = new Subscriber("localhost", 1595);
 
     //setLayout(new BorderLayout());
     setLayout(new GridLayout(1,2));
@@ -106,14 +116,14 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
    // add(textArea, BorderLayout.CENTER);
     add(scrollPane, BorderLayout.CENTER);
     //add(buttonConnect, BorderLayout.SOUTH);
-    buttonConnect.addActionListener(this);
+    /*buttonConnect.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
         shutdown();
         System.exit(0);
       }
-    });
+    });*/
     setSize(800,600);
     setVisible(true);
 
@@ -121,13 +131,15 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   private void close() {
     System.out.println("clossing ....... +++++++");
-    subscriber[0].stop();
-    subscriber[1].stop();
+    //subscriber[0].stop();
+    //subscriber[1].stop();
+    subscriber.stop();
   }
 
   private void shutdown() {
-    subscriber[0].stop();
-    subscriber[1].stop();
+    //subscriber[0].stop();
+    //subscriber[1].stop();
+    subscriber.stop();
     service.shutdown();
     try {
       if (!service.awaitTermination(10, TimeUnit.SECONDS)) {
@@ -161,8 +173,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     buttonConnect.setEnabled(false);
-    service.submit(subscriber[0]);
-    subscriber[0].addObserver(this);
+    //service.submit(subscriber[0]);
+    //subscriber[0].addObserver(this);
 
     //service.submit(subscriber[1]);
     //subscriber[1].addObserver(this);
