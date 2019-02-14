@@ -1,5 +1,4 @@
 package EyeTrackerV1;
-import Core.Data;
 
 public class DataEyeTracker extends Data 
 {
