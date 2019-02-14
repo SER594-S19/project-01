@@ -53,7 +53,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 	    addWindowListener(new java.awt.event.WindowAdapter() {
 	      @Override
 	      public void windowClosing(java.awt.event.WindowEvent e) {
-	        shutdown(type);
+	        shutdown();
 	        System.exit(0);
 	      }
 	    });
@@ -62,7 +62,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 	    disConnect[type].addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	          connect[type].setEnabled(true);
-	          shutdown(type);
+	          shutdown();
 	          close(type);
 	      }
 	});
@@ -70,7 +70,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 	    addWindowListener(new java.awt.event.WindowAdapter() {
 	      @Override
 	      public void windowClosing(java.awt.event.WindowEvent e) {
-	        shutdown(type);
+	        shutdown();
 	        System.exit(0);
 	      }
 	    });
@@ -198,14 +198,14 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
    // add(textArea, BorderLayout.CENTER);
     add(scrollPane, BorderLayout.CENTER);
     //add(buttonConnect, BorderLayout.SOUTH);
-    /*buttonConnect.addActionListener(this);
+    //buttonConnect.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
         shutdown();
         System.exit(0);
       }
-    });*/
+    });
     setSize(800,600);
     setVisible(true);
 
@@ -218,10 +218,10 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     subscriber[cnt].stop();
   }
 
-  private void shutdown(int cnt) {
+  private void shutdown() {
     //subscriber[0].stop();
     //subscriber[1].stop();
-    subscriber[cnt].stop();
+    //subscriber[cnt].stop();
     service.shutdown();
     try {
       if (!service.awaitTermination(10, TimeUnit.SECONDS)) {
