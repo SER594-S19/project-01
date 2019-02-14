@@ -1,4 +1,4 @@
-package Core;
+package EyeTrackerV1;
 
 import java.io.IOException;
 import java.net.ServerSocket;

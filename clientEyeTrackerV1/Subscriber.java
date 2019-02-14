@@ -20,7 +20,7 @@ public class Subscriber extends Observable implements Runnable {
 
   private boolean stop;
   private String Ip;
-  private int port;
+  public int port;
   private String data;
 
   public Subscriber(String Ip, int port) {
@@ -43,7 +43,7 @@ public class Subscriber extends Observable implements Runnable {
 
   @Override
   public void run() {
-
+	
     Socket client = null;
     ObjectInputStream ois = null;
     BufferedReader input = null;
@@ -51,7 +51,14 @@ public class Subscriber extends Observable implements Runnable {
     String measureLocal=null;
     try {
       client = new Socket(InetAddress.getByName(Ip.trim()), port); 
-      input = new BufferedReader(new InputStreamReader(client.getInputStream()));      
+      System.out.println("===============" + port);
+      input = new BufferedReader(new InputStreamReader(client.getInputStream())); 
+//      while(input.readLine()!=null) {
+//    	  response  = response + input.readLine();
+//      }
+//      
+//      response = response + String.valueOf(port);
+//      System.out.println("===================" + response);
       client.setSoTimeout(1000);
     } catch (IOException ex) {
       stop = true;
@@ -59,12 +66,10 @@ public class Subscriber extends Observable implements Runnable {
     while (!stop) {
       System.out.println("in hello");
       try {
-    	  System.out.println("in try block");
-        measureLocal= input.readLine();
-        System.out.println("data read is " + measureLocal);
+        measureLocal= input.readLine() +" "+port;
+//        measureLocal= response;
       System.out.println("in hello read");
-      } catch (IOException sce) {
-    	  sce.printStackTrace();
+      } catch (Exception sce) {
         measureLocal= null;
       }
       if (measureLocal == null) {

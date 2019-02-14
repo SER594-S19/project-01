@@ -5,8 +5,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import Core.Publisher;
-
 /**
  * Put together a dataGenerator and a publisher. It read from the dataGenerator
  * and publish in a port using the publisher. A GUI control the model and can

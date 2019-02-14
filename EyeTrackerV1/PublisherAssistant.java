@@ -1,12 +1,10 @@
-package Core;
+package EyeTrackerV1;
 
 
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Observable;
-
-import EyeTrackerV1.DataGenerator;
 
 public class PublisherAssistant implements Runnable {
 
