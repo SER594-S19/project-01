@@ -153,11 +153,11 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 		    JPanel panel = new JPanel();
 		    JScrollPane jp = new JScrollPane(tabbedPane);
 		    panel.add(textArea);
-		    textArea.setBounds(10, 11, 2000, 2000);
 		    panel.setBackground(Color.CYAN);
 		    tabbedPane.addTab(text, panel);
-		    JScrollPane scroll = new JScrollPane ( textArea );
+		    JScrollPane scroll = new JScrollPane ( textArea  );
 		    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+		    scroll.setPreferredSize(new Dimension(1000, 900));
 		    panel.add(scroll);
 		  }
   public ClientDemo() {
