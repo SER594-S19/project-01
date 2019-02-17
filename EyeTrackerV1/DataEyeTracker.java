@@ -61,7 +61,7 @@ public class DataEyeTracker extends Data
 	{
 		this.gpx = gpx;
 	}
-	
+
 	public double getGpy() 
 	{
 		return gpy;
@@ -105,9 +105,7 @@ public class DataEyeTracker extends Data
 		this.validityR = e;
 		this.gpy = gpy;
 	}
-	
-	
-	
+
 
 	public double getPupilLeft()
 	{
@@ -124,6 +122,6 @@ public class DataEyeTracker extends Data
 	{
 	    return "Data{" + "time=" + getTime() + ", Pupil Left = " + getPupilLeft()  +", PupilRight = " + getPupilRight()
 	    + ", ValidityL = " + getValidityL() + ", ValidityR = " +getValidityR() + ", Gpx = " +getGpx()+ ", Gpy = " + getGpy()+ ", Fixation = "+ getFixation() +", Event = " +getEvent() +", AOI = "+getAoi() + " }";
-	
+
 	}
 }

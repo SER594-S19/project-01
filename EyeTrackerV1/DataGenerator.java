@@ -72,6 +72,7 @@ public class DataGenerator extends Observable implements Runnable
 	    	}//catch
 	    }//while
   	}//run
+
   
   public void updateParam(String s, Double val) 
   {
@@ -87,8 +88,7 @@ public class DataGenerator extends Observable implements Runnable
 	  
 	  System.out.println(eyeParameters);
   }
-  
-  //methods to generate 9 other parameters
+
   public static Double generateGpxValue() 
   {
 	  return eyeParameters.get("gpxValue");
@@ -104,6 +104,7 @@ public class DataGenerator extends Observable implements Runnable
 	  return eyeParameters.get("pupilLeft");
   }
   
+
   public static double generatePupilright() 
   {
 	  return eyeParameters.get("pupilRight");
@@ -132,6 +133,7 @@ public class DataGenerator extends Observable implements Runnable
   {
 	  return eyeParameters.get("aoi");
   }
+
  /**
   * This method will instantiate the Data Eye Tracker and Notify all the observers.
   * @param timestampsystem
@@ -154,6 +156,5 @@ public class DataGenerator extends Observable implements Runnable
 	    data = new DataEyeTracker(timestampsystem, s, pupilLeft, pupilRight, gpxValue, gpyValue, d, e, f, g, h);
 	    setChanged();
 	    notifyObservers();
-	}//createAndNotify
-
-}//DataGenerator
+	}
+}

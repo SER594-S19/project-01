@@ -89,24 +89,23 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    createSliderPanel(sliderPanel_1, "event", 1, 4, 2);
 	    createSliderPanel(sliderPanel_1, "aoi", 1, 4, 2);
 	    System.out.println("gui done");
-	  }//Gui
-	  
+	  }
+	   
 	  public int getR1() 
 	  {
 		  	return r1;
-	  }//getR1
+	  }
 
 	  public void setR1(int r1) 
 	  {
 			this.r1 = r1;
-			// call paint
 			sliderPanel_1.repaint();
-	  }//setR1
+	  }
 
 	  public int getR2() 
 	  {
 		    return r2;	
-	  }//getR2
+	  }
 
 	  public void setR2(int r2) 
 	  {
@@ -118,18 +117,19 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	public HashMap<String, Integer> getEyeParameters()
 	{
 		return eyeParameters;
-	}//getEyeParameters
+	}
 	
 	public void setEyeParameters(HashMap<String, Integer> eyeParameters) 
 	{
 		this.eyeParameters = eyeParameters;
-	}//setEyeParameters
+	}
 
   /**
    * This helper method creates the South panel at the south most direction, 
    * providing information like what port it is connected to.e.t.c 
    * @return
    */
+
   private Component createPanelSouth()
   {
     JPanel labels = new JPanel();
@@ -144,7 +144,7 @@ public class Gui extends JPanel implements ActionListener,MouseListener
     buttonConnect.addActionListener(this);
     buttonConnect.setEnabled(true);
     return panel;
-  }//createPanelSouth
+  }
   
 	/**
 	 * This is a helper method that will create the various slider panels based on the provided input parameters.
@@ -167,19 +167,19 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	        Integer i = (Integer) e.nextElement();
 	        JLabel label = (JLabel) slider.getLabelTable().get(i);
 	        label.setText(String.valueOf(Integer.parseInt(label.getText())/100));          
-	    }//while
+	    }
 	
 	    JPanel panel = createSlider(slider,  s);
 	    sliderPanel.add(panel);
 	    this.add(sliderPanel);
-	}//createSliderPanel
+	}
 
 
 	public int getPupilRadius(int sliderValue) 
 	{
 		double percent = ((sliderValue)-2)/6.0;
 		return (int)((percent*15)+10);
-	}//getPupilRadius
+	}
 	
 	private JPanel createSlider(JSlider slider, String s) 
 	{
@@ -188,7 +188,6 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	       public void stateChanged(ChangeEvent event)
 	       {
 	    	  
-	          // update text field when the slider value changes  
 	          JSlider source = (JSlider) event.getSource();
 	          
 	          if (s =="pupilLeft") {
@@ -208,7 +207,7 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    panel.add(slider);
 	    panel.add(new JLabel(s));
 		return panel;
-	}//createSlider
+	}
 
 	  @Override
 	  public void actionPerformed(ActionEvent e) 
@@ -221,15 +220,15 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 			        System.out.println("start");
 			        model.start();
 			        buttonConnect.setText("stop");
-			  }//if 
+			  }
 			  else if (buttonConnect.getText().compareTo("stop") == 0) 
 			  {
 			        System.out.println("stop");
 			        model.stop();
 			        buttonConnect.setText("run");
-			  }//else if
-		  }//if
-	  }//actionPerformed
+			  }
+		  }
+	  }
   
 	  public static void main(String[] args) 
 	  {
@@ -249,49 +248,48 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    });
 	    frame.addMouseListener(new MouseAdapter() 
 	    {
-	    	//override the method
 	    	public void mouseClicked(MouseEvent e) 
 	    	{
 	  			  if (model.getDataGenerator() != null )
 	  			  {
 					  model.getDataGenerator().updateParam("gpxValue", (double) e.getX());
 					  model.getDataGenerator().updateParam("gpyValue", (double) e.getY());
-	  			  }//if
+	  			  }
 	    	}
 	    });
 	    frame.pack();
 	    frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 	    frame.setVisible(true);	 
-	  }//main
+	  }
 
 
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
 		// TODO Auto-generated method stub	
-	}//mouseClicked
+	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) 
 	{
 		// TODO Auto-generated method stub
-	}//mousePressed
+	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) 
 	{
 		// TODO Auto-generated method stub
-	}//mouseReleased
+	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e) 
 	{
 		// TODO Auto-generated method stub
-	}//mouseEntered
+	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) 
 	{
 		// TODO Auto-generated method stub
-	}//mouseExited
-}//Gui
+	}
+}
