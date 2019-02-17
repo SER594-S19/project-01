@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.HashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,60 +41,88 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	  
 	  private final int PORT = 1596;
 	  protected JLabel labelPublishPort;
+	  private final String IP = "localhost";
+	  protected JLabel labelPublishedIp;
 	  private final JButton buttonConnect = new JButton("run");
 	  private JPanel sliderPanel_1;
 	  private static Dimension screen ;
 	  
 	  /**
 	   * Constructor
+	 * @param frame 
 	   */
 	   public Gui() 
 	   {
-		   screen = getToolkit().getScreenSize();
+		  screen = getToolkit().getScreenSize();
 		   model = new Model(new DataGenerator(), new Publisher(PORT));
 		   Color color = UIManager.getColor ( "JSlider.background" );
-
-		   this.setBackground(color);
+		   JPanel mainPanel = new JPanel(new GridLayout(11,1));
+		   this.setBackground(Color.WHITE);
 		   this.setLayout(new BorderLayout());
-		   this.add(createPanelSouth(), BorderLayout.SOUTH);
+		   mainPanel.add(createRunButtonNorth(),BorderLayout.NORTH);
+
+		
+		  sliderPanel_1 = new JPanel() { 
+			  public void paintComponent(Graphics g) {
+		  super.paintComponent(g); 
+		  int r = 50;
+		  
+		  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); 
+		  int
+		  centerX = screenSize.width/2; 
+		  int centerY = screenSize.height/2; 
+		  int
+		  lefteyecenterX = centerX-100; 
+		  int lefteyecenterY = centerY-100; 
+		  int
+		  righteyecenterX = centerX+100;
+int righteyecenterY = centerY-100;
+		  g.setColor(Color.BLACK); 
+		  g.drawOval(lefteyecenterX-r, lefteyecenterY-r, 2*r,
+		  2*r-(int)(0.5*r));  
+		  g.fillOval(lefteyecenterX-r1, lefteyecenterY-r1, 2*r1,
+		  2*r1-(int)(0.5*r1));
+		  
+		  g.drawOval(righteyecenterX-r, righteyecenterY-r, 2*r, 2*r-(int)(0.5*r));
+		  g.fillOval(righteyecenterX-r2, righteyecenterY-r2, 2*r2, 2*r2-(int)(0.5*r2));
+		  } };
+		 
+		  
+		  mainPanel.add(createSliderPanel("pupilRight", 2, 8, 5));
+		  mainPanel.add(createSliderPanel("pupilLeft", 2, 8, 5));
+		  mainPanel.add(createSliderPanel("validityL", 0, 4, 2));
+		  mainPanel.add(createSliderPanel("validityR", 0, 4, 2));
+		  
+		   
+		   JPanel eyePanel1 = new JPanel(new GridLayout(1,1));
+		   eyePanel1.setBackground(Color.DARK_GRAY);
+		   //eyePanel.add(sliderPanel_1);
+		   mainPanel.add(eyePanel1);
+		   JPanel eyePanel2 = new JPanel(new GridLayout(1,1));
+		   eyePanel2.setBackground(Color.DARK_GRAY);
+		   mainPanel.add(eyePanel2);
+		   
+
+		   mainPanel.add(createSliderPanel("fixationValue", 0, 50, 25), BorderLayout.NORTH); 
+		   mainPanel.add(createSliderPanel("event", 1, 4, 2), BorderLayout.AFTER_LAST_LINE); 
+		   mainPanel.add(createSliderPanel("aoi", 1, 4, 2), BorderLayout.AFTER_LAST_LINE);
+		   
+
+		   mainPanel.add(createPanelSouth(), BorderLayout.SOUTH);
+		   
+
+		   
+		   this.add(mainPanel);
 		   Dimension screen = getToolkit().getScreenSize();
 		   this.setSize(screen.width / 2, 3 * screen.height / 4);
 		   this.setLocation((screen.width - getSize().width) / 2, (screen.height - getSize().height) / 2);
-		   
-		   sliderPanel_1 = new JPanel()
-		   {    	
-		       public void paintComponent(Graphics g) 
-		       {
-		           super.paintComponent(g);
-		            int r = 50;
-		            
-		            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		            int centerX = screenSize.width/2;
-		            int centerY = screenSize.height/2;
-		            int lefteyecenterX = centerX-100;
-		            int lefteyecenterY = centerY-100;
-		            int righteyecenterX = centerX+100;
-		            int righteyecenterY = centerY-100;
-		            g.setColor(Color.BLACK);
-		            g.drawOval(lefteyecenterX-r, lefteyecenterY-r, 2*r, 2*r-(int)(0.5*r));
-		            g.fillOval(lefteyecenterX-r1, lefteyecenterY-r1, 2*r1, 2*r1-(int)(0.5*r1));
-		            
-		            g.drawOval(righteyecenterX-r, righteyecenterY-r, 2*r, 2*r-(int)(0.5*r));
-		            g.fillOval(righteyecenterX-r2, righteyecenterY-r2, 2*r2, 2*r2-(int)(0.5*r2));
-		        }
-		   };
 
-	    createSliderPanel(sliderPanel_1, "pupilLeft", 2, 8, 5);
-	    createSliderPanel(sliderPanel_1, "pupilRight", 2, 8, 5);
-	    createSliderPanel(sliderPanel_1, "validityL", 0, 4, 2);
-	    createSliderPanel(sliderPanel_1, "validityR", 0, 4, 2);
-	    createSliderPanel(sliderPanel_1, "fixationValue", 0, 50, 25);
-	    createSliderPanel(sliderPanel_1, "event", 1, 4, 2);
-	    createSliderPanel(sliderPanel_1, "aoi", 1, 4, 2);
 	    System.out.println("gui done");
 	  }
 	   
-	  public int getR1() 
+
+
+	public int getR1() 
 	  {
 		  	return r1;
 	  }
@@ -132,30 +163,47 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 
   private Component createPanelSouth()
   {
-    JPanel labels = new JPanel();
-    labels.setBackground(Color.GRAY);
-    labels.add(new JLabel("  Publishing at port: "));
-    labelPublishPort = new JLabel("" + PORT);
-    labels.add(labelPublishPort);
-    JPanel panel = new JPanel(new BorderLayout());
-    panel.setBackground(Color.CYAN);
-    panel.add(labels, BorderLayout.WEST);
-    panel.add(buttonConnect, BorderLayout.EAST);
-    buttonConnect.addActionListener(this);
-    buttonConnect.setEnabled(true);
-    return panel;
+	  JPanel panel = new JPanel(new GridLayout(1, 2)); 
+	  panel.setBackground(Color.LIGHT_GRAY); 
+	  
+	  JPanel labelPanel = new JPanel(new BorderLayout());
+	  labelPanel.setBackground(Color.LIGHT_GRAY);
+	  JLabel label = new JLabel("Click to start the simulator...");
+	  label.setHorizontalAlignment(JLabel.CENTER);
+	  label.setVerticalAlignment(JLabel.CENTER);
+	  labelPanel.add(label, BorderLayout.CENTER);
+	  panel.add(labelPanel);
+	  panel.add(buttonConnect,
+  BorderLayout.CENTER); 
+	  buttonConnect.addActionListener(this);
+  buttonConnect.setEnabled(true); 
+  panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
+  return panel;
   }
   
-	/**
-	 * This is a helper method that will create the various slider panels based on the provided input parameters.
-	 * @param sliderPanel
-	 * @param s
-	 * @param min
-	 * @param max
-	 * @param mid
-	 */
-	private void createSliderPanel(JPanel sliderPanel, String s, double min, double max, double mid) 
+	
+	  private Component createRunButtonNorth() { 
+		  JPanel labelPanel = new JPanel(new GridLayout(2,1));
+		  labelPanel.setBackground(Color.DARK_GRAY);
+		  JPanel port = new JPanel();
+		    port.add(new JLabel("  Publishing at port: "));
+		    labelPublishPort = new JLabel("" + PORT);
+		    port.add(labelPublishPort);
+		   JPanel ip = new JPanel();
+		   ip.add(new JLabel("  Publishing at IP: "));
+		   labelPublishedIp = new JLabel("" + IP);
+		   ip.add(labelPublishedIp);
+		    labelPanel.add(port, BorderLayout.CENTER);
+		    labelPanel.add(ip, BorderLayout.CENTER);
+		    labelPanel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
+		    return labelPanel;
+	  }
+
+  
+	private Component createSliderPanel(String s, double min, double max, double mid) 
 	{
+		JPanel panel = new JPanel(new GridLayout(1,3));
+	    
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, (int)min*100, (int)max*100, (int)mid*100);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
@@ -165,25 +213,10 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    while (e.hasMoreElements()) 
 	    {
 	        Integer i = (Integer) e.nextElement();
-	        JLabel label = (JLabel) slider.getLabelTable().get(i);
-	        label.setText(String.valueOf(Integer.parseInt(label.getText())/100));          
+	        JLabel labelname = (JLabel) slider.getLabelTable().get(i);
+	        labelname.setText(String.valueOf(Integer.parseInt(labelname.getText())/100));          
 	    }
-	
-	    JPanel panel = createSlider(slider,  s);
-	    sliderPanel.add(panel);
-	    this.add(sliderPanel);
-	}
-
-
-	public int getPupilRadius(int sliderValue) 
-	{
-		double percent = ((sliderValue)-2)/6.0;
-		return (int)((percent*15)+10);
-	}
-	
-	private JPanel createSlider(JSlider slider, String s) 
-	{
-		ChangeListener listener = new ChangeListener()
+	    ChangeListener listener = new ChangeListener()
 	    {
 	       public void stateChanged(ChangeEvent event)
 	       {
@@ -203,11 +236,56 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	       }
 	    };
 	    slider.addChangeListener(listener);
-	    JPanel panel = new JPanel();
-	    panel.add(slider);
-	    panel.add(new JLabel(s));
-		return panel;
+	    
+	    JPanel sliderPanel = new JPanel();
+	    JPanel labelPanel = new JPanel(new BorderLayout());
+	    JPanel detailPanel = new JPanel();
+	    
+		  JLabel label = new JLabel(s);
+		  label.setHorizontalAlignment(JLabel.CENTER);
+		  label.setVerticalAlignment(JLabel.CENTER);
+		  labelPanel.add(label, BorderLayout.CENTER);
+		  panel.add(labelPanel);
+	    
+	    sliderPanel.add(slider, BorderLayout.CENTER);
+	    panel.add(sliderPanel);
+	    
+	    JLabel labelquestion = new JLabel("?");
+		  labelquestion.setHorizontalAlignment(JLabel.CENTER);
+		  labelquestion.setVerticalAlignment(JLabel.CENTER);
+		  detailPanel.add(labelquestion, BorderLayout.CENTER);
+	    panel.add(detailPanel, BorderLayout.CENTER);
+	    
+	    
+	    return panel;
+	
 	}
+
+
+	public int getPupilRadius(int sliderValue) 
+	{
+		double percent = ((sliderValue)-2)/6.0;
+		return (int)((percent*15)+10);
+	}
+	
+	/*
+	 * private JPanel addListener(JSlider slider, String s) { ChangeListener
+	 * listener = new ChangeListener() { public void stateChanged(ChangeEvent event)
+	 * {
+	 * 
+	 * JSlider source = (JSlider) event.getSource();
+	 * 
+	 * if (s =="pupilLeft") {
+	 * 
+	 * setR1(getPupilRadius(source.getValue()/100));
+	 * 
+	 * } if (s =="pupilRight") {
+	 * 
+	 * setR2(getPupilRadius(source.getValue()/100)); }
+	 * model.getDataGenerator().updateParam(s, source.getValue()/100.0); } };
+	 * slider.addChangeListener(listener); JPanel panel = new JPanel();
+	 * panel.add(slider); panel.add(new JLabel(s)); return panel; }
+	 */
 
 	  @Override
 	  public void actionPerformed(ActionEvent e) 
@@ -233,8 +311,10 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	  public static void main(String[] args) 
 	  {
 	    JFrame frame = new JFrame("Eye Tracker Simulator");
-	    frame.getContentPane().setLayout(new GridLayout(1, 1));
+	    frame.getContentPane().setLayout(new GridLayout(1,1));	    
 	    frame.getContentPane().add(new Gui());
+	    
+	    
 	    frame.setLocationRelativeTo(null);
 	    
 	    frame.addWindowListener(new java.awt.event.WindowAdapter()
@@ -258,7 +338,8 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    	}
 	    });
 	    frame.pack();
-	    frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	    //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    frame.setSize(600, 800);
 	    frame.setVisible(true);	 
 	  }
 

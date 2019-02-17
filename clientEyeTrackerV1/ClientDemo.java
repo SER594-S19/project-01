@@ -102,7 +102,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 		      @Override
 		      public void actionPerformed(ActionEvent e) {
 		    	  close();
-				  //System.exit(0);
 	            }
 		    });
 	    	    
