@@ -67,27 +67,22 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 		  super.paintComponent(g); 
 		  int r = 50;
 		  
-		  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); 
-		  int
-		  centerX = screenSize.width/2; 
+		  Dimension screenSize = sliderPanel_1.getPreferredSize(); 
+		  int centerX = screenSize.width/2; 
 		  int centerY = screenSize.height/2; 
-		  int
-		  lefteyecenterX = centerX-100; 
+		  int lefteyecenterX = centerX-100; 
 		  int lefteyecenterY = centerY-100; 
-		  int
-		  righteyecenterX = centerX+100;
-int righteyecenterY = centerY-100;
-		  g.setColor(Color.BLACK); 
-		  g.drawOval(lefteyecenterX-r, lefteyecenterY-r, 2*r,
-		  2*r-(int)(0.5*r));  
-		  g.fillOval(lefteyecenterX-r1, lefteyecenterY-r1, 2*r1,
-		  2*r1-(int)(0.5*r1));
-		  
+		  int righteyecenterX = centerX+100;
+		  int righteyecenterY = centerY-100;
+		  g.setColor(Color.BLACK);
+		  g.drawOval(lefteyecenterX-r, lefteyecenterY-r, 2*r,2*r-(int)(0.5*r));  
+		  g.fillOval(lefteyecenterX-r1, lefteyecenterY-r1, 2*r1,2*r1-(int)(0.5*r1));
 		  g.drawOval(righteyecenterX-r, righteyecenterY-r, 2*r, 2*r-(int)(0.5*r));
 		  g.fillOval(righteyecenterX-r2, righteyecenterY-r2, 2*r2, 2*r2-(int)(0.5*r2));
-		  } };
-		 
 		  
+			  } };
+		 
+		   
 		  mainPanel.add(createSliderPanel("pupilRight", 2, 8, 5));
 		  mainPanel.add(createSliderPanel("pupilLeft", 2, 8, 5));
 		  mainPanel.add(createSliderPanel("validityL", 0, 4, 2));
@@ -95,11 +90,11 @@ int righteyecenterY = centerY-100;
 		  
 		   
 		   JPanel eyePanel1 = new JPanel(new GridLayout(1,1));
-		   eyePanel1.setBackground(Color.DARK_GRAY);
+		   eyePanel1.setBackground(Color.WHITE);
 		   //eyePanel.add(sliderPanel_1);
 		   mainPanel.add(eyePanel1);
 		   JPanel eyePanel2 = new JPanel(new GridLayout(1,1));
-		   eyePanel2.setBackground(Color.DARK_GRAY);
+		   eyePanel2.setBackground(Color.WHITE );
 		   mainPanel.add(eyePanel2);
 		   
 
@@ -207,14 +202,34 @@ int righteyecenterY = centerY-100;
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, (int)min*100, (int)max*100, (int)mid*100);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
-		slider.setMajorTickSpacing(2000);
-		slider.setMinorTickSpacing(500);
+		 if (s == "fixationValue") {
+		    	slider.setMajorTickSpacing(1000);
+				slider.setMinorTickSpacing(500);
+		    }
+		 else {
+			 slider.setMajorTickSpacing(100);
+				slider.setMinorTickSpacing(50);
+		 }
+		
+		slider.setSnapToTicks(true);
 	    Enumeration e = slider.getLabelTable().keys();
 	    while (e.hasMoreElements()) 
 	    {
 	        Integer i = (Integer) e.nextElement();
 	        JLabel labelname = (JLabel) slider.getLabelTable().get(i);
-	        labelname.setText(String.valueOf(Integer.parseInt(labelname.getText())/100));          
+	        String g = labelname.getText();
+	        int ii = Integer.parseInt(g)/100;
+	        if (ii == 0) {
+	        	String di = String.valueOf(ii);
+	        	labelname.setText(String.valueOf(Integer.parseInt(labelname.getText())/100));
+	        }
+	        else {
+	        	 String di = String.valueOf(ii);
+	 	        labelname.setHorizontalTextPosition(JLabel.CENTER);
+	 	        labelname.setText(String.valueOf(Integer.parseInt(labelname.getText())/100)+"  ");
+	        }
+	       
+	        
 	    }
 	    ChangeListener listener = new ChangeListener()
 	    {
@@ -236,7 +251,7 @@ int righteyecenterY = centerY-100;
 	       }
 	    };
 	    slider.addChangeListener(listener);
-	    
+	   
 	    JPanel sliderPanel = new JPanel();
 	    JPanel labelPanel = new JPanel(new BorderLayout());
 	    JPanel detailPanel = new JPanel();
