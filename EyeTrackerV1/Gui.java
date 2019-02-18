@@ -57,9 +57,9 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 		   model = new Model(new DataGenerator(), new Publisher(PORT));
 		   Color color = UIManager.getColor ( "JSlider.background" );
 		   JPanel mainPanel = new JPanel(new GridLayout(11,1));
-		   this.setBackground(Color.WHITE);
 		   this.setLayout(new BorderLayout());
 		   mainPanel.add(createRunButtonNorth(),BorderLayout.NORTH);
+		   mainPanel.setBackground(Color.LIGHT_GRAY);
 
 		
 		  sliderPanel_1 = new JPanel() { 
@@ -162,32 +162,35 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	  panel.setBackground(Color.LIGHT_GRAY); 
 	  
 	  JPanel labelPanel = new JPanel(new BorderLayout());
-	  labelPanel.setBackground(Color.LIGHT_GRAY);
+	  labelPanel.setBackground(new Color(219,219,219));
 	  JLabel label = new JLabel("Click to start the simulator...");
 	  label.setHorizontalAlignment(JLabel.CENTER);
 	  label.setVerticalAlignment(JLabel.CENTER);
 	  labelPanel.add(label, BorderLayout.CENTER);
+	  labelPanel.setBackground(new Color(219,219,219));
 	  panel.add(labelPanel);
-	  panel.add(buttonConnect,
-  BorderLayout.CENTER); 
+	  panel.setBackground(new Color(219,219,219));
+	  panel.add(buttonConnect,BorderLayout.CENTER); 
 	  buttonConnect.addActionListener(this);
-  buttonConnect.setEnabled(true); 
-  panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
-  return panel;
+	  buttonConnect.setEnabled(true); 
+	  panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+	  return panel;
   }
   
 	
 	  private Component createRunButtonNorth() { 
 		  JPanel labelPanel = new JPanel(new GridLayout(2,1));
-		  labelPanel.setBackground(Color.DARK_GRAY);
+		  //labelPanel.setBackground(new Color(234,241,249));
 		  JPanel port = new JPanel();
 		    port.add(new JLabel("  Publishing at port: "));
 		    labelPublishPort = new JLabel("" + PORT);
+		    port.setBackground(new Color(234,241,249));
 		    port.add(labelPublishPort);
 		   JPanel ip = new JPanel();
 		   ip.add(new JLabel("  Publishing at IP: "));
 		   labelPublishedIp = new JLabel("" + IP);
 		   ip.add(labelPublishedIp);
+		   ip.setBackground(new Color(234,241,249));
 		    labelPanel.add(port, BorderLayout.CENTER);
 		    labelPanel.add(ip, BorderLayout.CENTER);
 		    labelPanel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
@@ -251,11 +254,13 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	       }
 	    };
 	    slider.addChangeListener(listener);
-	   
+
 	    JPanel sliderPanel = new JPanel();
+	    sliderPanel.setBackground(new Color(234,241,249));
 	    JPanel labelPanel = new JPanel(new BorderLayout());
+	    labelPanel.setBackground(new Color(234,241,249));
 	    JPanel detailPanel = new JPanel();
-	    
+	    detailPanel.setBackground(new Color(234,241,249));
 		  JLabel label = new JLabel(s);
 		  label.setHorizontalAlignment(JLabel.CENTER);
 		  label.setVerticalAlignment(JLabel.CENTER);
@@ -268,6 +273,7 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	    JLabel labelquestion = new JLabel("?");
 		  labelquestion.setHorizontalAlignment(JLabel.CENTER);
 		  labelquestion.setVerticalAlignment(JLabel.CENTER);
+		  labelquestion.setForeground(Color.BLACK);
 		  detailPanel.add(labelquestion, BorderLayout.CENTER);
 	    panel.add(detailPanel, BorderLayout.CENTER);
 	    
@@ -322,7 +328,8 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 			  }
 		  }
 	  }
-  
+
+
 	  public static void main(String[] args) 
 	  {
 	    JFrame frame = new JFrame("Eye Tracker Simulator");
@@ -380,7 +387,7 @@ public class Gui extends JPanel implements ActionListener,MouseListener
 	@Override
 	public void mouseEntered(MouseEvent e) 
 	{
-		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
