@@ -315,7 +315,7 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		}
 	}
-
+	//Set Affective
 	private void setAffective(ActionEvent e, ArrayList<Double> arrayList) {
 		if(e.getActionCommand().equals(engageIcon))
 		{
