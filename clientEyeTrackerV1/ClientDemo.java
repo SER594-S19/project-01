@@ -150,14 +150,16 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 	  
 	  private void addIt(JTabbedPane tabbedPane, String text, JTextArea textArea) {
 		    JPanel panel = new JPanel();
-		    JScrollPane jp = new JScrollPane(tabbedPane);
-		    panel.add(textArea);
-		    panel.setBackground(Color.CYAN);
+		    JScrollPane scroll = new JScrollPane (textArea);
+		    JLabel label = new JLabel("Time Stamp                               Pupil Left           Pupil Right           ValidityL            ValidityR                   GPX                      GPY                 Fixation                Event                     AOI                         Port");
+		    
 		    tabbedPane.addTab(text, panel);
-		    JScrollPane scroll = new JScrollPane ( textArea  );
-		    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
-		    scroll.setPreferredSize(new Dimension(1000, 650));
-		    panel.add(scroll);
+		    
+		    panel.setLayout(new BorderLayout());
+		    panel.setBackground(Color.CYAN);	    
+		    panel.add(scroll, BorderLayout.CENTER);
+		    panel.setBorder(BorderFactory.createEmptyBorder(25,0,0,0));
+		    panel.add(label, BorderLayout.NORTH);
 		  }
   public ClientDemo() {
 
@@ -171,7 +173,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 //    subscriber[3] = new Subscriber("localhost", 1597);
 //    subscriber[4] = new Subscriber("localhost", 1598);
     
-    setLayout(new GridLayout(1,2));
+    getContentPane().setLayout(new GridLayout(1,2));
     JTabbedPane tabbedPane = new JTabbedPane();
    tabbedPane.addTab("Settings", null, ClientPanel(), "Important Panel");
    addIt(tabbedPane, "Face Simulator", faceTextArea );
@@ -183,7 +185,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
    //tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
    
    
-   add(tabbedPane);
+   getContentPane().add(tabbedPane);
 
     buttonConnect.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {

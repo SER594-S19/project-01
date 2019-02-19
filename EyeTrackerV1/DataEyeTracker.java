@@ -120,8 +120,8 @@ public class DataEyeTracker extends Data
 	  @Override
 	public String toString() 
 	{
-	    return "Data{" + "time=" + getTime() + ", Pupil Left = " + getPupilLeft()  +", PupilRight = " + getPupilRight()
-	    + ", ValidityL = " + getValidityL() + ", ValidityR = " +getValidityR() + ", Gpx = " +getGpx()+ ", Gpy = " + getGpy()+ ", Fixation = "+ getFixation() +", Event = " +getEvent() +", AOI = "+getAoi() + " }";
+	    return Math.round(getTime()) + "\t\t" + getPupilLeft()  +"\t" + getPupilRight()
+	    + "\t" + getValidityL() + "\t" +getValidityR() + "\t" +getGpx()+ "\t" + getGpy()+ "\t"+ getFixation() +"\t" +getEvent() +"\t"+getAoi()+"\t";
 
 	}
 }
