@@ -157,7 +157,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 		    panel.setLayout(new BorderLayout());
 		    panel.setBackground(Color.CYAN);	    
 		    panel.add(scroll, BorderLayout.CENTER);
-		    panel.setBorder(BorderFactory.createEmptyBorder(25,0,0,0));
+		    panel.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		  }
   public ClientDemo() {
 
