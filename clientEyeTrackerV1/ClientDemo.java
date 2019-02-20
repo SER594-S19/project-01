@@ -151,7 +151,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 	  private void addIt(JTabbedPane tabbedPane, String text, JTextArea textArea) {
 		    JPanel panel = new JPanel();
 		    JScrollPane scroll = new JScrollPane (textArea);
-		    JLabel label = new JLabel("Time Stamp                               Pupil Left           Pupil Right           ValidityL            ValidityR                   GPX                      GPY                 Fixation                Event                     AOI                         Port");
 		    
 		    tabbedPane.addTab(text, panel);
 		    
@@ -159,7 +158,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 		    panel.setBackground(Color.CYAN);	    
 		    panel.add(scroll, BorderLayout.CENTER);
 		    panel.setBorder(BorderFactory.createEmptyBorder(25,0,0,0));
-		    panel.add(label, BorderLayout.NORTH);
 		  }
   public ClientDemo() {
 
