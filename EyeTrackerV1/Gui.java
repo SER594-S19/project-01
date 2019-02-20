@@ -237,6 +237,28 @@ public class Gui extends JPanel implements ActionListener, MouseListener {
 		labelquestion.setHorizontalAlignment(JLabel.CENTER);
 		labelquestion.setVerticalAlignment(JLabel.CENTER);
 		labelquestion.setForeground(Color.BLACK);
+		
+		
+		if (s == "pupilLeft")
+			labelquestion.setToolTipText("Pupil size (left eye) in mm.");
+		else if ( s == "pupilRight")
+			labelquestion.setToolTipText("Pupil size (right eye) in mm.");		
+		else if ( s == "validityL")
+			labelquestion.setToolTipText("Validity of the gaze data.");	
+		else if ( s == "validityR")
+			labelquestion.setToolTipText("Validity of the gaze data.");	
+		else if ( s == "fixationValue")
+			labelquestion.setToolTipText("Fixation duration. The time in milliseconds that a fixation lasts.");	
+		else if ( s == "event")
+			labelquestion.setToolTipText("Events, automatic and logged, will show up under Event.");	
+		else if ( s == "aoi")
+			labelquestion.setToolTipText("Areas Of Interests if fixations on multiple AOIs are to be written on\n" + 
+					"the same row.");	
+		else
+            labelquestion.setToolTipText("Info other");
+		
+		
+		
 		detailPanel.add(labelquestion, BorderLayout.CENTER);
 		panel.add(detailPanel, BorderLayout.CENTER);
 
