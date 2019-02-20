@@ -164,7 +164,7 @@ public class Gui extends JPanel implements ActionListener, MouseListener {
 		ip.setBackground(Color.LIGHT_GRAY);
 		labelPanel.add(port, BorderLayout.CENTER);
 		labelPanel.add(ip, BorderLayout.CENTER);
-		labelPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+		labelPanel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 		return labelPanel;
 	}
 
@@ -224,7 +224,27 @@ public class Gui extends JPanel implements ActionListener, MouseListener {
 		labelPanel.setBackground(new Color(234, 241, 249));
 		JPanel detailPanel = new JPanel();
 		detailPanel.setBackground(new Color(234, 241, 249));
-		JLabel label = new JLabel(s);
+		
+		String updatedString;
+		//JLabel label = new JLabel(s);
+		if (s == "pupilLeft")
+			updatedString = "Left pupil";
+		else if ( s == "pupilRight")
+			updatedString = "Right Pupil";		
+		else if ( s == "validityL")
+			updatedString = "Left Validity";	
+		else if ( s == "validityR")
+			updatedString = "Right Validity";	
+		else if ( s == "fixationValue")
+			updatedString = "Fixation Value";	
+		else if ( s == "event")
+			updatedString = "Event type";	
+		else if ( s == "aoi")
+			updatedString = "Area of Interest";
+		else	
+			updatedString = "NA";
+		JLabel label = new JLabel(updatedString);
+		
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setVerticalAlignment(JLabel.CENTER);
 		labelPanel.add(label, BorderLayout.CENTER);
